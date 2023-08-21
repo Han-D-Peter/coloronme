@@ -5,6 +5,7 @@
     "rootDir": "src",
     "baseUrl": "./",
     "composite": true,
+    "types": ["@emotion/react/types/css-prop"],
     "jsx": "react-jsx"
   },
 

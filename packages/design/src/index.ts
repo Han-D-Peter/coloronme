@@ -1,1 +1,1 @@
-export const hello = () => "hello";
+export { Age } from './Age';
