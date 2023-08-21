@@ -1,0 +1,23 @@
+{
+  "name": "coloronme",
+  "packageManager": "yarn@3.3.1",
+  "private": true,
+  "scripts": {
+    "libs": "yarn workspace libs",
+    "design": "yarn workspace design",
+    "client": "yarn workspace coloronme-client",
+    "admin": "yarn workspace coloronme-admin"
+  },
+  "workspaces": [
+    "packages/*/*",
+    "packages/libs",
+    "packages/design",
+    "packages/coloronme-client",
+    "packages/coloronme-admin"
+  ],
+  "devDependencies": {
+    "@types/prettier": "^3",
+    "prettier": "^3.0.2",
+    "typescript": "^5.1.6"
+  }
+}
