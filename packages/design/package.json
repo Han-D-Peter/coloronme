@@ -11,7 +11,8 @@
     "clean": "rimraf -rf ./dist",
     "compile": "tsc",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_2f2563d99b2fdcf"
   },
   "peerDependencies": {
     "@emotion/react": "^11.11.1",
@@ -35,6 +36,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/rimraf": "^3",
+    "chromatic": "^6.22.0",
     "rimraf": "^3.0.2",
     "storybook": "^7.3.2",
     "typescript": "^4.9.4"
