@@ -1,1 +1,1 @@
-export { Age } from './Age';
+export { Age } from './Age/Age';

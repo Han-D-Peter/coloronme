@@ -5,9 +5,9 @@
     "rootDir": "src",
     "baseUrl": "./",
     "composite": true,
-    "types": ["@emotion/react/types/css-prop"],
+    "types": ["@emotion/react/types/css-prop", "jest"],
     "jsx": "react-jsx"
   },
 
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "**/*.ts", "**/*.test.ts"]
 }
