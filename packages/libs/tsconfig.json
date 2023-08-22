@@ -5,6 +5,7 @@
     "rootDir": "src",
     "baseUrl": "./",
     "composite": true,
+    "types": ["jest"],
     "jsx": "react-jsx"
   },
 
