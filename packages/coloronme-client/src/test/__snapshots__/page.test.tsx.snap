@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`predict page 이건 프레딕트 글자가 잘 나오는지 체크 1`] = `
+<div>
+  <h1>
+    hello
+  </h1>
+</div>
+`;
