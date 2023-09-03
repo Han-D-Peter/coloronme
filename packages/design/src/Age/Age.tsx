@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-function Age() {
+export function Age() {
   return (
     <div
       css={css`
@@ -13,5 +13,3 @@ function Age() {
     </div>
   );
 }
-
-export default Age;
