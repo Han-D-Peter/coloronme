@@ -16,6 +16,8 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-essentials'),
     getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@storybook/addon-interactions'),
+    getAbsolutePath('@storybook/addon-styling-webpack'),
+    getAbsolutePath('@storybook/addon-themes'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-webpack5'),
@@ -23,6 +25,13 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag',
+  },
+  webpackFinal: async (config) => {
+    config.module?.rules?.push({
+      test: /\.(ts|tsx)$/,
+      loader: require.resolve('babel-loader'),
+    });
+    return config;
   },
 };
 export default config;
