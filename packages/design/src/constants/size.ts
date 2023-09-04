@@ -1,8 +1,14 @@
-// Scale -> Title, Body
-// Size -> xxs, xs, sm, md, lg, xlg
-// Weight -> Bold, Regular
+export type TypoType = 'title' | 'body';
+export type TypoScale = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
+export type TypoWeight = 'bold' | 'regular';
 
-export const fontSize = {
+export type FontSize = {
+  [key in TypoType]: {
+    [sizeKey in TypoScale]: number;
+  };
+};
+
+export const fontSize: FontSize = {
   title: {
     xxs: 14,
     xs: 16,
