@@ -20,5 +20,6 @@ export const color = {
   },
   purple: {
     purple050: '#cd9de9',
+    purple040: '#EBD8F6 ',
   },
 };
