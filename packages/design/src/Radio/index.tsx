@@ -79,6 +79,11 @@ const RadioBox = forwardRef<HTMLInputElement, RadioProps>(
           opacity: 0.7;
           cursor: not-allowed;
         }
+        &[type='radio']:checked {
+          border-style: solid;
+          border-width: 4px;
+          border-color: ${color.purple.purple040};
+        }
 
         &[type='radio']:disabled + span {
           opacity: 0.7;
