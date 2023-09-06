@@ -28,3 +28,5 @@ export * from './ShoppingCartOutline';
 export * from './TablerPhotoSensor';
 export * from './TablerPhotoSensorOutline';
 export * from './UpwardOutline';
+export * from './CancelIcon';
+export * from './Warnning';
