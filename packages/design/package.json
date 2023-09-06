@@ -40,6 +40,7 @@
     "@types/jest": "^29.5.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-modal": "^3",
     "@types/react-test-renderer": "^18",
     "@types/rimraf": "^3",
     "babel-jest": "^29.6.3",
@@ -53,6 +54,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1"
   }
 }
