@@ -23,3 +23,9 @@ export const color = {
     purple040: '#EBD8F6 ',
   },
 };
+
+export const gradation = {
+  sm: 'linear-gradient(92deg, #C4A1D8 0%, #A3ABD2 24.72%, #89B3CD 52.32%, #FFF3AB 107.2%)',
+  md: 'linear-gradient(92deg, #B281CE 0%, #8892C1 24.72%, #74A5C3 52.32%, #F5E583 107.2%)',
+  lg: 'linear-gradient(60deg, #AB70CC 0%, #7481C0 24.72%, #5C97BB 52.32%, #E9D55E 107.2%)',
+};
