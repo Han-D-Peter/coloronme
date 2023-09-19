@@ -1,4 +1,4 @@
-export type TypoType = 'title' | 'body';
+export type TypoType = 'title' | 'body' | 'caption';
 export type TypoScale = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
 export type TypoWeight = 'bold' | 'regular';
 
@@ -9,9 +9,9 @@ export type ButtonSizeDimensions = {
 };
 
 export type FontSize = {
-  [key in TypoType]: {
+  [key in TypoType]: Partial<{
     [sizeKey in TypoScale]: number;
-  };
+  }>;
 };
 
 export type ButtonSize = {
@@ -20,20 +20,18 @@ export type ButtonSize = {
 
 export const fontSize: FontSize = {
   title: {
-    xxs: 14,
     xs: 16,
     sm: 18,
     md: 24,
-    lg: 28,
-    xlg: 30,
+    lg: 30,
   },
   body: {
-    xxs: 9,
-    xs: 10,
-    sm: 11,
-    md: 12,
-    lg: 13,
-    xlg: 14,
+    sm: 12,
+    md: 14,
+  },
+  caption: {
+    sm: 10,
+    md: 11,
   },
 };
 
