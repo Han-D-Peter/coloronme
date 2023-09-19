@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
 import DefaultLayout from '../domains/shared/component/layout/DefaultLayout';
-import { useRouter } from 'next/router';
 
-export default function Home() {
-  // const router = useRouter();
-
-  // router.push('/register');
+export default function Colors() {
   return (
     <DefaultLayout>
       <div
@@ -13,7 +9,7 @@ export default function Home() {
           height: 100%;
         `}
       >
-        hello
+        colors
       </div>
     </DefaultLayout>
   );
