@@ -12,24 +12,30 @@ interface TextProps {
   style?: SerializedStyles;
 }
 
+const defaultStyle = css`
+  margin: 0;
+  padding: 0;
+`;
+
 export function Text({ as, size, weight = 'regular', children, style }: TextProps) {
   const textSize = useMemo(() => {
     return css`
+      font-family: pretendard;
       font-size: ${fontSize[as][size]}px;
     `;
   }, [as, size]);
 
   const textWeight = useMemo(() => {
     return css`
-      font-weight: ${weight};
+      font-weight: ${weight === 'bold' ? 800 : 400};
     `;
   }, [weight]);
 
   if (as === 'title') {
-    return <span css={[textSize, textWeight, style ?? null]}>{children}</span>;
+    return <span css={[defaultStyle, textSize, textWeight, style ?? null]}>{children}</span>;
   }
 
   if (as === 'body') {
-    return <p css={[textSize, textWeight, style ?? null]}>{children}</p>;
+    return <p css={[defaultStyle, textSize, textWeight, style ?? null]}>{children}</p>;
   }
 }
