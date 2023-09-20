@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Text, Button, TablerPhotoSensorOutline } from '@design';
+import { Text, TablerPhotoSensorOutline, Button } from '@design';
 import ProfileCard from '../shared/component/element/ProfileCard';
 import { OnResultFunction, QrReader } from 'react-qr-reader';
 import { useState } from 'react';
@@ -123,13 +123,7 @@ export default function RegisterPage() {
           box-shadow: 0px 3px 4px #0000003e;
         `}
       >
-        <Button
-          size="md"
-          variant="primary"
-          onClick={() => {
-            setStartScan(!startScan);
-          }}
-        >
+        <button>
           <div
             css={css`
               width: 100%;
@@ -160,7 +154,7 @@ export default function RegisterPage() {
               </Text>
             </div>
           </div>
-        </Button>
+        </button>
       </div>
       {startScan && (
         <QrReader
