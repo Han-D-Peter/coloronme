@@ -123,7 +123,11 @@ export default function RegisterPage() {
           box-shadow: 0px 3px 4px #0000003e;
         `}
       >
-        <button>
+        <button
+          onClick={() => {
+            setStartScan(true);
+          }}
+        >
           <div
             css={css`
               width: 100%;
