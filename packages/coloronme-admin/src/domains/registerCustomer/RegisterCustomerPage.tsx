@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { Text, color } from '@design';
+import { Dropdown } from '@design';
 
 export default function RegisterCustomerPage() {
   return (
@@ -85,8 +86,57 @@ export default function RegisterCustomerPage() {
         <div
           css={css`
             margin-top: 18px;
+            width: 187px;
           `}
-        ></div>
+        >
+          <Dropdown>
+            <Dropdown.Element>봄 브라이트</Dropdown.Element>
+            <Dropdown.Element>봄 다크</Dropdown.Element>
+            <Dropdown.Element>여름 뮤트</Dropdown.Element>
+            <Dropdown.Element>여름 라이트</Dropdown.Element>
+            <Dropdown.Element>가을</Dropdown.Element>
+            <Dropdown.Element>겨울</Dropdown.Element>
+          </Dropdown>
+        </div>
+      </div>
+      <div
+        css={css`
+          margin-top: 40px;
+        `}
+      >
+        <div
+          css={css`
+            display: flex;
+            justify-content: space-between;
+          `}
+        >
+          <div>
+            <Text as="title" size="xlg" weight="bold">
+              진단 내용
+            </Text>
+          </div>
+          <div>
+            <button>작성하기</button>
+          </div>
+        </div>
+        <div
+          css={css`
+            margin-top: 18px;
+            height: 218px;
+          `}
+        >
+          <textarea
+            css={css`
+              width: 100%;
+              height: 100%;
+              border: 1px solid ${color.gray.gray020};
+              border-radius: 5px;
+            `}
+          />
+        </div>
+      </div>
+      <div>
+        <button>결과 공유하기</button>
       </div>
     </section>
   );

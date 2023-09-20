@@ -3,8 +3,10 @@ import { Text, TablerPhotoSensorOutline, Button } from '@design';
 import ProfileCard from '../shared/component/element/ProfileCard';
 import { OnResultFunction, QrReader } from 'react-qr-reader';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [selected, setSelected] = useState('environment');
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
@@ -16,8 +18,7 @@ export default function RegisterPage() {
     if (qrText && qrText !== '') {
       console.log(`loaded >>>`, qrText);
       setData(qrText);
-      setStartScan(false);
-      setLoadingScan(false);
+      router.push('/register/asdfasdfasdf');
       // setPrecScan(scanData);
     }
   };
