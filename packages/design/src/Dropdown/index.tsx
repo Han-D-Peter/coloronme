@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactElement, ReactNode, createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import DropdownHeader from './components/DropdownHeader';
 import DropdownContainer from './components/DropdownContainer';
 import DropdownElement from './components/DropdownElement';
@@ -8,7 +8,7 @@ interface DropdownProps {
   placeholder?: string;
   value?: string;
   onChange?: (value: string) => void;
-  children: ReactNode;
+  children: ReactElement<typeof DropdownElement> | ReactElement<typeof DropdownElement>[];
 }
 
 export interface DropdownContextValues {
@@ -23,7 +23,7 @@ export interface DropdownContextValues {
 
 export const DropdownContext = createContext<DropdownContextValues | null>(null);
 
-export default function Dropdown({ placeholder = 'select', value, onChange, children }: DropdownProps) {
+export function Dropdown({ placeholder = 'select', value, onChange, children }: DropdownProps) {
   const [selectedValue, setSelectedValue] = useState<string | undefined>(value);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -68,14 +68,10 @@ export default function Dropdown({ placeholder = 'select', value, onChange, chil
         `}
       >
         <DropdownHeader />
-        {isOpen && (
-          <DropdownContainer>
-            <DropdownElement>1</DropdownElement>
-            <DropdownElement>2</DropdownElement>
-            <DropdownElement>3</DropdownElement>
-          </DropdownContainer>
-        )}
+        {isOpen && <DropdownContainer>{children}</DropdownContainer>}
       </div>
     </DropdownContext.Provider>
   );
 }
+
+Dropdown.Element = DropdownElement;
