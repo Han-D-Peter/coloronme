@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { HomeOutline, Text, TablerPhotoSensorOutline, Layer, PersonOutline } from '@design';
+import { HomeOutline, Text, TablerPhotoSensorOutline, Layer, PersonOutline, color } from '@design';
 
 import NaviItem from './NaviItem';
 import { useRouter } from 'next/router';
@@ -30,6 +30,7 @@ export default function Navigation() {
         bottom: 0;
         right: 0;
         justify-content: space-around;
+        background: ${color.gray.gray000};
         align-items: center;
         height: 81px;
         width: 100%;

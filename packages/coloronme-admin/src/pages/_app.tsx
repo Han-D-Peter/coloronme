@@ -11,6 +11,16 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Global
           styles={css`
+            @font-face {
+              font-family: pretendard;
+              font-weight: bold;
+              src: url('/fonts/Pretendard-Bold');
+            }
+            @font-face {
+              font-family: pretendard;
+              font-weight: regular;
+              src: url('/fonts/Pretendard-Medium');
+            }
             body {
               margin: 0;
               width: 100%;
