@@ -64,6 +64,7 @@ export function Dropdown({ placeholder = 'select', value, onChange, children }: 
     <DropdownContext.Provider value={contextValues}>
       <div
         css={css`
+          position: relative;
           min-width: 130px;
         `}
       >

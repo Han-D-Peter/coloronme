@@ -11,6 +11,9 @@ export default function DropdownContainer({ children }: DropdownContianerProps) 
   return (
     <div
       css={css`
+        position: absolute;
+        z-index: 10;
+        top: 36px;
         border-radius: 0 0 5px 5px;
         border: 1px solid ${color.gray.gray020};
         border-top: 0px;
