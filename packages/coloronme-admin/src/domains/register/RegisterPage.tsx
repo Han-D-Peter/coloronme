@@ -117,53 +117,6 @@ export default function RegisterPage() {
             <ProfileCard name="맹꽁이" email="asdf@naver.com" date="2023. 08. 13" colorType="여름 쿨 라이트" />
           </div>
         </div>
-        <div
-          css={css`
-            position: fixed;
-            left: 125px;
-            border-radius: 25px;
-            box-shadow: 0px 3px 4px #0000003e;
-          `}
-        >
-          <Button
-            size="md"
-            variant="primary"
-            onClick={() => {
-              setStartScan(true);
-            }}
-          >
-            <div
-              css={css`
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              `}
-            >
-              <div>
-                <TablerPhotoSensorOutline width="28px" height="28px" color="#fff" />
-              </div>
-              <div
-                css={css`
-                  margin-left: 5px;
-                `}
-              >
-                <Text
-                  as="title"
-                  size="xs"
-                  weight="bold"
-                  style={css`
-                    margin: 0;
-                    padding: 0;
-                  `}
-                >
-                  등록
-                </Text>
-              </div>
-            </div>
-          </Button>
-        </div>
       </section>
       {startScan && (
         <div
@@ -208,6 +161,60 @@ export default function RegisterPage() {
           </button>
         </div>
       )}
+      <div
+        css={css`
+          display: flex;
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 110px;
+          width: 100vw;
+          justify-content: center;
+        `}
+      >
+        <Button
+          css={css`
+            border-radius: 25px;
+            box-shadow: 0px 3px 4px #0000003e;
+          `}
+          size="md"
+          variant="primary"
+          onClick={() => {
+            setStartScan(true);
+          }}
+        >
+          <div
+            css={css`
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            `}
+          >
+            <div>
+              <TablerPhotoSensorOutline width="28px" height="28px" color="#fff" />
+            </div>
+            <div
+              css={css`
+                margin-left: 5px;
+              `}
+            >
+              <Text
+                as="title"
+                size="xs"
+                weight="bold"
+                style={css`
+                  margin: 0;
+                  padding: 0;
+                `}
+              >
+                등록
+              </Text>
+            </div>
+          </div>
+        </Button>
+      </div>
     </>
   );
 }
