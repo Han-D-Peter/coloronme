@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { Text, color } from '@design';
+
+import { Modal, Text, color } from '@design';
 import { Dropdown } from '@design';
 
 export default function RegisterCustomerPage() {
@@ -138,6 +139,24 @@ export default function RegisterCustomerPage() {
       <div>
         <button>결과 공유하기</button>
       </div>
+      <Modal isOpen={true}>
+        <div
+          css={css`
+            width: 320px;
+          `}
+        >
+          <div>
+            <Text as="title" size="xlg" weight="bold">
+              진단 내용 작성
+            </Text>
+          </div>
+          <div
+            css={css`
+              margin-top: 18px;
+            `}
+          ></div>
+        </div>
+      </Modal>
     </section>
   );
 }
