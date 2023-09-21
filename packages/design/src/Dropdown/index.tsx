@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactElement, createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import DropdownHeader from './components/DropdownHeader';
 import DropdownContainer from './components/DropdownContainer';
 import DropdownElement from './components/DropdownElement';

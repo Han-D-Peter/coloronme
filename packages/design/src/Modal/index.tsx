@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useCallback, useContext, useMemo, useState } from 'react';
-import Modal from 'react-modal';
+import ModalContainer from './ModalContainer';
+import { SxProps, Theme } from '@mui/material';
 
 interface ModalContextValue {
   isTrue: boolean;
@@ -16,26 +17,11 @@ const ModalContext = createContext<ModalContextValue | null>(null);
 export default function ModalBox({
   children,
   isOpen = false,
-  style = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      borderRadius: '15px',
-      border: '0',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      boxShadow: '0px 4px 10px 0px rgba(0,0,0,0.25)',
-    },
-    overlay: {
-      background: '#545454ca',
-    },
-  },
+  sx = {},
 }: {
   children: ReactNode;
   isOpen?: boolean;
-  style?: Modal.Styles;
+  sx?: SxProps<Theme>;
 }) {
   const [isTrue, setIsTrue] = useState(isOpen);
 
@@ -57,9 +43,9 @@ export default function ModalBox({
 
   return (
     <ModalContext.Provider value={modalValues}>
-      <Modal isOpen={isTrue} style={style} onRequestClose={onCloseModal}>
+      <ModalContainer sx={{ ...sx }} isOpen={isTrue} onRequestClose={onCloseModal}>
         {children}
-      </Modal>
+      </ModalContainer>
     </ModalContext.Provider>
   );
 }

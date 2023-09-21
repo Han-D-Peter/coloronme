@@ -38,4 +38,5 @@ export function Text({ as, size, weight = 'regular', children, style }: TextProp
   if (as === 'body') {
     return <p css={[defaultStyle, textSize, textWeight, style ?? null]}>{children}</p>;
   }
+  return <></>;
 }
