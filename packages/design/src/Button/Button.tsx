@@ -46,10 +46,14 @@ const defaultButtonStyle = css`
   cursor: pointer;
 `;
 
-function Button(
-  { size = 'lg', variant = 'primary', fullWidth = false, disabled = false, children, ...rest }: ButtonProps,
-  ref: ForwardedRef<HTMLButtonElement>,
-) {
+export function Button({
+  size = 'lg',
+  variant = 'primary',
+  fullWidth = false,
+  disabled = false,
+  children,
+  ...rest
+}: ButtonProps) {
   const activeButtonStyle = useMemo(() => {
     const currentVariantStyles = buttonStyles[variant as Variant] || {};
     return css`
@@ -83,11 +87,11 @@ function Button(
       type="button"
       disabled={disabled}
       css={[defaultButtonStyle, buttonSizeStyle, activeButtonStyle]}
-      ref={ref}
+      // ref={ref}
       {...rest}
     >
       {children}
     </button>
   );
 }
-export const ForwardedButton = forwardRef(Button);
+// export const ForwardedButton = forwardRef(Button);

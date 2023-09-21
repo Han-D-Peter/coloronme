@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { color } from '../../constants';
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 import DropdownElement from './DropdownElement';
 
 interface DropdownContianerProps {
-  children: ReactElement<typeof DropdownElement> | ReactElement<typeof DropdownElement>[];
+  children: React.ReactNode;
 }
 
 export default function DropdownContainer({ children }: DropdownContianerProps) {
