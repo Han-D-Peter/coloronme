@@ -181,7 +181,7 @@ export default function RegisterPage() {
           `}
         >
           <QrReader
-            constraints={{ facingMode: 'user' }}
+            constraints={{ facingMode: 'environment' }}
             scanDelay={500}
             onResult={handleScan}
             // chooseDeviceId={()=>selected}
