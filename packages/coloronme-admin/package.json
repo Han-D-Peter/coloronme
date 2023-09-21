@@ -13,7 +13,6 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@tanstack/react-query": "^4.35.0",
-    "@types/react-qr-reader": "^2.1.4",
     "fabric": "^5.3.0",
     "fabricjs-react": "^1.2.0",
     "next": "13.4.19",
@@ -33,6 +32,7 @@
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "@types/react-qr-reader": "^2.1.4",
     "@types/testing-library__jest-dom": "^6",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
