@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { fabric } from 'fabric';
 
 export default function RegisterCustomerPage() {
-  const [isOpen, open, close] = useBoolean(true);
+  const [isOpen, open, close] = useBoolean(false);
   const [canvasObj, setCanvasObj] = useState<fabric.Object[]>([]);
 
   const onSubmit = () => {
