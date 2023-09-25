@@ -3,9 +3,18 @@ import { css } from '@emotion/react';
 import { Button, Modal, Text, color } from '@design';
 import { Dropdown } from '@design';
 import { useBoolean } from '@libs';
+import Canvas from '../shared/component/Canvas';
+import { useState } from 'react';
+import { fabric } from 'fabric';
 
 export default function RegisterCustomerPage() {
   const [isOpen, open, close] = useBoolean(true);
+  const [canvasObj, setCanvasObj] = useState<fabric.Object[]>([]);
+
+  const onSubmit = () => {
+    const canvasObjectsJson = canvasObj.map((object) => object.toObject());
+    console.log('canvasObjectsJson', canvasObjectsJson);
+  };
   return (
     <section
       css={css`
@@ -158,14 +167,13 @@ export default function RegisterCustomerPage() {
           justify-content: center;
         `}
       >
-        <Button variant="primary" size="lg">
+        <Button variant="primary" size="lg" onClick={onSubmit}>
           결과 공유하기
         </Button>
       </div>
       <Modal sx={{ display: 'flex', padding: '59px 16px' }} isOpen={isOpen} close={close} open={open}>
         <div
           css={css`
-            width: 100%;
             padding: 29px 31px;
           `}
         >
@@ -178,7 +186,42 @@ export default function RegisterCustomerPage() {
             css={css`
               margin-top: 18px;
             `}
-          ></div>
+          >
+            <Canvas
+              value={canvasObj}
+              onChange={(e) => {
+                setCanvasObj(e);
+              }}
+            />
+          </div>
+          <div
+            css={css`
+              width: 100%;
+              margin-top: 26px;
+              display: flex;
+              justify-content: space-between;
+            `}
+          >
+            <Button
+              onClick={() => {
+                setCanvasObj([]);
+                close();
+              }}
+              variant="secondary"
+              size="md"
+            >
+              취소
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
+              onClick={() => {
+                close();
+              }}
+            >
+              저장
+            </Button>
+          </div>
         </div>
       </Modal>
     </section>
