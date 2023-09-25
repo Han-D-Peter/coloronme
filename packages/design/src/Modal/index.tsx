@@ -3,9 +3,9 @@ import ModalContainer from './ModalContainer';
 import { SxProps, Theme } from '@mui/material';
 
 interface ModalContextValue {
-  isTrue: boolean;
-  onCloseModal: () => void;
-  onOpenModal: () => void;
+  isOpen: boolean;
+  close: () => void;
+  open: () => void;
 }
 
 export const useModal = () => {
@@ -17,33 +17,27 @@ const ModalContext = createContext<ModalContextValue | null>(null);
 export default function ModalBox({
   children,
   isOpen = false,
+  close,
+  open,
   sx = {},
 }: {
   children: ReactNode;
   isOpen?: boolean;
+  close: () => void;
+  open: () => void;
   sx?: SxProps<Theme>;
 }) {
-  const [isTrue, setIsTrue] = useState(isOpen);
-
-  const onCloseModal = useCallback(() => {
-    setIsTrue(false);
-  }, []);
-
-  const onOpenModal = useCallback(() => {
-    setIsTrue(true);
-  }, []);
-
   const modalValues = useMemo(() => {
     return {
-      isTrue,
-      onCloseModal,
-      onOpenModal,
+      isOpen,
+      close,
+      open,
     };
-  }, [isTrue, onCloseModal, onOpenModal]);
+  }, [close, open, isOpen]);
 
   return (
     <ModalContext.Provider value={modalValues}>
-      <ModalContainer sx={{ ...sx }} isOpen={isTrue} onRequestClose={onCloseModal}>
+      <ModalContainer sx={{ ...sx }} isOpen={isOpen} onRequestClose={close}>
         {children}
       </ModalContainer>
     </ModalContext.Provider>

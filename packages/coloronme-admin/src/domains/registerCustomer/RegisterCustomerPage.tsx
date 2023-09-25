@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 
-import { Modal, Text, color } from '@design';
+import { Button, Modal, Text, color } from '@design';
 import { Dropdown } from '@design';
+import { useBoolean } from '@libs';
 
 export default function RegisterCustomerPage() {
+  const [isOpen, open, close] = useBoolean(false);
   return (
     <section
       css={css`
@@ -109,6 +111,7 @@ export default function RegisterCustomerPage() {
           css={css`
             display: flex;
             justify-content: space-between;
+            align-items: center;
           `}
         >
           <div>
@@ -117,7 +120,18 @@ export default function RegisterCustomerPage() {
             </Text>
           </div>
           <div>
-            <button>작성하기</button>
+            <Button
+              size="md"
+              variant="secondary"
+              css={css`
+                width: 87px;
+                height: 30px;
+                border-radius: 10px;
+              `}
+              onClick={open}
+            >
+              작성하기
+            </Button>
           </div>
         </div>
         <div
@@ -136,10 +150,19 @@ export default function RegisterCustomerPage() {
           />
         </div>
       </div>
-      <div>
-        <button>결과 공유하기</button>
+      <div
+        css={css`
+          width: 100%;
+          margin-top: 40px;
+          display: flex;
+          justify-content: center;
+        `}
+      >
+        <Button variant="primary" size="lg">
+          결과 공유하기
+        </Button>
       </div>
-      <Modal isOpen={true}>
+      <Modal isOpen={isOpen} close={close} open={open}>
         <div
           css={css`
             width: 320px;
