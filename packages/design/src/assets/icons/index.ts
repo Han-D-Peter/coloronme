@@ -37,3 +37,4 @@ export * from './Penwidth';
 export * from './LeftArrow';
 export * from './RightArrow';
 export * from './Eraser';
+export * from './CircleDrawing';

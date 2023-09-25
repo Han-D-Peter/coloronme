@@ -1,6 +1,6 @@
 import { CustomSVGProps } from '.';
 
-export function Text({ width, height, color }: CustomSVGProps) {
+export function Trash({ width, height, color }: CustomSVGProps) {
   return (
     <svg width={width} height={height} viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
