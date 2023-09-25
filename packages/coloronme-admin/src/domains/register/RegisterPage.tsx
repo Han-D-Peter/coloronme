@@ -4,6 +4,7 @@ import ProfileCard from '../shared/component/element/ProfileCard';
 import { OnResultFunction, QrReader } from 'react-qr-reader';
 import { ComponentType, useState } from 'react';
 import { useRouter } from 'next/router';
+import { relative } from 'path';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -129,18 +130,20 @@ export default function RegisterPage() {
             position: fixed;
             height: 100vh;
             width: 100vw;
+            z-index: 2;
             top: 0;
             left: 0;
           `}
         >
-          <QrReader
-            constraints={{ facingMode: 'user' }}
-            scanDelay={500}
-            onResult={handleScan}
-            // chooseDeviceId={()=>selected}
-
-            containerStyle={{ position: 'fixed', width: '100vw', height: '100vh' }}
-          />
+          <div>
+            <QrReader
+              constraints={{ facingMode: 'environment', aspectRatio: { exact: 1 } }}
+              scanDelay={500}
+              onResult={handleScan}
+              // chooseDeviceId={()=>selected}
+              containerStyle={{ width: '100vw', height: '50%' }}
+            />
+          </div>
           <div
             css={css`
               color: white;
