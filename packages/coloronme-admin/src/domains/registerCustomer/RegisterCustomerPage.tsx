@@ -5,7 +5,7 @@ import { Dropdown } from '@design';
 import { useBoolean } from '@libs';
 
 export default function RegisterCustomerPage() {
-  const [isOpen, open, close] = useBoolean(false);
+  const [isOpen, open, close] = useBoolean(true);
   return (
     <section
       css={css`
@@ -162,10 +162,11 @@ export default function RegisterCustomerPage() {
           결과 공유하기
         </Button>
       </div>
-      <Modal isOpen={isOpen} close={close} open={open}>
+      <Modal sx={{ display: 'flex', padding: '59px 16px' }} isOpen={isOpen} close={close} open={open}>
         <div
           css={css`
-            width: 320px;
+            width: 100%;
+            padding: 0;
           `}
         >
           <div>
