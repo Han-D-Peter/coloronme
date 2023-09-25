@@ -1,25 +1,19 @@
 /** @type {import('next').NextConfig} */
-const withPlugins = require('next-compose-plugins');
 const withPWA = require('next-pwa');
+const isProduction = process.env.NODE_ENV === 'production';
+const runtimeCaching = require('next-pwa/cache.js');
 
-const nextConfig = {
-  reactStrictMode: true,
+const config = {
+  reactStrictMode: false,
   experimental: {
     externalDir: true,
   },
 };
 
-module.exports = withPlugins(
-  [
-    [
-      withPWA,
-      {
-        pwa: {
-          dest: 'public',
-        },
-      },
-    ],
-    // 추가 플러그인 작성
-  ],
-  nextConfig,
-);
+const nextConfig = withPWA({
+  dest: 'public',
+  disable: !isProduction,
+  runtimeCaching: runtimeCaching,
+})(config);
+
+module.exports = nextConfig;
