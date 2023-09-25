@@ -126,20 +126,20 @@ export default function RegisterPage() {
             align-items: center;
             flex-direction: column;
             background-color: black;
-            position: absolute;
-            height: 100%;
-            width: 100%;
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
             top: 0;
             left: 0;
           `}
         >
           <QrReader
-            constraints={{ facingMode: 'environment' }}
+            constraints={{ facingMode: 'user' }}
             scanDelay={500}
             onResult={handleScan}
             // chooseDeviceId={()=>selected}
 
-            containerStyle={{ position: 'absolute', width: '100%', height: '100%' }}
+            containerStyle={{ position: 'fixed', width: '100vw', height: '100vh' }}
           />
           <div
             css={css`
