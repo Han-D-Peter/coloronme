@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "ColorOnMe",
-  "short_name": "ColorMe",
+  "name": "ColorOnMe-admin",
+  "short_name": "ColorMe-admin",
   "description": "\ud37c\uc2a4\ub110 \uceec\ub7ec\uc758 \uc0c9\uc0c1\uc740?",
   "icons": [
     {
