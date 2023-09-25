@@ -166,7 +166,7 @@ export default function RegisterCustomerPage() {
         <div
           css={css`
             width: 100%;
-            padding: 0;
+            padding: 29px 31px;
           `}
         >
           <div>
