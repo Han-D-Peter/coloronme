@@ -38,3 +38,5 @@ export * from './LeftArrow';
 export * from './RightArrow';
 export * from './Eraser';
 export * from './CircleDrawing';
+export * from './ThumbsUp';
+export * from './ThumbsDown';
