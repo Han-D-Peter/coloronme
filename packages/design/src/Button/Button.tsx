@@ -16,12 +16,12 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   /**
    * How large should the button be? default: 'lg'
    */
-  size: Size;
+  size?: Size;
 
   /**
    * Visual Style of the Button. default: 'primary'
    */
-  variant: Variant;
+  variant?: Variant;
 
   /**
    * If true, the button will take up the full width of its container
