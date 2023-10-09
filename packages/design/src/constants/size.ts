@@ -37,7 +37,7 @@ export const fontSize: FontSize = {
 
 export const buttonSize: ButtonSize = {
   md: {
-    width: 132,
+    width: 126,
     height: 45,
   },
   lg: {

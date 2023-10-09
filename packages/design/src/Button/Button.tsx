@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { buttonSize, buttonStyles } from '../constants';
 
 export type Size = 'md' | 'lg';
-export type Variant = 'primary' | 'secondary' | 'ghost';
+export type Variant = 'primary' | 'ghost';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string;
