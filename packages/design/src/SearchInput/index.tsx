@@ -1,4 +1,4 @@
-import React, { type InputHTMLAttributes, forwardRef, FormEventHandler, useMemo } from 'react';
+import React, { type InputHTMLAttributes, forwardRef, FormEventHandler, useMemo, FormEvent } from 'react';
 import { css } from '@emotion/react';
 import { MaxmizeOutline } from '../../src/assets/icons';
 import { color } from '../../src/constants';
@@ -27,6 +27,13 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 
 const SearchInput = forwardRef<HTMLInputElement, InputProps>(
   ({ id, fullWidth = false, placeholder, onSubmit, ...args }, ref) => {
+    const handleOnSubmit = (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (onSubmit) {
+        onSubmit(event);
+      }
+    };
+
     const inputSizeStyle = useMemo(() => {
       return css`
         width: ${fullWidth ? '100%' : '270px'};
@@ -34,7 +41,7 @@ const SearchInput = forwardRef<HTMLInputElement, InputProps>(
     }, [fullWidth]);
 
     return (
-      <form css={containerStyle} onSubmit={onSubmit}>
+      <form css={containerStyle} onSubmit={handleOnSubmit}>
         <input id={id} ref={ref} css={[inputStyle, inputSizeStyle]} placeholder={placeholder} {...args} />
         <button css={imageWrapperStyle} type="submit">
           <MaxmizeOutline width="20" height="20" color="#BCBCBC" />
