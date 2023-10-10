@@ -4,6 +4,9 @@ export * from './assets/icons';
 export * from './Button';
 export * from './Dropdown';
 
+import URLInput from './URLInput';
+export { URLInput };
+
 import SearchInput from './SearchInput';
 export { SearchInput };
 
