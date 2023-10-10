@@ -3,6 +3,7 @@ export * from './constants';
 export * from './assets/icons';
 export * from './Button';
 export * from './Dropdown';
+export * from './Tag';
 
 import URLInput from './URLInput';
 export { URLInput };

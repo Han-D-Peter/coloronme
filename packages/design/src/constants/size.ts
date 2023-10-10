@@ -45,3 +45,8 @@ export const buttonSize: ButtonSize = {
     height: 45,
   },
 };
+
+export const tagGapSize = {
+  lg: 9,
+  md: 6,
+};
