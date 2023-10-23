@@ -1,10 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 import { css } from '@emotion/react';
-import { Text, TablerPhotoSensorOutline, Button } from '@design';
+import { Text, TablerPhotoSensorOutline, Button, ForwardOutline } from '@design';
 import ProfileCard from '../shared/component/element/ProfileCard';
 import { OnResultFunction, QrReader } from 'react-qr-reader';
 import { ComponentType, useState } from 'react';
 import { useRouter } from 'next/router';
 import { relative } from 'path';
+import leftArrow from '../../../public/icons/vector/leftArrow.svg';
+import Image from 'next/image';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -122,11 +125,12 @@ export default function RegisterPage() {
       {startScan && (
         <div
           css={css`
+            padding: 62px 0 0 0;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             flex-direction: column;
-            background-color: black;
+            background-color: white;
             position: fixed;
             height: 100vh;
             width: 100vw;
@@ -135,7 +139,58 @@ export default function RegisterPage() {
             left: 0;
           `}
         >
+          <div
+            onClick={() => setStartScan(false)}
+            css={css`
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              width: 100%;
+              margin-left: 28px;
+            `}
+          >
+            <div>
+              <Image width={7} height={14} src={leftArrow} alt="leftArrow" />
+            </div>
+            <div
+              css={css`
+                margin-left: 13px;
+              `}
+            >
+              <Text as="title" size="xs" weight="bold">
+                코드 스캔
+              </Text>
+            </div>
+          </div>
           <div>
+            <div
+              css={css`
+                width: 100%;
+                text-align: center;
+                margin-top: 105px;
+              `}
+            >
+              <Text as="body" size="md" weight="regular">
+                회원가입을 마친 고객님의 화면에서
+              </Text>
+            </div>
+            <div
+              css={css`
+                margin-top: px;
+                width: 100%;
+                text-align: center;
+              `}
+            >
+              <Text as="body" size="md" weight="regular">
+                QR코드를 스캔해주세요
+              </Text>
+            </div>
+          </div>
+          <div
+            css={css`
+              margin-top: 25px;
+            `}
+          >
             <QrReader
               constraints={{ facingMode: 'environment', aspectRatio: { exact: 1 } }}
               scanDelay={500}
@@ -152,16 +207,6 @@ export default function RegisterPage() {
           >
             Scanning QR Code...
           </div>
-          <button
-            css={css`
-              z-index: 1000;
-            `}
-            onClick={() => {
-              setStartScan(false);
-            }}
-          >
-            cancel
-          </button>
         </div>
       )}
       <div

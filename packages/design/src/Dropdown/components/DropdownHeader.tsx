@@ -33,8 +33,9 @@ export default function DropdownHeader() {
       </div>
       <div
         css={css`
-          margin-top: 6px;
+          margin-top: -6px;
           margin-right: 17px;
+          transform: rotate(180deg);
         `}
       >
         <UpwardOutline color={color.gray.gray030} width="24px" height="24px" />

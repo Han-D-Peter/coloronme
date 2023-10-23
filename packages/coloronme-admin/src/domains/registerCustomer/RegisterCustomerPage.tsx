@@ -77,7 +77,7 @@ export default function RegisterCustomerPage() {
         </div>
         <div
           css={css`
-            margin-top: 22px;
+            margin-top: 20px;
           `}
         >
           <Text as="body" size="md">
@@ -129,18 +129,19 @@ export default function RegisterCustomerPage() {
             </Text>
           </div>
           <div>
-            <Button
-              size="md"
-              variant="secondary"
+            <button
               css={css`
+                background: ${color.gray.gray040};
+                color: white;
+                border: 0;
                 width: 87px;
                 height: 30px;
-                border-radius: 10px;
+                border-radius: 5px;
               `}
               onClick={open}
             >
               작성하기
-            </Button>
+            </button>
           </div>
         </div>
         <div
@@ -207,7 +208,7 @@ export default function RegisterCustomerPage() {
                 setCanvasObj([]);
                 close();
               }}
-              variant="secondary"
+              variant="ghost"
               size="md"
             >
               취소

@@ -10,10 +10,18 @@ export default function IconButton({
   return (
     <button
       css={css`
-        width: 100%;
-        height: 100%;
-        border: none;
-        background-color: ${isActive ? `${color.gray.gray060}` : 'transparent'};
+        width: 27px;
+        height: 27px;
+        ${isActive
+          ? css`
+              border: 1px solid #bfbfbf;
+              border-radius: 3px;
+            `
+          : css`
+              border: none;
+            `}
+
+        background-color: ${isActive ? '#d7d7d7' : 'transparent'};
       `}
       {...args}
     >
