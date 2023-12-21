@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import DefaultLayout from '../domains/shared/component/layout/DefaultLayout';
 import { useRouter } from 'next/router';
+import withAuth from '../domains/shared/hoc/withAuth';
 
-export default function Home() {
+function Home() {
   // const router = useRouter();
 
   // router.push('/register');
@@ -18,3 +19,5 @@ export default function Home() {
     </DefaultLayout>
   );
 }
+
+export default withAuth(Home);

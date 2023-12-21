@@ -8,21 +8,24 @@ import { useRouter } from 'next/router';
 import { relative } from 'path';
 import leftArrow from '../../../public/icons/vector/leftArrow.svg';
 import Image from 'next/image';
+import { useUserByQR, useUsers } from '../shared/hooks/queryhooks/common.query';
 
 export default function RegisterPage() {
+  const { data } = useUsers();
+
   const router = useRouter();
   const [selected, setSelected] = useState('environment');
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
-  const [data, setData] = useState('');
+  const [qr, setQR] = useState('');
 
   const handleScan: OnResultFunction = async (result, error, codeReader) => {
     setLoadingScan(true);
     const qrText = result?.getText();
     if (qrText && qrText !== '') {
       console.log(`loaded >>>`, qrText);
-      setData(qrText);
-      router.push('/register/asdfasdfasdf');
+      setQR(qrText);
+      router.push(`/register/${qrText}`);
       // setPrecScan(scanData);
     }
   };

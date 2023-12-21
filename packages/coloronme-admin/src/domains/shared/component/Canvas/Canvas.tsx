@@ -1,16 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { fabric } from 'fabric';
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { Button, CircleDrawing, LeftArrow, Pencil, Penwidth, RightArrow, TextIcon, Trash, color } from '@design';
 import IconButton from '../../component/IconButton';
 import { Eraser } from '../../../../../../design/src/assets/icons/Eraser';
+import { brushColor as brushColorConstants } from '../../constants/color';
+import { useBoolean } from '../../../../../../libs/src/hooks';
 
 interface CanvasProps {
-  value?: fabric.Object[];
-  onChange?: (objects: fabric.Object[]) => void;
+  value?: string;
+  onChange?: (objects: { version: string; objects: Object[] }) => void;
 }
 
-export default function Canvas({ value, onChange }: CanvasProps) {
+export default forwardRef<{ fromJSON: (value: any) => void }, CanvasProps>(function Canvas({ value, onChange }, ref) {
+  const storedValue = useRef<string>();
   const fabricRef = useRef<fabric.Canvas | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const history: fabric.Object[] = [];
@@ -20,42 +24,50 @@ export default function Canvas({ value, onChange }: CanvasProps) {
     removable: false,
   });
 
-  const onAddText = () => {
-    if (fabricRef.current) {
-      const text = new fabric.IText('Test', {
-        left: 100, // x 좌표
-        top: 100, // y 좌표
-        fontSize: 24, // 폰트 크기
-        fill: 'red', // 텍스트 색상
-        fontFamily: 'Arial', // 폰트 패밀리
-      });
-      //   text.selectable = true;
-      fabricRef.current.add(text);
+  const [brushColor, setBrushColor] = useState('#000000');
+  const [isShown, open, close] = useBoolean(false);
+
+  // const onAddText = () => {
+  //   if (fabricRef.current) {
+  //     const text = new fabric.IText('Test', {
+  //       left: 100, // x 좌표
+  //       top: 100, // y 좌표
+  //       fontSize: 24, // 폰트 크기
+  //       fill: 'red', // 텍스트 색상
+  //       fontFamily: 'Arial', // 폰트 패밀리
+  //     });
+  //     //   text.selectable = true;
+  //     fabricRef.current.add(text);
+  //   }
+  // };
+  // const onTogglePencil = () => {
+  //   if (fabricRef.current) {
+  //     if (canvasControl.isDrawing) {
+  //       fabricRef.current.isDrawingMode = false;
+  //       setCanvasControl((prev) => ({ isDrawing: false, removable: false, textable: false }));
+  //     } else {
+  //       fabricRef.current.isDrawingMode = true;
+  //       fabricRef.current.freeDrawingBrush.color = 'black';
+  //       fabricRef.current.freeDrawingBrush.width = 2;
+  //       setCanvasControl((prev) => ({ isDrawing: true, removable: false, textable: false }));
+  //     }
+  //   }
+  // };
+  const onSelectColor = () => {
+    if (isShown) {
+      close();
+    } else {
+      open();
     }
-  };
-  const onTogglePencil = () => {
-    if (fabricRef.current) {
-      if (canvasControl.isDrawing) {
-        fabricRef.current.isDrawingMode = false;
-        setCanvasControl((prev) => ({ isDrawing: false, removable: false, textable: false }));
-      } else {
-        fabricRef.current.isDrawingMode = true;
-        fabricRef.current.freeDrawingBrush.color = 'black';
-        fabricRef.current.freeDrawingBrush.width = 2;
-        setCanvasControl((prev) => ({ isDrawing: true, removable: false, textable: false }));
-      }
-    }
-  };
-  const onAddCircle = () => {
-    if (fabricRef.current) {
-      const circle = new fabric.Circle({
-        left: 100, // x 좌표
-        top: 100, // y 좌표
-        radius: 50, // 반지름
-        fill: 'blue', // 채우기 색상
-      });
-      fabricRef.current.add(circle);
-    }
+    // if (fabricRef.current) {
+    //   const circle = new fabric.Circle({
+    //     left: 100, // x 좌표
+    //     top: 100, // y 좌표
+    //     radius: 50, // 반지름
+    //     fill: 'blue', // 채우기 색상
+    //   });
+    //   fabricRef.current.add(circle);
+    // }
   };
   const onToggleEraser = () => {
     if (fabricRef.current) {
@@ -79,7 +91,8 @@ export default function Canvas({ value, onChange }: CanvasProps) {
           history.push(popedObject);
         }
 
-        const objects = fabricRef.current.getObjects();
+        const objects = fabricRef.current.toJSON();
+
         if (onChange) {
           onChange(objects);
         }
@@ -105,7 +118,7 @@ export default function Canvas({ value, onChange }: CanvasProps) {
       editor._objects.splice(0, editor._objects.length);
       history.splice(0, history.length);
       editor.renderAll();
-      const objects = fabricRef.current.getObjects();
+      const objects = fabricRef.current.toJSON();
       if (onChange) {
         onChange(objects);
       }
@@ -119,6 +132,22 @@ export default function Canvas({ value, onChange }: CanvasProps) {
       fabricRef.current.renderAll(); // 다시 렌더링
     }
   };
+
+  function fromJSON(value: any) {
+    if (value) {
+      if (fabricRef.current) {
+        fabricRef.current.loadFromJSON(value, () => {});
+      }
+    }
+  }
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      fromJSON: fromJSON,
+    }),
+    [],
+  );
 
   useEffect(() => {
     const initFabric = () => {
@@ -143,7 +172,8 @@ export default function Canvas({ value, onChange }: CanvasProps) {
     function handleCanvasChange() {
       // 캔버스에서 변화가 감지되었을 때 수행할 작업을 여기에 추가
       if (fabricRef.current) {
-        const objects = fabricRef.current.getObjects();
+        const objects = fabricRef.current.toJSON();
+
         if (onChange) {
           onChange(objects);
         }
@@ -168,14 +198,21 @@ export default function Canvas({ value, onChange }: CanvasProps) {
   }, []);
 
   useEffect(() => {
-    if (value) {
-      value.forEach((object) => {
-        if (fabricRef.current) {
-          fabricRef.current.add(object);
-        }
-      });
+    if (value && storedValue.current !== value && fabricRef.current) {
+      fabricRef.current.loadFromJSON(JSON.parse(value), () => {});
+      console.log('value', JSON.parse(value));
+      storedValue.current = value;
     }
-  }, []);
+  }, [value]);
+
+  useEffect(() => {
+    if (fabricRef.current) {
+      fabricRef.current.isDrawingMode = true;
+      fabricRef.current.freeDrawingBrush.width = 2;
+      fabricRef.current.freeDrawingBrush.color = brushColor;
+      setCanvasControl((prev) => ({ isDrawing: true, removable: false, textable: false }));
+    }
+  }, [brushColor]);
 
   return (
     <>
@@ -187,26 +224,60 @@ export default function Canvas({ value, onChange }: CanvasProps) {
       >
         <div
           css={css`
-            width: 282px;
+            position: relative;
+            width: 100%;
             height: 43px;
             border-bottom: 1px solid ${color.gray.gray020};
-            background-color: ${color.gray.gray020};
             display: flex;
             justify-content: space-evenly;
             align-items: center;
           `}
         >
-          <IconButton onClick={onAddText}>
+          {isShown && (
+            <div
+              css={css`
+                z-index: 3;
+                position: absolute;
+                background-color: white;
+                top: 47px;
+                width: 240px;
+                height: 50px;
+                border-radius: 5px;
+                box-shadow: 0px 1px 4px 0px #00000040;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+              `}
+            >
+              {brushColorConstants.map((color) => (
+                <button
+                  onClick={() => {
+                    setBrushColor(color);
+                    close();
+                  }}
+                  key={color}
+                  css={css`
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 30px;
+                    border: none;
+                    background-color: ${color};
+                  `}
+                ></button>
+              ))}
+            </div>
+          )}
+          {/* <IconButton onClick={onAddText}>
             <TextIcon width="13" height="13" color={`${color.gray.gray050}`} />
-          </IconButton>
-          <IconButton isActive={canvasControl.isDrawing} onClick={onTogglePencil}>
+          </IconButton> */}
+          {/* <IconButton isActive={canvasControl.isDrawing} onClick={onTogglePencil}>
             <Pencil width="13" height="13" color={`${color.gray.gray050}`} />
-          </IconButton>
+          </IconButton> */}
           <IconButton>
             <Penwidth width="13" height="13" color={`${color.gray.gray050}`} />
           </IconButton>
-          <IconButton onClick={onAddCircle}>
-            <CircleDrawing width="13" height="13" color={`${color.gray.gray050}`} />
+          <IconButton onClick={onSelectColor}>
+            <CircleDrawing width="15" height="15" color={`${brushColor}`} />
           </IconButton>
           <IconButton onClick={undo}>
             <LeftArrow width="13" height="13" color={`${color.gray.gray050}`} />
@@ -225,4 +296,4 @@ export default function Canvas({ value, onChange }: CanvasProps) {
       </div>
     </>
   );
-}
+});

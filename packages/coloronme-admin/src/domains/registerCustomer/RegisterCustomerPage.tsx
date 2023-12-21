@@ -1,20 +1,67 @@
+/* eslint-disable @next/next/no-img-element */
 import { css } from '@emotion/react';
 
 import { Button, Modal, Text, color } from '@design';
 import { Dropdown } from '@design';
 import { useBoolean } from '@libs';
 import Canvas from '../shared/component/Canvas';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
+import { useRouter } from 'next/router';
+import { useMutateUser, useUserByQR } from '../shared/hooks/queryhooks/common.query';
+import { PERSONAL_COLOR_MAPPING } from '../shared/constants/constants';
+
+function convertIdFromStringName(keyword: string) {
+  let index = 1;
+
+  Object.entries(PERSONAL_COLOR_MAPPING).forEach(([key, value]) => {
+    if (keyword === value.string) {
+      index = Number(key);
+    }
+  });
+  return index;
+}
 
 export default function RegisterCustomerPage() {
+  const router = useRouter();
+  const qrId = router.query.id! as string;
+  const { mutate } = useMutateUser();
+
+  const { data, isLoading } = useUserByQR(qrId);
   const [isOpen, open, close] = useBoolean(false);
-  const [canvasObj, setCanvasObj] = useState<fabric.Object[]>([]);
+  const [canvasObj, setCanvasObj] = useState<string>('');
+
+  const [personalId, setPersonalId] = useState(1);
+  const [diagnosisText, setDiagnosisText] = useState('');
+
+  useEffect(() => {
+    if (data?.data) {
+      setPersonalId(data?.data?.personalColorId);
+      setCanvasObj(data?.data?.consultedDrawing);
+      setDiagnosisText(data?.data?.consultedContent);
+    }
+  }, [data]);
 
   const onSubmit = () => {
-    const canvasObjectsJson = canvasObj.map((object) => object.toObject());
-    console.log('canvasObjectsJson', canvasObjectsJson);
+    if (!data?.data) return;
+
+    mutate(
+      {
+        userId: data.data.memberId.toString(),
+        personalColorId: personalId,
+        consultedContent: diagnosisText,
+        consultedDrawing: canvasObj,
+        consultedDate: new Date().toISOString(),
+      },
+      {
+        onSuccess: () => {
+          console.log('success');
+        },
+      },
+    );
   };
+
+  if (isLoading || !data?.data) return <div>...Loading</div>;
   return (
     <section
       css={css`
@@ -49,7 +96,7 @@ export default function RegisterCustomerPage() {
         >
           <div>
             <Text as="title" size="sm" weight="bold">
-              맹꽁이
+              {data.data.nickname}
             </Text>
           </div>
           <div>
@@ -60,7 +107,7 @@ export default function RegisterCustomerPage() {
                 color: ${color.gray.gray050};
               `}
             >
-              abcdefg@naver.com
+              {data.data.email}
             </Text>
           </div>
         </div>
@@ -81,7 +128,7 @@ export default function RegisterCustomerPage() {
           `}
         >
           <Text as="body" size="md">
-            2023. 08. 13 12:30
+            {data.data.consultedDate || '진단 전'}
           </Text>
         </div>
       </div>
@@ -101,13 +148,17 @@ export default function RegisterCustomerPage() {
             width: 187px;
           `}
         >
-          <Dropdown>
-            <Dropdown.Element>봄 브라이트</Dropdown.Element>
-            <Dropdown.Element>봄 다크</Dropdown.Element>
-            <Dropdown.Element>여름 뮤트</Dropdown.Element>
-            <Dropdown.Element>여름 라이트</Dropdown.Element>
-            <Dropdown.Element>가을</Dropdown.Element>
-            <Dropdown.Element>겨울</Dropdown.Element>
+          <Dropdown
+            value={PERSONAL_COLOR_MAPPING[data.data.personalColorId as keyof typeof PERSONAL_COLOR_MAPPING].string}
+            placeholder="타입을 선택해 주세요"
+            onChange={(value) => {
+              const changeTargetId = convertIdFromStringName(value);
+              setPersonalId(changeTargetId);
+            }}
+          >
+            {Object.values(PERSONAL_COLOR_MAPPING).map((item) => (
+              <Dropdown.Element key={item.code}>{item.string}</Dropdown.Element>
+            ))}
           </Dropdown>
         </div>
       </div>
@@ -128,36 +179,55 @@ export default function RegisterCustomerPage() {
               진단 내용
             </Text>
           </div>
-          <div>
-            <button
-              css={css`
-                background: ${color.gray.gray040};
-                color: white;
-                border: 0;
-                width: 87px;
-                height: 30px;
-                border-radius: 5px;
-              `}
-              onClick={open}
-            >
-              작성하기
-            </button>
-          </div>
         </div>
         <div
           css={css`
+            position: relative;
             margin-top: 18px;
             height: 218px;
+            padding: 0;
           `}
         >
           <textarea
+            placeholder="* 진단 내용을 입력해주세요."
+            value={diagnosisText}
+            onChange={(e) => {
+              setDiagnosisText(e.target.value);
+            }}
             css={css`
-              width: 100%;
-              height: 100%;
+              height: calc(100% - 32px);
+              width: calc(100% - 32px);
               border: 1px solid ${color.gray.gray020};
               border-radius: 5px;
+              padding: 16px;
+              &::placeholder {
+                font-size: 14px;
+                font-weight: 400;
+                font-family: pretendard;
+              }
             `}
           />
+          <div
+            css={css`
+              position: absolute;
+              right: 16px;
+              bottom: 16px;
+            `}
+          >
+            <button
+              css={css`
+                background: white;
+                border: 0;
+                width: 40px;
+                height: 40px;
+                border-radius: 100px;
+                box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+              `}
+              onClick={open}
+            >
+              <img src="/icons/vector/pencil.svg" alt="pencil" width={20} height={20} />
+            </button>
+          </div>
         </div>
       </div>
       <div
@@ -191,7 +261,7 @@ export default function RegisterCustomerPage() {
             <Canvas
               value={canvasObj}
               onChange={(e) => {
-                setCanvasObj(e);
+                setCanvasObj(JSON.stringify(e));
               }}
             />
           </div>
@@ -205,7 +275,7 @@ export default function RegisterCustomerPage() {
           >
             <Button
               onClick={() => {
-                setCanvasObj([]);
+                setCanvasObj('');
                 close();
               }}
               variant="ghost"

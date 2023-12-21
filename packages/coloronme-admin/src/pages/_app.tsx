@@ -2,6 +2,7 @@ import { Global, css } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const queryClient = new QueryClient();
 
@@ -14,12 +15,12 @@ export default function App({ Component, pageProps }: AppProps) {
             @font-face {
               font-family: pretendard;
               font-weight: bold;
-              src: url('/fonts/Pretendard-Bold');
+              src: url('/fonts/Pretendard-Bold.otf');
             }
             @font-face {
               font-family: pretendard;
               font-weight: regular;
-              src: url('/fonts/Pretendard-Medium');
+              src: url('/fonts/Pretendard-Medium.otf');
             }
             body {
               margin: 0;
@@ -34,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
           `}
         />
         <Component {...pageProps} />
+        <ReactQueryDevtools position="left" initialIsOpen={false} />
       </QueryClientProvider>
     </RecoilRoot>
   );
