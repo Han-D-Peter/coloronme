@@ -42,7 +42,7 @@ export function Dropdown({ placeholder = 'select', value, onChange, children }: 
     if (onChange && selectedValue) {
       onChange(selectedValue);
     }
-  }, [value]);
+  }, [value, selectedValue]);
 
   const changeHandler = (value: string) => {
     setSelectedValue(value);
@@ -58,7 +58,7 @@ export function Dropdown({ placeholder = 'select', value, onChange, children }: 
       isOpen,
       toggleContainer,
     };
-  }, [selectedValue, placeholder, isOpen, toggleContainer]);
+  }, [selectedValue, placeholder, isOpen, toggleContainer, changeHandler]);
 
   return (
     <DropdownContext.Provider value={contextValues}>

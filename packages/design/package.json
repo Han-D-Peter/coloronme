@@ -19,8 +19,8 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.10",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -47,7 +47,7 @@
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/jest": "^29.5.3",
-    "@types/react": "18.2.20",
+    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@types/react-test-renderer": "^18",
     "@types/rimraf": "^3",
