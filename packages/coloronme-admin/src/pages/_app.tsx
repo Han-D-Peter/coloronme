@@ -14,12 +14,12 @@ export default function App({ Component, pageProps }: AppProps) {
           styles={css`
             @font-face {
               font-family: pretendard;
-              font-weight: bold;
+              font-weight: 800;
               src: url('/fonts/Pretendard-Bold.otf');
             }
             @font-face {
               font-family: pretendard;
-              font-weight: regular;
+              font-weight: 400;
               src: url('/fonts/Pretendard-Medium.otf');
             }
             body {
