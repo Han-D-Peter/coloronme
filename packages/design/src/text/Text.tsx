@@ -20,7 +20,7 @@ const defaultStyle = css`
 export function Text({ as, size, weight = 'regular', children, style }: TextProps) {
   const textSize = useMemo(() => {
     return css`
-      font-family: pretendard;
+      font-family: 'pretendard';
       font-size: ${fontSize[as][size]}px;
     `;
   }, [as, size]);
