@@ -26,6 +26,7 @@ export default function ColorProfile({ name, code }: ColorProfile) {
       ></div>
       <div
         css={css`
+          margin-top: 4px;
           display: flex;
         `}
       >
