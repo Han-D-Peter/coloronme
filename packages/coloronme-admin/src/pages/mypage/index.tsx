@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import DefaultLayout from '../domains/shared/component/layout/DefaultLayout';
+import DefaultLayout from '../../domains/shared/component/layout/DefaultLayout';
+import MyPage from '../../domains/mypage/MyPage';
 
 export default function Mypage() {
   return (
@@ -9,7 +10,7 @@ export default function Mypage() {
           height: 100%;
         `}
       >
-        my page
+        <MyPage />
       </div>
     </DefaultLayout>
   );

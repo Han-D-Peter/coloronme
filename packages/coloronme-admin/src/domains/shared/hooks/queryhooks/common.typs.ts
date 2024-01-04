@@ -16,6 +16,12 @@ export type Client = {
   consultedDrawing: string;
 };
 
+export type Me = {
+  name: string;
+  company: string;
+  email: string;
+};
+
 export type AuthResult = {
   accessToken: string;
   email: string;

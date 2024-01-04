@@ -1,10 +1,15 @@
 /* eslint-disable import/no-anonymous-default-export */
 import ky from 'ky';
-import { AuthResult, Client, ColorResponse } from './common.typs';
+import { Me, AuthResult, Client, ColorResponse } from './common.typs';
 import { BASE_URL } from '../../constants/constants';
 import { requestInstance } from '../../api/client';
 
+type MutatedUser = { name?: string; company?: string; email?: string };
 class CommonRepository {
+  async getMe() {
+    return await requestInstance.get<Me>('myPages');
+  }
+
   async getUserByQR(uuid: string) {
     return await requestInstance.get<Client>(`members/qr/${uuid}`);
   }
@@ -17,6 +22,10 @@ class CommonRepository {
       email,
       password,
     });
+  }
+
+  async mutateMe(body: MutatedUser) {
+    return await requestInstance.patch<ColorResponse<MutatedUser>, MutatedUser>('myPages', { ...body });
   }
 
   async registerCustomer({
