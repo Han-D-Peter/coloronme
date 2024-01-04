@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from '@emotion/react';
-import { Text, TablerPhotoSensorOutline, Button, ForwardOutline } from '@design';
+import { Text, TablerPhotoSensorOutline, Button, ForwardOutline, colorLibrary, ColorLibrary } from '@design';
 import ProfileCard from '../shared/component/element/ProfileCard';
 import { OnResultFunction, QrReader } from 'react-qr-reader';
 import { ComponentType, useState } from 'react';
@@ -9,6 +9,7 @@ import { relative } from 'path';
 import leftArrow from '../../../public/icons/vector/leftArrow.svg';
 import Image from 'next/image';
 import { useUserByQR, useUsers } from '../shared/hooks/queryhooks/common.query';
+import convertDateToSimple from '../shared/utils/convertDateToSimple';
 
 export default function RegisterPage() {
   const { data } = useUsers();
@@ -18,6 +19,7 @@ export default function RegisterPage() {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [qr, setQR] = useState('');
+  const colorKeys = Object.keys(colorLibrary) as (keyof ColorLibrary)[];
 
   const handleScan: OnResultFunction = async (result, error, codeReader) => {
     setLoadingScan(true);
@@ -95,34 +97,23 @@ export default function RegisterPage() {
           </div>
         </div>
         <div>
-          <div
-            css={css`
-              margin-bottom: 16px;
-            `}
-          >
-            <ProfileCard name="맹꽁이" email="asdf@naver.com" date="2023. 08. 13" colorType="여름 쿨 라이트" />
-          </div>
-          <div
-            css={css`
-              margin-bottom: 16px;
-            `}
-          >
-            <ProfileCard name="맹꽁이" email="asdf@naver.com" date="2023. 08. 13" colorType="여름 쿨 라이트" />
-          </div>
-          <div
-            css={css`
-              margin-bottom: 16px;
-            `}
-          >
-            <ProfileCard name="맹꽁이" email="asdf@naver.com" date="2023. 08. 13" colorType="여름 쿨 라이트" />
-          </div>
-          <div
-            css={css`
-              margin-bottom: 16px;
-            `}
-          >
-            <ProfileCard name="맹꽁이" email="asdf@naver.com" date="2023. 08. 13" colorType="여름 쿨 라이트" />
-          </div>
+          {data?.data?.map((user) => {
+            return (
+              <div
+                key={user.memberId}
+                css={css`
+                  margin-bottom: 16px;
+                `}
+              >
+                <ProfileCard
+                  name={user.nickname}
+                  email={user.email}
+                  date={convertDateToSimple(user.consultedDate as string)}
+                  colorType={colorLibrary[colorKeys[user.personalColorId]].name}
+                />
+              </div>
+            );
+          })}
         </div>
       </section>
       {startScan && (
