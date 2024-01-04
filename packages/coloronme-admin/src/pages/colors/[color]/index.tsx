@@ -36,6 +36,10 @@ export default function ColorDetail() {
     }
   }
 
+  if (!colorFromPath || !colorLibrary[colorFromPath]) {
+    return <h1>존재하지 않는 경로 입니다.</h1>;
+  }
+
   return (
     <main>
       <section
@@ -161,4 +165,18 @@ export default function ColorDetail() {
       </section>
     </main>
   );
+}
+
+export function getStaticPaths() {
+  const colorKeys = Object.keys(colorLibrary) as (keyof ColorLibrary)[];
+  return {
+    paths: colorKeys.map((color) => ({
+      params: { color },
+    })),
+    fallback: true,
+  };
+}
+
+export function getStaticProps() {
+  return { props: {} };
 }
