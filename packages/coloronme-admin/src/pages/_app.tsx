@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
               margin: 0;
               width: 100%;
               height: 100%;
+              font-family: 'pretendard';
             }
             #__next {
               height: 100vh;
