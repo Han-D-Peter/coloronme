@@ -35,7 +35,7 @@ export function Text({ as, size, weight = 'regular', children, style }: TextProp
     return <span css={[defaultStyle, textSize, textWeight, style ?? null]}>{children}</span>;
   }
 
-  if (as === 'body') {
+  if (as === 'body' || as === 'caption') {
     return <p css={[defaultStyle, textSize, textWeight, style ?? null]}>{children}</p>;
   }
   return <></>;

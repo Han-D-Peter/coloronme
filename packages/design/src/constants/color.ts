@@ -1,3 +1,25 @@
+export type ColorLibrary = {
+  [key in
+    | 'sw_lg'
+    | 'sw_cl'
+    | 'sw_st'
+    | 'sc_lg'
+    | 'sc_cl'
+    | 'sc_mt'
+    | 'fw_mt'
+    | 'fw_st'
+    | 'fw_dp'
+    | 'wc_br'
+    | 'wc_tr'
+    | 'wc_dp']: {
+    name: string;
+    iconColor: { name: string; code: { r: number; g: number; b: number } };
+    tags: [string, string, string];
+    best: Record<string, { name: string; r: number; g: number; b: number }>;
+    worst: { description: string; color: Record<string, { name: string; r: number; g: number; b: number }> };
+  };
+};
+
 export const color = {
   gray: {
     gray000: '#fff',
@@ -30,7 +52,7 @@ export const gradation = {
   lg: 'linear-gradient(60deg, #AB70CC 0%, #7481C0 24.72%, #5C97BB 52.32%, #E9D55E 107.2%)',
 };
 
-export const colorLibrary = {
+export const colorLibrary: ColorLibrary = {
   sw_lg: {
     name: '봄 웜 라이트',
     iconColor: { name: '트로피칼 블루', code: { r: 210, g: 238, b: 250 } },
