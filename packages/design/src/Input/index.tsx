@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         padding-left: 15px;
         height: 36px;
         outline: none;
-        font-size: ${fontSize.body.xlg}px;
+        font-size: ${fontSize.body.md}px;
         border: 0;
         border-bottom: 1px solid ${value ? color.blue.blue100 : color.gray.gray050};
         &:hover {
@@ -72,7 +72,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           align-items: center;
         `}
       >
-        <div>
+        <div
+          css={css`
+            width: 100%;
+          `}
+        >
           <div>
             <input
               css={[inputStyle, inputOutlineSelectorStyle]}
@@ -96,7 +100,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             <span
               css={css`
                 color: ${color.red.red100};
-                font-size: ${fontSize.body.xs}px;
+                font-size: ${fontSize.caption.sm}px;
               `}
             >
               {isInvalid && errorMessage}
