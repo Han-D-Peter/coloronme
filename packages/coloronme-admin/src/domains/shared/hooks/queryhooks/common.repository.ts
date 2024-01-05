@@ -1,10 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
 import ky from 'ky';
-import { Me, AuthResult, Client, ColorResponse } from './common.typs';
+import { Me, AuthResult, Client, ColorResponse, MutatedUser } from './common.typs';
 import { BASE_URL } from '../../constants/constants';
 import { requestInstance } from '../../api/client';
 
-type MutatedUser = { name?: string; company?: string; email?: string };
 class CommonRepository {
   async getMe() {
     return await requestInstance.get<Me>('myPages');
@@ -47,6 +46,10 @@ class CommonRepository {
       consultedDrawing,
       consultedDate,
     });
+  }
+
+  async modifyPassword(body: { oldPassword: string; newPassword: string; passwordConfirm: string }) {
+    return await requestInstance.patch('password', body);
   }
 }
 

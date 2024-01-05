@@ -40,3 +40,7 @@ export const useMutationMe = () => {
     },
   });
 };
+
+export const useMutationPassword = () => {
+  return useMutation(['modifyPassword'], commonRepository.modifyPassword, {});
+};

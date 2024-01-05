@@ -5,10 +5,16 @@ import { color } from '../../../../design/src/constants';
 import Hr from '../shared/Hr';
 import { Me } from '../shared/hooks/queryhooks/common.typs';
 import { useRouter } from 'next/router';
+import { clearAuthToken } from '../shared/api/client';
 
 export default function MyPage() {
   const { data, isLoading } = useMe();
   const router = useRouter();
+
+  function logout() {
+    clearAuthToken();
+    router.push('/login');
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>Error...</div>;
@@ -82,7 +88,7 @@ export default function MyPage() {
         </div>
         <Hr topMargin={17} bottomMargin={17} />
         <div>
-          <button css={textButtonStyle}>
+          <button css={textButtonStyle} onClick={logout}>
             <Text as="body" size="lg" weight="regular">
               로그아웃
             </Text>

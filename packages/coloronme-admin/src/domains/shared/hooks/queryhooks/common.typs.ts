@@ -28,3 +28,5 @@ export type AuthResult = {
   refreshToken: string;
   roleType: string;
 };
+
+export type MutatedUser = { name?: string; company?: string; email?: string };
