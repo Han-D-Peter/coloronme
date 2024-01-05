@@ -34,7 +34,17 @@ export default function Password() {
       }
 
       setValidation({ notOk: false, msg: '' });
-      mutate({ newPassword, oldPassword: originPassword, passwordConfirm: newPassword });
+      mutate(
+        { newPassword, oldPassword: originPassword, newPasswordConfirm: newPassword },
+        {
+          onSuccess: () => {
+            alert('비밀번호 변경 성공');
+            newPasswordRef.current!.value = '';
+            validationPasswordRef.current!.value = '';
+            originPasswordRef.current!.value = '';
+          },
+        },
+      );
     }
   }
   // 검증해서 아니면 error message 부여

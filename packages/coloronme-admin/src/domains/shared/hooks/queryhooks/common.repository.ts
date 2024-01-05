@@ -48,7 +48,7 @@ class CommonRepository {
     });
   }
 
-  async modifyPassword(body: { oldPassword: string; newPassword: string; passwordConfirm: string }) {
+  async modifyPassword(body: { oldPassword: string; newPassword: string; newPasswordConfirm: string }) {
     return await requestInstance.patch('password', body);
   }
 }
