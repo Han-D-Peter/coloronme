@@ -8,6 +8,7 @@ export type Client = {
   memberId: number;
   nickname: string;
   email: string;
+  profileImageUrl?: string;
   consultedDate: string | null;
   personalColorId: number;
   age: number;

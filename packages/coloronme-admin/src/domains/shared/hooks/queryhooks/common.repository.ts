@@ -40,7 +40,7 @@ class CommonRepository {
     consultedDrawing: string;
     consultedDate: string;
   }) {
-    return await requestInstance.post(`members/${userId}`, {
+    return await requestInstance.post<Client>(`members/${userId}`, {
       personalColorId,
       consultedContent,
       consultedDrawing,
