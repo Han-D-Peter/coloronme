@@ -200,7 +200,7 @@ export default forwardRef<{ fromJSON: (value: any) => void }, CanvasProps>(funct
   useEffect(() => {
     if (value && storedValue.current !== value && fabricRef.current) {
       fabricRef.current.loadFromJSON(JSON.parse(value), () => {});
-      console.log('value', JSON.parse(value));
+
       storedValue.current = value;
     }
   }, [value]);
