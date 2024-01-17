@@ -21,6 +21,7 @@ const iconBox = css`
 
 export default function Navigation() {
   const { route } = useRouter();
+  const mainRoute = route.split('/')[1];
 
   return (
     <nav
@@ -48,7 +49,7 @@ export default function Navigation() {
               size="md"
               style={css`
                 margin: 0;
-                color: ${route === '/' ? 'black' : 'grey'};
+                color: ${mainRoute === '' ? 'black' : 'grey'};
               `}
             >
               홈
@@ -59,13 +60,13 @@ export default function Navigation() {
       <li css={listStyle}>
         <NaviItem route="/register">
           <div css={iconBox}>
-            <TablerPhotoSensorOutline width="25" height="24" color={route === '/register' ? 'black' : 'grey'} />
+            <TablerPhotoSensorOutline width="25" height="24" color={mainRoute === 'register' ? 'black' : 'grey'} />
             <Text
               as="body"
               size="md"
               style={css`
                 margin: 0;
-                color: ${route === '/register' ? 'black' : 'grey'};
+                color: ${mainRoute === 'register' ? 'black' : 'grey'};
               `}
             >
               고객 등록
@@ -76,13 +77,13 @@ export default function Navigation() {
       <li css={listStyle}>
         <NaviItem route="/colors">
           <div css={iconBox}>
-            <Layer width="25" height="24" color={route === '/colors' ? 'black' : 'grey'} />
+            <Layer width="25" height="24" color={mainRoute === 'colors' ? 'black' : 'grey'} />
             <Text
               as="body"
               size="md"
               style={css`
                 margin: 0;
-                color: ${route === '/colors' ? 'black' : 'grey'};
+                color: ${mainRoute === 'colors' ? 'black' : 'grey'};
               `}
             >
               퍼스널 컬러
@@ -93,13 +94,13 @@ export default function Navigation() {
       <li css={listStyle}>
         <NaviItem route="/mypage">
           <div css={iconBox}>
-            <PersonOutline width="25" height="24" color={route === '/mypage' ? 'black' : 'grey'} />
+            <PersonOutline width="25" height="24" color={mainRoute === 'mypage' ? 'black' : 'grey'} />
             <Text
               as="body"
               size="md"
               style={css`
                 margin: 0;
-                color: ${route === '/mypage' ? 'black' : 'grey'};
+                color: ${mainRoute === 'mypage' ? 'black' : 'grey'};
               `}
             >
               마이페이지
