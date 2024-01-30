@@ -46,7 +46,7 @@ export default function ColorDetail() {
       <main>
         <section
           css={css`
-            margin-top: 60px;
+            margin-top: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
