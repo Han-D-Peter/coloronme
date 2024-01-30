@@ -59,7 +59,7 @@ export default function BarGraph({ data, width, height, isShownTotalCount = true
         `}
       >
         <div>
-          <Text as="body" size="xlg" weight="bold">
+          <Text as="body" size="md" weight="bold">
             {`${totalCount}건(전체)`}
           </Text>
         </div>

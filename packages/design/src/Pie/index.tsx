@@ -44,7 +44,7 @@ export default function Pie({ data, width, height, isShownTotalCount = true }: P
       `}
     >
       <div>
-        <Text as="body" size="xlg" weight="bold">
+        <Text as="body" size="md" weight="bold">
           {`${totalCount}건 (전체)`}
         </Text>
       </div>
