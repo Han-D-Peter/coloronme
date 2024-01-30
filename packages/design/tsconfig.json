@@ -15,8 +15,13 @@
     "baseUrl": ".",
     "composite": true,
     "types": ["@emotion/react/types/css-prop", "jest"],
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "@/*": ["./*"],
+      "@libs": ["../libs/src"]
+    }
   },
 
-  "include": ["src/**/*", ".storybook/**/*"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
