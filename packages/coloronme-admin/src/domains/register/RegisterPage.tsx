@@ -10,6 +10,7 @@ import leftArrow from '../../../public/icons/vector/leftArrow.svg';
 import Image from 'next/image';
 import { useUserByQR, useUsers } from '../shared/hooks/queryhooks/common.query';
 import convertDateToSimple from '../shared/utils/convertDateToSimple';
+import convertColorNumberToCode from '../shared/utils/convertColorNumberToCode';
 
 export default function RegisterPage() {
   const { data } = useUsers();
@@ -82,7 +83,7 @@ export default function RegisterPage() {
                 padding: 0;
               `}
             >
-              4명
+              {data?.data ? `${data.data.length}명` : '0명'}
             </Text>
             <Text
               as="body"
@@ -109,7 +110,7 @@ export default function RegisterPage() {
                   name={user.nickname}
                   email={user.email}
                   date={convertDateToSimple(user.consultedDate as string)}
-                  colorType={colorLibrary[colorKeys[user.personalColorId]].name}
+                  colorType={colorLibrary[convertColorNumberToCode(user.personalColorId)].name}
                 />
               </div>
             );
