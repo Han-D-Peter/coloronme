@@ -84,7 +84,7 @@ export default function Password() {
         `}
       >
         <div>
-          <Text as="title" size="xs" weight="bold">
+          <Text as="title" size="sm" weight="bold">
             기존 비밀번호
           </Text>
         </div>
@@ -103,7 +103,7 @@ export default function Password() {
         `}
       >
         <div>
-          <Text as="title" size="xs" weight="bold">
+          <Text as="title" size="sm" weight="bold">
             새 비밀번호
           </Text>
         </div>

@@ -11,7 +11,7 @@ export default function ColorProfile({ name, code }: ColorProfile) {
   return (
     <div>
       <div>
-        <Text as="body" size="lg">
+        <Text as="body" size="sm">
           {name}
         </Text>
       </div>

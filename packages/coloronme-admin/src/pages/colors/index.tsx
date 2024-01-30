@@ -98,7 +98,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('sw_lg')}
                 css={markableButtonColor({ backColor: colorLibrary.sw_lg.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   봄 웜 라이트
                 </Text>
               </button>
@@ -108,7 +108,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('sw_cl')}
                 css={markableButtonColor({ backColor: colorLibrary.sw_cl.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   봄 웜 클리어
                 </Text>
               </button>
@@ -118,7 +118,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('sw_st')}
                 css={markableButtonColor({ backColor: colorLibrary.sw_st.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   봄 웜 스트롱
                 </Text>
               </button>
@@ -130,7 +130,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('sc_lg')}
                 css={markableButtonColor({ backColor: colorLibrary.sc_lg.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   여름 쿨 라이트
                 </Text>
               </button>
@@ -140,7 +140,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('sc_cl')}
                 css={markableButtonColor({ backColor: colorLibrary.sc_cl.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   여름 쿨 클리어
                 </Text>
               </button>
@@ -150,7 +150,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('sc_mt')}
                 css={markableButtonColor({ backColor: colorLibrary.sc_mt.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   여름 쿨 뮤트
                 </Text>
               </button>
@@ -170,7 +170,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('fw_mt')}
                 css={markableButtonColor({ backColor: colorLibrary.fw_mt.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   가을 웜 뮤트
                 </Text>
               </button>
@@ -180,7 +180,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('fw_st')}
                 css={markableButtonColor({ backColor: colorLibrary.fw_st.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   가을 웜 트루
                 </Text>
               </button>
@@ -190,7 +190,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('fw_dp')}
                 css={markableButtonColor({ backColor: colorLibrary.fw_dp.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   가을 웜 딥
                 </Text>
               </button>
@@ -202,7 +202,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('wc_br')}
                 css={markableButtonColor({ backColor: colorLibrary.wc_br.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   겨울 쿨 스트롱
                 </Text>
               </button>
@@ -212,7 +212,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('wc_tr')}
                 css={markableButtonColor({ backColor: colorLibrary.wc_tr.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   겨울 쿨 트루
                 </Text>
               </button>
@@ -222,7 +222,7 @@ export default function Colors() {
                 onClick={() => routeToColorDetail('wc_dp')}
                 css={markableButtonColor({ backColor: colorLibrary.wc_dp.iconColor.code })}
               >
-                <Text as="body" size="lg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   겨울 쿨 딥
                 </Text>
               </button>

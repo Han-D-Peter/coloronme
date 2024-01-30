@@ -49,7 +49,7 @@ export default function RegisterPage() {
             margin-top: 44px;
           `}
         >
-          <Text as="title" size="xs" weight="bold">
+          <Text as="title" size="sm" weight="bold">
             Today
           </Text>
         </div>
@@ -152,7 +152,7 @@ export default function RegisterPage() {
                 margin-left: 13px;
               `}
             >
-              <Text as="title" size="xs" weight="bold">
+              <Text as="title" size="sm" weight="bold">
                 코드 스캔
               </Text>
             </div>
@@ -245,7 +245,7 @@ export default function RegisterPage() {
             >
               <Text
                 as="title"
-                size="xs"
+                size="sm"
                 weight="bold"
                 style={css`
                   margin: 0;

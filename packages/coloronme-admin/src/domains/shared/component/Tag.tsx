@@ -18,7 +18,7 @@ export default function Tag({ children }: { children: string }) {
     >
       <Text
         as="body"
-        size="lg"
+        size="md"
         weight="regular"
         style={css`
           color: ${color.gray.gray050};

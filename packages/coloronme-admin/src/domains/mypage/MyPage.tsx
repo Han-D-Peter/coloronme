@@ -73,7 +73,7 @@ export default function MyPage() {
       >
         <div>
           <button css={textButtonStyle} onClick={() => router.push('/mypage/modify')}>
-            <Text as="body" size="lg" weight="regular">
+            <Text as="body" size="sm" weight="regular">
               회원 정보 수정
             </Text>
           </button>
@@ -81,7 +81,7 @@ export default function MyPage() {
         <Hr topMargin={17} bottomMargin={17} />
         <div>
           <button css={textButtonStyle} onClick={() => router.push('/mypage/password')}>
-            <Text as="body" size="lg" weight="regular">
+            <Text as="body" size="md" weight="regular">
               비밀번호 변경
             </Text>
           </button>
@@ -89,7 +89,7 @@ export default function MyPage() {
         <Hr topMargin={17} bottomMargin={17} />
         <div>
           <button css={textButtonStyle} onClick={logout}>
-            <Text as="body" size="lg" weight="regular">
+            <Text as="body" size="md" weight="regular">
               로그아웃
             </Text>
           </button>
@@ -97,7 +97,7 @@ export default function MyPage() {
         <Hr topMargin={17} bottomMargin={17} />
         <div>
           <button css={textButtonStyle}>
-            <Text as="body" size="lg" weight="regular">
+            <Text as="body" size="md" weight="regular">
               회원탈퇴
             </Text>
           </button>
