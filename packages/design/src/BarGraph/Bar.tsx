@@ -7,34 +7,45 @@ interface Bar {
    * @description degree는 100을 초과할 수 없음
    */
   degree: number;
+  barSize: number;
   count: number;
   barColor: string;
   title: string;
 }
 
-export default function Bar({ count, degree, barColor, title }: Bar) {
+export default function Bar({ count, degree, barSize, barColor, title }: Bar) {
   return (
     <div>
       <div
         css={css`
           display: flex;
+          align-items: end;
         `}
       >
-        <Text as="body" size="xlg" weight="regular">{`${title}`}</Text>
+        <Text as="body" size="md" weight="regular">{`${title}`}</Text>
         <Text
           as="body"
-          size="xlg"
+          size="sm"
           weight="regular"
           style={css`
             margin-left: 5px;
             color: ${color.gray.gray050};
           `}
-        >{`(${(degree * 100).toFixed(2)}%)`}</Text>
+        >{`${(degree * 100).toFixed(2)}%`}</Text>
+        <Text
+          as="body"
+          size="sm"
+          weight="regular"
+          style={css`
+            margin-left: 5px;
+            color: ${color.gray.gray050};
+          `}
+        >{`(${count})`}</Text>
       </div>
       <div
         css={css`
           margin-top: 7px;
-          width: ${degree * 100}%;
+          width: ${barSize * 100}%;
           height: 13px;
           border-radius: 3px;
           background-color: ${barColor};

@@ -34,6 +34,15 @@ export default function BarGraph({ data, width, height, isShownTotalCount = true
   const totalCount = useMemo(() => {
     return data.reduce((acc, current) => acc + current.count, 0);
   }, [data]);
+  const mostCount = useMemo(() => {
+    return data.reduce((acc, current) => {
+      if (acc > current.count) {
+        return acc;
+      } else {
+        return current.count;
+      }
+    }, 0);
+  }, [data]);
 
   return (
     <div
@@ -70,13 +79,14 @@ export default function BarGraph({ data, width, height, isShownTotalCount = true
                   margin-right: 17px;
                 `}
               >
-                <Text as="body" size="xlg" weight="regular">
+                <Text as="body" size="md" weight="regular">
                   {`${index + 1}`}
                 </Text>
               </div>
               <Bar
                 count={value.value}
                 degree={value.value / totalCount}
+                barSize={value.value / mostCount}
                 barColor={barRandomColor[index]}
                 title={value.id}
               />

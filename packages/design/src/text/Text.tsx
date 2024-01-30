@@ -4,13 +4,27 @@ import { TypoScale, TypoType, TypoWeight, fontSize } from '../constants/size';
 
 // type TypoTitleScale = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-interface TextProps {
-  as: TypoType;
-  size: TypoScale;
+interface TextBaseType {
   weight?: TypoWeight;
   children: string;
   style?: SerializedStyles;
 }
+interface TextTitle extends TextBaseType {
+  as: 'title';
+  size: 'xlg' | 'lg' | 'md' | 'sm';
+}
+
+interface TextBody extends TextBaseType {
+  as: 'body';
+  size: 'md' | 'sm';
+}
+
+interface TextCaption extends TextBaseType {
+  as: 'caption';
+  size: 'md' | 'sm';
+}
+
+type TextProps = TextTitle | TextBody | TextCaption;
 
 const defaultStyle = css`
   margin: 0;
