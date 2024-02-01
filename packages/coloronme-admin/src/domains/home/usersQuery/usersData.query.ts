@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import usersDataRepository from './usersData.repository';
-import { ChannelData, ColorData, GenderData } from './usersData.type';
+import { AgeData, ChannelData, ColorData, GenderData } from './usersData.type';
 
 export const useColorData = ({ from, to }: { from: string; to: string }) => {
   return useQuery(
@@ -30,4 +30,10 @@ export const useGenderData = ({ from, to }: { from: string; to: string }) => {
       enabled: !from || !to ? false : true,
     },
   );
+};
+
+export const useAgeData = ({ from, to }: { from: string; to: string }) => {
+  return useQuery(['ageData'], () => usersDataRepository.getColorData<AgeData>({ from, to, top: 5, type: 'age' }), {
+    enabled: !from || !to ? false : true,
+  });
 };

@@ -8,6 +8,7 @@ import TextWithDescription from '../../../../../design/src/TextWithDescription/i
 import ColorBarGraph from './ColorBarGraph';
 import ChannelBarGraph from './ChannelBarGraph';
 import GenderPieGraph from './GenderPieGraph';
+import AgePieGraph from './AgePieGraph';
 const Pie = dynamic(() => import('../../../../../design/src/Pie/index'), { ssr: false });
 
 interface Result {
@@ -21,7 +22,7 @@ export default function Result({ date }: Result) {
         /* position: fixed; */
         left: 0;
         width: 100%;
-        top: 180px;
+        margin-top: 26px;
       `}
     >
       <Tabs
@@ -31,6 +32,7 @@ export default function Result({ date }: Result) {
               <ColorBarGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
               <ChannelBarGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
               <GenderPieGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
+              <AgePieGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
             </>
           ),
           '진단 결과 공유 현황': <div>hello</div>,
