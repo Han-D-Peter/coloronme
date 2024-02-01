@@ -5,6 +5,9 @@ import { Text } from '../../../../../design/src/text';
 import Tag from '@/src/domains/shared/component/Tag';
 import ColorProfile from '@/src/domains/shared/component/ColorProfile';
 import DefaultLayout from '@/src/domains/shared/component/layout/DefaultLayout';
+import IconButton from '@/src/domains/shared/component/IconButton';
+import { LeftArrow } from '../../../../../design/src/assets/icons';
+import { BackwardOutline } from '../../../../../design/src/assets/icons/BackwardOutline';
 
 const transparentBtnStyle = css`
   background-color: transparent;
@@ -43,6 +46,13 @@ export default function ColorDetail() {
 
   return (
     <DefaultLayout>
+      <IconButton
+        onClick={() => {
+          router.push('/colors');
+        }}
+      >
+        <BackwardOutline width="7px" height="14px" color="black" />
+      </IconButton>
       <main>
         <section
           css={css`
