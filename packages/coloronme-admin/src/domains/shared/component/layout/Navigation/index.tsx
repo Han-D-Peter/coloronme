@@ -45,7 +45,7 @@ export default function Navigation() {
           <div css={iconBox}>
             <HomeOutline width="25" height="24" color={route === '/' ? 'black' : 'grey'} />
             <Text
-              as="body"
+              as="caption"
               size="md"
               style={css`
                 margin: 0;
@@ -62,7 +62,7 @@ export default function Navigation() {
           <div css={iconBox}>
             <TablerPhotoSensorOutline width="25" height="24" color={mainRoute === 'register' ? 'black' : 'grey'} />
             <Text
-              as="body"
+              as="caption"
               size="md"
               style={css`
                 margin: 0;
@@ -79,14 +79,14 @@ export default function Navigation() {
           <div css={iconBox}>
             <Layer width="25" height="24" color={mainRoute === 'colors' ? 'black' : 'grey'} />
             <Text
-              as="body"
+              as="caption"
               size="md"
               style={css`
                 margin: 0;
                 color: ${mainRoute === 'colors' ? 'black' : 'grey'};
               `}
             >
-              퍼스널 컬러
+              퍼스널컬러 정보
             </Text>
           </div>
         </NaviItem>
@@ -96,7 +96,7 @@ export default function Navigation() {
           <div css={iconBox}>
             <PersonOutline width="25" height="24" color={mainRoute === 'mypage' ? 'black' : 'grey'} />
             <Text
-              as="body"
+              as="caption"
               size="md"
               style={css`
                 margin: 0;
