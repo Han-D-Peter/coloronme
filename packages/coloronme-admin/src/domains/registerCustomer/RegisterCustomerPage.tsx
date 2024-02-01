@@ -118,7 +118,7 @@ export default function RegisterCustomerPage() {
         `}
       >
         <div>
-          <Text as="title" size="xlg" weight="bold">
+          <Text as="title" size="lg" weight="bold">
             진단일
           </Text>
         </div>
@@ -138,7 +138,7 @@ export default function RegisterCustomerPage() {
         `}
       >
         <div>
-          <Text as="title" size="xlg" weight="bold">
+          <Text as="title" size="lg" weight="bold">
             퍼스널컬러 타입
           </Text>
         </div>
@@ -175,7 +175,7 @@ export default function RegisterCustomerPage() {
           `}
         >
           <div>
-            <Text as="title" size="xlg" weight="bold">
+            <Text as="title" size="lg" weight="bold">
               진단 내용
             </Text>
           </div>
@@ -249,7 +249,7 @@ export default function RegisterCustomerPage() {
           `}
         >
           <div>
-            <Text as="title" size="xlg" weight="bold">
+            <Text as="title" size="lg" weight="bold">
               진단 내용 작성
             </Text>
           </div>
