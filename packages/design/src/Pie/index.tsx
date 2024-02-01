@@ -109,7 +109,7 @@ export default function Pie({ data, width, height, isShownTotalCount = true }: P
                 color: ${color.gray.gray050};
               `}
             >
-              {`${((dat.count * 100) / totalCount).toFixed(2)}%`}
+              {`(${((dat.count * 100) / totalCount).toFixed(2)}%)`}
             </span>
           </div>
         ))}
