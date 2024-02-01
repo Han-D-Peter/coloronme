@@ -49,6 +49,7 @@ export default function DateRange({ onClick }: DateRange) {
       <div>
         <input
           css={css`
+            width: calc(37% - 8px);
             padding-left: 8px;
             height: 24px;
             font-size: 11px;
@@ -72,6 +73,7 @@ export default function DateRange({ onClick }: DateRange) {
         </span>
         <input
           css={css`
+            width: calc(37% - 8px);
             padding-left: 8px;
             height: 24px;
             font-size: 11px;
@@ -115,6 +117,9 @@ export default function DateRange({ onClick }: DateRange) {
               border-radius: 5px;
               background-color: transparent;
               border: 1px solid ${color.gray.gray040};
+              display: flex;
+              justify-content: center;
+              align-items: center;
             `}
             onClick={beforeOneWeek}
           >
@@ -131,6 +136,9 @@ export default function DateRange({ onClick }: DateRange) {
               border-radius: 5px;
               background-color: transparent;
               border: 1px solid ${color.gray.gray040};
+              display: flex;
+              justify-content: center;
+              align-items: center;
             `}
             onClick={beforeOneMonth}
           >

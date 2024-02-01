@@ -11,11 +11,16 @@ interface Bar {
   count: number;
   barColor: string;
   title: string;
+  hasBar?: boolean;
 }
 
-export default function Bar({ count, degree, barSize, barColor, title }: Bar) {
+export default function Bar({ count, degree, barSize, barColor, title, hasBar = true }: Bar) {
   return (
-    <div>
+    <div
+      css={css`
+        width: 100%;
+      `}
+    >
       <div
         css={css`
           display: flex;
@@ -42,15 +47,17 @@ export default function Bar({ count, degree, barSize, barColor, title }: Bar) {
           `}
         >{`(${count})`}</Text>
       </div>
-      <div
-        css={css`
-          margin-top: 7px;
-          width: ${barSize * 100}%;
-          height: 13px;
-          border-radius: 3px;
-          background-color: ${barColor};
-        `}
-      ></div>
+      {hasBar && (
+        <div
+          css={css`
+            margin-top: 7px;
+            width: ${barSize * 100}%;
+            height: 13px;
+            border-radius: 3px;
+            background-color: ${barColor};
+          `}
+        ></div>
+      )}
     </div>
   );
 }

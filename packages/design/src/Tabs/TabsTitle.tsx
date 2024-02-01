@@ -30,10 +30,10 @@ export default function TabsTitle({ selected, onClick, children }: TabsTitleProp
 
   const tabsTitleButtonStyle = useMemo(
     () => css`
-      font-size: 22px;
+      font-size: 14px;
       background: ${selected ? `${color.gray.gray010}` : '#fff'};
       color: ${selected ? `black` : `${color.gray.gray040}`};
-      font-weight: ${selected ? `bold` : `rugular`};
+      font-weight: ${selected ? `bold` : `regular`};
       border: 0.5px solid ${selected ? `${color.gray.gray010}` : `${color.gray.gray020}`};
       padding-top: 15px;
       padding-bottom: 15px;

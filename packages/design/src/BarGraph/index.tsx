@@ -9,7 +9,7 @@ import { color } from '../constants';
 import Bar from './Bar';
 
 interface BarGraph {
-  data: { label: ColorCode; value: ColorCode; count: number }[];
+  data: { label: ColorCode | 'ETC'; value: ColorCode | 'ETC'; count: number }[];
   width: number;
   height: number;
   isShownTotalCount?: boolean;
@@ -24,11 +24,14 @@ export default function BarGraph({ data, width, height, isShownTotalCount = true
   }
 
   const convertedValue = useMemo(() => {
-    return data
-      .map((dat) => {
-        return { id: convertColorCodeToColorName(dat.label), value: dat.count };
-      })
-      .sort((a, b) => b.value - a.value);
+    const copied = [...data].map((dat) => {
+      return { id: convertColorCodeToColorName(dat.label), value: dat.count };
+    });
+    const etc = copied.filter((item) => item.id === '그 외');
+
+    const result = copied.filter((item) => item.id !== '그 외').sort((a, b) => b.value - a.value);
+
+    return [...result, ...etc];
   }, [data]);
 
   const totalCount = useMemo(() => {
@@ -51,20 +54,27 @@ export default function BarGraph({ data, width, height, isShownTotalCount = true
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        width: ${width}px;
       `}
     >
+      {isShownTotalCount && (
+        <div
+          css={css`
+            margin-bottom: 45px;
+          `}
+        >
+          <div>
+            <Text as="body" size="md" weight="bold">
+              {`${totalCount}건(전체)`}
+            </Text>
+          </div>
+        </div>
+      )}
       <div
         css={css`
-          margin-bottom: 45px;
+          width: 100%;
         `}
       >
-        <div>
-          <Text as="body" size="md" weight="bold">
-            {`${totalCount}건(전체)`}
-          </Text>
-        </div>
-      </div>
-      <div>
         {convertedValue.map((value, index) => {
           return (
             <div
@@ -72,6 +82,7 @@ export default function BarGraph({ data, width, height, isShownTotalCount = true
               css={css`
                 display: flex;
                 margin-bottom: 24px;
+                width: 100%;
               `}
             >
               <div
@@ -89,6 +100,7 @@ export default function BarGraph({ data, width, height, isShownTotalCount = true
                 barSize={value.value / mostCount}
                 barColor={barRandomColor[index]}
                 title={value.id}
+                hasBar={value.id !== '그 외'}
               />
             </div>
           );
