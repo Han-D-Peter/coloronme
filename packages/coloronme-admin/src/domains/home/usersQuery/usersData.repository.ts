@@ -28,8 +28,8 @@ function makeQuery({ from, to, top = 5, type }: UsersDataQueryArgs) {
 }
 
 class UserDataRepository {
-  async getColorData({ from, to, top, type }: UsersDataQueryArgs) {
-    return await requestInstance.get<ColorData>(`data/users?${makeQuery({ from, to, top, type })}`);
+  async getColorData<T>({ from, to, top, type }: UsersDataQueryArgs) {
+    return await requestInstance.get<T>(`data/users?${makeQuery({ from, to, top, type })}`);
   }
 }
 
