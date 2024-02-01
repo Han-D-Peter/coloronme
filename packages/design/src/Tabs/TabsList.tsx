@@ -10,6 +10,7 @@ export default function TabsList() {
         background: ${color.gray.gray010};
         padding: 7px 24px 7px 24px;
         height: 100%;
+        overflow: auto;
       `}
     >
       <div

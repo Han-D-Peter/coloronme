@@ -9,7 +9,7 @@ import { color } from '../constants';
 import Bar from './Bar';
 
 interface BarGraph {
-  data: { label: ColorCode | 'ETC'; value: ColorCode | 'ETC'; count: number }[];
+  data: { label: string; value: string; count: number }[];
   width: number;
   height: number;
   isShownTotalCount?: boolean;

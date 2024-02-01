@@ -1,6 +1,6 @@
 import { ColorCode, ColorName } from './constants';
 
-export function convertColorCodeToColorName(code: ColorCode | 'ETC'): ColorName | '그 외' {
+export function convertColorCodeToColorName(code: string): string {
   switch (code) {
     case 'Best_SW_LG':
       return '봄 웜 라이트';
@@ -28,5 +28,7 @@ export function convertColorCodeToColorName(code: ColorCode | 'ETC'): ColorName 
       return '겨울 쿨 딥';
     case 'ETC':
       return '그 외';
+    default:
+      return code;
   }
 }

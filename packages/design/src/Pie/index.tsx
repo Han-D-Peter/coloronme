@@ -8,7 +8,7 @@ import { ColorCode } from '../utils/constants';
 import { color } from '../constants';
 
 interface Pie {
-  data: { label: ColorCode; value: ColorCode; count: number }[];
+  data: { label: string; value: string; count: number }[];
   width: number;
   height: number;
   isShownTotalCount?: boolean;
@@ -16,6 +16,7 @@ interface Pie {
 
 export default function Pie({ data, width, height, isShownTotalCount = true }: Pie) {
   const onlyOneKeys = new Set([...data.map((dat) => dat.value)]);
+
   if (onlyOneKeys.size !== data.length) {
     throw new Error('Data 안에 중복된 value를 가진 요소가 있습니다.');
   }
@@ -43,11 +44,13 @@ export default function Pie({ data, width, height, isShownTotalCount = true }: P
         }
       `}
     >
-      <div>
-        <Text as="body" size="md" weight="bold">
-          {`${totalCount}건 (전체)`}
-        </Text>
-      </div>
+      {isShownTotalCount && (
+        <div>
+          <Text as="body" size="md" weight="bold">
+            {`${totalCount}건 (전체)`}
+          </Text>
+        </div>
+      )}
       <div
         css={css`
           width: ${width}px;
@@ -106,7 +109,7 @@ export default function Pie({ data, width, height, isShownTotalCount = true }: P
                 color: ${color.gray.gray050};
               `}
             >
-              (19.4%)
+              {`${((dat.count * 100) / totalCount).toFixed(2)}%`}
             </span>
           </div>
         ))}
