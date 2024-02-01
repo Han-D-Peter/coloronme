@@ -1,6 +1,13 @@
+import { ColorCode, ColorName } from '../../../../../design/src/utils/constants';
+
 export const BASE_URL = 'https://api.admin.coloronme.site';
 
-export const PERSONAL_COLOR_MAPPING = {
+export const PERSONAL_COLOR_MAPPING: {
+  [key: number]: {
+    code: ColorCode;
+    string: ColorName;
+  };
+} = {
   1: {
     code: 'Best_SW_LG',
     string: '봄 웜 라이트',
