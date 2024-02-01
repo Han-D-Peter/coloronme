@@ -3,11 +3,11 @@ import BarGraph from '../../../../../design/src/BarGraph';
 import { useApproachChannelData } from '../usersQuery/usersData.query';
 import TextWithDescription from '../../../../../design/src/TextWithDescription';
 
-interface ChannelBarGraph {
+interface ChannelDataGraph {
   date: { start: string; end: string };
 }
 
-export default function ChannelBarGraph({ date }: ChannelBarGraph) {
+export default function ChannelDataGraph({ date }: ChannelDataGraph) {
   const { data } = useApproachChannelData({ from: date.start, to: date.end });
   if (!data?.data) return <></>;
 

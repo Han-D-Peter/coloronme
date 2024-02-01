@@ -2,13 +2,17 @@ import { css } from '@emotion/react';
 import TextWithDescription from '../../../../../design/src/TextWithDescription';
 import { useColorData } from '../usersQuery/usersData.query';
 import BarGraph from '../../../../../design/src/BarGraph';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+const Pie = dynamic(() => import('../../../../../design/src/Pie/index'), { ssr: false });
 
-interface ColorBarGraph {
+interface ColorDataGraph {
   date: { start: string; end: string };
 }
 
-export default function ColorBarGraph({ date }: ColorBarGraph) {
+export default function ColorDataGraph({ date }: ColorDataGraph) {
   const { data, isLoading } = useColorData({ from: date.start, to: date.end });
+  const [isPie, setIsPie] = useState(false);
   if (!data?.data) return <></>;
 
   const convertedData = data.data.map((item) => {
@@ -86,6 +90,7 @@ export default function ColorBarGraph({ date }: ColorBarGraph) {
       </div>
       <div
         css={css`
+          position: relative;
           display: flex;
           justify-content: center;
           background-color: white;
@@ -93,7 +98,28 @@ export default function ColorBarGraph({ date }: ColorBarGraph) {
           border-radius: 5px;
         `}
       >
-        <BarGraph data={convertedData} isShownTotalCount={false} width={230} height={100} />
+        <button
+          onClick={() => setIsPie((prev) => !prev)}
+          css={css`
+            position: absolute;
+            right: 10px;
+            top: 9px;
+            width: 42px;
+            height: 31px;
+            border-radius: 5px;
+            border: none;
+            background: var(--Grayscale-10, #f4f4f4);
+            box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          `}
+        >
+          <img src="images/Pie.png" width={30} />
+        </button>
+        {isPie && <Pie data={convertedData} isShownTotalCount={false} width={300} height={230} />}
+        {!isPie && <BarGraph data={convertedData} isShownTotalCount={false} width={230} height={100} />}
       </div>
     </div>
   );

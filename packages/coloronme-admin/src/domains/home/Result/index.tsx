@@ -5,8 +5,8 @@ import { useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import BarGraph from '../../../../../design/src/BarGraph/index';
 import TextWithDescription from '../../../../../design/src/TextWithDescription/index';
-import ColorBarGraph from './ColorBarGraph';
-import ChannelBarGraph from './ChannelBarGraph';
+import ColorDataGraph from './ColorDataGraph';
+import ChannelDataGraph from './ChannelDataGraph';
 import GenderPieGraph from './GenderPieGraph';
 import AgePieGraph from './AgePieGraph';
 const Pie = dynamic(() => import('../../../../../design/src/Pie/index'), { ssr: false });
@@ -29,8 +29,8 @@ export default function Result({ date }: Result) {
         tabStacks={{
           '고객 정보': (
             <>
-              <ColorBarGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
-              <ChannelBarGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
+              <ColorDataGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
+              <ChannelDataGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
               <GenderPieGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
               <AgePieGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
             </>
