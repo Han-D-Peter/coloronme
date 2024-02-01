@@ -29,10 +29,10 @@ export default function Result({ date }: Result) {
         tabStacks={{
           '고객 정보': (
             <>
-              <ColorDataGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
-              <ChannelDataGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
-              <GenderPieGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
-              <AgePieGraph date={{ start: '2024-01-01', end: '2024-01-31' }} />
+              <ColorDataGraph date={date} />
+              <ChannelDataGraph date={date} />
+              <GenderPieGraph date={date} />
+              <AgePieGraph date={date} />
             </>
           ),
           '진단 결과 공유 현황': <div>hello</div>,
