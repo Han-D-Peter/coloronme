@@ -46,7 +46,7 @@ const defaultButtonStyle = css`
   cursor: pointer;
 `;
 
-export function Button({
+export default function Button({
   size = 'lg',
   variant = 'primary',
   fullWidth = false,

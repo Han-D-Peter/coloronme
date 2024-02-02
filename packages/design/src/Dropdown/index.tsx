@@ -23,7 +23,7 @@ export interface DropdownContextValues {
 
 export const DropdownContext = createContext<DropdownContextValues | null>(null);
 
-export function Dropdown({ placeholder = 'select', value, onChange, children }: DropdownProps) {
+export default function Dropdown({ placeholder = 'select', value, onChange, children }: DropdownProps) {
   const [selectedValue, setSelectedValue] = useState<string | undefined>(value);
   const [isOpen, setIsOpen] = useState(false);
 
