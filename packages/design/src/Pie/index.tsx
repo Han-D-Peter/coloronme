@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 import { ResponsivePie as NivoPie } from '@nivo/pie';
 import { Text } from '../text';
-import { fontSize } from '../constants/size';
 import { useMemo } from 'react';
 import { convertColorCodeToColorName } from '../utils/convertColorCodeToColorName';
-import { ColorCode } from '../utils/constants';
 import { color } from '../constants';
 
 interface Pie {

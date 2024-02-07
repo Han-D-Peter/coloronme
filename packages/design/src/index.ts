@@ -34,7 +34,6 @@ export {
   DateRange,
   Dropdown,
   Input,
-  Pie,
   Radio,
   Tabs,
   TextWithDescription,
