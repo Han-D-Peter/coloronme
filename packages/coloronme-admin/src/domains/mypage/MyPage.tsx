@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-import { Text } from '../../../../design/src/text';
+import { Text, color } from '@design';
 import { useMe } from '../shared/hooks/queryhooks/common.query';
-import { color } from '../../../../design/src/constants';
 import Hr from '../shared/Hr';
 import { Me } from '../shared/hooks/queryhooks/common.typs';
 import { useRouter } from 'next/router';

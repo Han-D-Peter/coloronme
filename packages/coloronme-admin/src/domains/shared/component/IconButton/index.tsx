@@ -1,6 +1,5 @@
 import { ReactNode, HTMLAttributes } from 'react';
 import { css } from '@emotion/react';
-import { color } from '@design';
 
 export default function IconButton({
   children,

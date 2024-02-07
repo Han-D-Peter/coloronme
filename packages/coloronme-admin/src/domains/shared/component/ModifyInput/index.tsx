@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { Button } from '../../../../../../design/src/Button';
-import { color } from '../../../../../../design/src/constants';
+import { Button, color } from '@design';
 import { useRef, useState } from 'react';
 import { useBoolean } from '../../../../../../libs/src/hooks';
 

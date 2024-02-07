@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
-import TextWithDescription from '../../../../../design/src/TextWithDescription';
+import { TextWithDescription, BarGraph } from '@design';
 import { useColorData } from '../usersQuery/usersData.query';
-import BarGraph from '../../../../../design/src/BarGraph';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-const Pie = dynamic(() => import('../../../../../design/src/Pie/index'), { ssr: false });
+const Pie = dynamic(() => import('../../../../../design/src/Pie'), { ssr: false });
 
 interface ColorDataGraph {
   date: { start: string; end: string };
@@ -116,7 +115,7 @@ export default function ColorDataGraph({ date }: ColorDataGraph) {
             flex-direction: column;
           `}
         >
-          <img src="images/Pie.png" width={30} />
+          <img src={isPie ? 'images/Pie.png' : 'images/bargraphicon.png'} width={30} />
         </button>
         {isPie && <Pie data={convertedData} isShownTotalCount={false} width={300} height={230} />}
         {!isPie && <BarGraph data={convertedData} isShownTotalCount={false} width={230} height={100} />}

@@ -1,4 +1,4 @@
-import { ColorCode, ColorName } from '../../../../../design/src/utils/constants';
+import { ColorCode, ColorName } from '@design';
 
 export const BASE_URL = 'https://api.admin.coloronme.site';
 

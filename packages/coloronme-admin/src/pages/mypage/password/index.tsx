@@ -2,11 +2,9 @@ import IconButton from '@/src/domains/shared/component/IconButton';
 import DefaultLayout from '@/src/domains/shared/component/layout/DefaultLayout';
 import { css } from '@emotion/react';
 import Link from 'next/link';
-import { BackwardOutline } from '../../../../../design/src/assets/icons/BackwardOutline';
-import { Text } from '../../../../../design/src/text';
-import Input from '../../../../../design/src/Input';
+import { BackwardOutline } from '@design';
+import { Text, Input, Button } from '@design';
 import { useRef, useState } from 'react';
-import { Button } from '../../../../../design/src/Button';
 import { useMutationPassword } from '@/src/domains/shared/hooks/queryhooks/common.query';
 
 export default function Password() {

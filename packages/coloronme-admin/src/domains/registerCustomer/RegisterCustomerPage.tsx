@@ -1,12 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from '@emotion/react';
-
-import { Button, Modal, Text, color } from '@design';
-import { Dropdown } from '@design';
+import { Button, Modal, Text, color, Dropdown } from '@design';
 import { useBoolean } from '@libs';
 import Canvas from '../shared/component/Canvas';
 import { useEffect, useRef, useState } from 'react';
-import { fabric } from 'fabric';
 import { useRouter } from 'next/router';
 import { useMutateUser, useUserByQR } from '../shared/hooks/queryhooks/common.query';
 import { PERSONAL_COLOR_MAPPING } from '../shared/constants/constants';

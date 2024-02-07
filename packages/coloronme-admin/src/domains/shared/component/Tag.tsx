@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { color } from '../../../../../design/src/constants';
-import { Text } from '../../../../../design/src/text';
+import { color, Text } from '@design';
 
 export default function Tag({ children }: { children: string }) {
   return (

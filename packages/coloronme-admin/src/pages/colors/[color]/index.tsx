@@ -1,13 +1,10 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { ColorLibrary, color, colorLibrary } from '../../../../../design/src/constants';
-import { Text } from '../../../../../design/src/text';
 import Tag from '@/src/domains/shared/component/Tag';
 import ColorProfile from '@/src/domains/shared/component/ColorProfile';
 import DefaultLayout from '@/src/domains/shared/component/layout/DefaultLayout';
 import IconButton from '@/src/domains/shared/component/IconButton';
-import { LeftArrow } from '../../../../../design/src/assets/icons';
-import { BackwardOutline } from '../../../../../design/src/assets/icons/BackwardOutline';
+import { BackwardOutline, ColorLibrary, color, colorLibrary, Text } from '@design';
 
 const transparentBtnStyle = css`
   background-color: transparent;

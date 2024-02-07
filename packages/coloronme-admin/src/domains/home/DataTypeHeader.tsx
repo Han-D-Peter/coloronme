@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { Text } from '../../../../design/src/text';
-import { color } from '../../../../design/src/constants';
+import { Text } from '@design';
+import { color } from '@design';
 
 export default function DateTypeHeader() {
   return (

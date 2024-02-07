@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { Text } from '../../../../../design/src/text';
-import { color } from '../../../../../design/src/constants';
+import { Text, color } from '@design';
 
 interface ColorProfile {
   name: string;

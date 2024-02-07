@@ -2,8 +2,7 @@
 import { css } from '@emotion/react';
 import { setAuthToken } from '../shared/api/client';
 import { useLogin } from '../shared/hooks/queryhooks/common.query';
-import Input from '../../../../design/src/Input';
-import { Button } from '../../../../design/src/Button';
+import { Button } from '@design';
 import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 

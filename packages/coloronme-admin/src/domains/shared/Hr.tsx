@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { color } from '../../../../design/src/constants';
+import { color } from '@design';
 
 interface Hr {
   topMargin?: number;
