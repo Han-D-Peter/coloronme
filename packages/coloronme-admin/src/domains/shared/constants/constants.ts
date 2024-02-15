@@ -1,6 +1,7 @@
 import { ColorCode, ColorName } from '@design';
 
-export const BASE_URL = 'https://api.admin.coloronme.site';
+// export const BASE_URL = 'https://api.admin.coloronme.site';
+export const BASE_URL = 'http://192.168.0.137:8080';
 
 export const PERSONAL_COLOR_MAPPING: {
   [key: number]: {

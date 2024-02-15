@@ -4,6 +4,7 @@ import ColorDataGraph from './ColorDataGraph';
 import ChannelDataGraph from './ChannelDataGraph';
 import GenderPieGraph from './GenderPieGraph';
 import AgePieGraph from './AgePieGraph';
+import DayHeatMap from './DayHeatMap';
 
 interface Result {
   date: { start: string; end: string };
@@ -29,7 +30,11 @@ export default function Result({ date }: Result) {
               <AgePieGraph date={date} />
             </>
           ),
-          '진단 결과 공유 현황': <div>hello</div>,
+          '진단 결과 공유 현황': (
+            <>
+              <DayHeatMap date={date} />
+            </>
+          ),
         }}
       />
     </div>

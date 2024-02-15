@@ -115,10 +115,10 @@ export default function ColorDataGraph({ date }: ColorDataGraph) {
             flex-direction: column;
           `}
         >
-          <img src={isPie ? 'images/Pie.png' : 'images/bargraphicon.png'} width={30} />
+          <img src={!isPie ? 'images/Pie.png' : 'images/bargraphicon.png'} width={30} />
         </button>
-        {isPie && <Pie data={convertedData} isShownTotalCount={false} width={300} height={230} />}
-        {!isPie && <BarGraph data={convertedData} isShownTotalCount={false} width={230} height={100} />}
+        {isPie && data && <Pie data={convertedData} isShownTotalCount={false} width={300} height={230} />}
+        {!isPie && data && <BarGraph data={convertedData} isShownTotalCount={false} width={230} height={100} />}
       </div>
     </div>
   );
