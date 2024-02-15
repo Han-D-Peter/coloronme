@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { color } from '../constants';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { kstFormat, isEqualOrAfter, isEqualOrBefore } from '@toss/date';
 import { Text } from '../text';
 
@@ -44,6 +44,15 @@ export default function DateRange({ onClick }: DateRange) {
   function callback() {
     onClick({ start: startDate, end: endDate });
   }
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const oneWeekAgo = new Date().setDate(currentDate.getMonth() - 1);
+    setEndDate(kstFormat(currentDate, 'yyyy-MM-dd'));
+    setStartDate(kstFormat(oneWeekAgo, 'yyyy-MM-dd'));
+    onClick({ start: kstFormat(oneWeekAgo, 'yyyy-MM-dd'), end: kstFormat(currentDate, 'yyyy-MM-dd') });
+  }, []);
+
   return (
     <div>
       <div>
