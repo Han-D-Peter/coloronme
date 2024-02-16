@@ -77,7 +77,9 @@ export default function DayHeatMap({ date }: DayHeatMap) {
           margin-bottom: 16px;
         `}
       >
-        <TextWithDescription description="">요일 및 시간대</TextWithDescription>
+        <TextWithDescription description="해당 기간 동안 결과를 공유한 전체 고객 기준  ">
+          요일 및 시간대
+        </TextWithDescription>
       </div>
       <div
         css={css`
