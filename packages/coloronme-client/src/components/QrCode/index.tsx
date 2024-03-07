@@ -12,7 +12,7 @@ const QrCodePage = () => {
   const { Canvas } = useQRCode();
 
   const handleClickStartButton = () => {
-    return router.replace('/personalcolor/select');
+    return router.replace('/select-color');
   };
 
   if (idLoading) {

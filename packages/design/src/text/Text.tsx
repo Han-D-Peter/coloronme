@@ -11,7 +11,7 @@ interface TextBaseType {
 }
 interface TextTitle extends TextBaseType {
   as: 'title';
-  size: 'lg' | 'xs' | 'md' | 'sm';
+  size: 'lg' | 'md' | 'sm' | 'xs';
 }
 
 interface TextBody extends TextBaseType {
