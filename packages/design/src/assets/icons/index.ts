@@ -41,3 +41,4 @@ export * from './CircleDrawing';
 export * from './ThumbsUp';
 export * from './ThumbsDown';
 export * from './BackwardOutline';
+export * from './Kakao';
