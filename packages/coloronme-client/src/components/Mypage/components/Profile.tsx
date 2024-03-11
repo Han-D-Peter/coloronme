@@ -5,17 +5,11 @@ import MainLogo from '../../Common/MainLogo';
 import MyPageQrCode from './MyPageQrCode';
 
 const Profile = ({ data }: { data: { name: string; email: string; profileImageUrl: string } }) => {
-  const [isShown, onOpen, onClose] = useBooleanState();
+  const [isQrModalOpen, onQrModalOpen, onQrModalClose] = useBooleanState(false);
 
   return (
     <div css={container}>
-      <div
-        css={css`
-          display: flex;
-          gap: 15px;
-          align-items: center;
-        `}
-      >
+      <div css={leftContainer}>
         {data.profileImageUrl ? (
           <Image css={imageStyles} src={data?.profileImageUrl} alt="logo" width={58} height={58} />
         ) : (
@@ -28,21 +22,25 @@ const Profile = ({ data }: { data: { name: string; email: string; profileImageUr
           <div css={emailStyles}>{data?.email ? data?.email : '365support@naver.com'}</div>
         </div>
       </div>
-      <div onClick={onOpen} css={qrStyles}>
+      <div onClick={onQrModalOpen} css={qrStyles}>
         나의 QR
       </div>
-      {isShown && <MyPageQrCode onClose={onClose} />}
+      {isQrModalOpen && <MyPageQrCode onClose={onQrModalClose} />}
     </div>
   );
 };
+
+const leftContainer = css`
+  display: flex;
+  gap: 15px;
+  align-items: center;
+`;
 
 const qrStyles = css`
   padding: 5px 10px;
   border-radius: 30px;
   background: var(--Grayscale-0, #fff);
   color: var(--Grayscale-50, #878787);
-  leading-trim: both;
-  text-edge: cap;
 
   font-family: Pretendard;
   font-size: 14px;

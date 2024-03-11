@@ -77,6 +77,8 @@ const alertModal = css`
   color: #fff;
   font-size: 12px;
   font-family: 'pretendard';
+
+  z-index: 100;
 `;
 
 const mainContainer = css`
@@ -122,6 +124,9 @@ const qrContainer = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
 `;
 
 export default MyPageQrCode;
