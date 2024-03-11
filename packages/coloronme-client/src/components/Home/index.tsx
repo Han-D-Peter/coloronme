@@ -291,8 +291,8 @@ const logoContainer = css`
   height: 120px;
   z-index: 2;
   position: absolute;
-  top: 30%;
-  left: 35%;
+  top: 32%;
+  left: 35.5%;
 
   @media (max-width: 668px) and (max-height: 741px) {
     width: 100px;
