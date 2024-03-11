@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import ColorRepository from './color.repository';
 
-export const usePersonalColor = (code: any) => {
+export const usePersonalColor = (code: number | null) => {
   return useQuery({
     queryKey: ['PersonalColor', code],
     queryFn: () => ColorRepository.getPersonalColor(code),
+    enabled: !!code,
   });
 };
 
-export const useWorstColor = (code: any) => {
+export const useWorstColor = (code: number | null) => {
   return useQuery({
     queryKey: ['worstColor', code],
     queryFn: () => ColorRepository.getWorstPersonalColor(code),
+    enabled: !!code,
   });
 };

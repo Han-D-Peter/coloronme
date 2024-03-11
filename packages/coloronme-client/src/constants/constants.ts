@@ -1,3 +1,5 @@
+import { ColorCode, ColorName } from '@design';
+
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 export const SERVER_BASE_URL = process.env.NEXT_PUBLIC_SERVER_API_URL;
 
@@ -77,4 +79,60 @@ export const PERSONAL_COLOR = {
       fontColor: '#fff',
     },
   ],
+};
+
+export const PERSONAL_COLOR_MAPPING: {
+  [key: number]: {
+    code: ColorCode;
+    name: ColorName;
+  };
+} = {
+  1: {
+    code: 'Best_SW_LG',
+    name: '봄 웜 라이트',
+  },
+  2: {
+    code: 'Best_SW_CL',
+    name: '봄 웜 클리어',
+  },
+  3: {
+    code: 'Best_SW_ST',
+    name: '봄 웜 스트롱',
+  },
+  4: {
+    code: 'Best_SC_LG',
+    name: '여름 쿨 라이트',
+  },
+  5: {
+    code: 'Best_SC_CL',
+    name: '여름 쿨 클리어',
+  },
+  6: {
+    code: 'Best_SC_MT',
+    name: '여름 쿨 뮤트',
+  },
+  7: {
+    code: 'Best_FW_MT',
+    name: '가을 웜 뮤트',
+  },
+  8: {
+    code: 'Best_FW_TR',
+    name: '가을 웜 트루',
+  },
+  9: {
+    code: 'Best_FW_DP',
+    name: '가을 웜 딥',
+  },
+  10: {
+    code: 'Best_WC_ST',
+    name: '겨울 쿨 스트롱',
+  },
+  11: {
+    code: 'Best_WC_TR',
+    name: '겨울 쿨 트루',
+  },
+  12: {
+    code: 'Best_WC_DP',
+    name: '겨울 쿨 딥',
+  },
 };

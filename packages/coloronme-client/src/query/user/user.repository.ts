@@ -1,4 +1,5 @@
 import client from '../../api/client';
+import { User } from './user.model';
 
 class UserRepository {
   async postUser(data: any) {
@@ -6,7 +7,7 @@ class UserRepository {
       personalColor: data,
     });
   }
-  async getUser() {
+  async getUser(): Promise<User> {
     return client.get('users');
   }
   async postId() {
