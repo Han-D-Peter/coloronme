@@ -15,12 +15,7 @@ const MyPageQrCode = ({ onClose }: Props) => {
   return (
     <div css={alertModal} onClick={onClose}>
       <div css={mainContainer}>
-        <div
-          css={css`
-            display: flex;
-            flex-direction: column;
-          `}
-        >
+        <div css={titleStyle}>
           <div css={mainText}>
             컨설턴트님께
             <br />
@@ -41,13 +36,7 @@ const MyPageQrCode = ({ onClose }: Props) => {
             />
           )}
         </div>
-        <div
-          css={css`
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          `}
-        >
+        <div css={buttonContainer}>
           <Button variant="ghost" onClick={onClose}>
             닫기
           </Button>
@@ -58,7 +47,7 @@ const MyPageQrCode = ({ onClose }: Props) => {
 };
 
 const alertModal = css`
-  position: absolute;
+  position: fixed;
   left: 50%;
   bottom: 50%;
   transform: translate(-50%, 50%);
@@ -69,7 +58,7 @@ const alertModal = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 520px;
   height: 100vh;
 
   border-radius: 10px;
@@ -90,6 +79,11 @@ const mainContainer = css`
   flex-direction: column;
   padding: 9% 9%;
   justify-content: space-around;
+`;
+
+const titleStyle = css`
+  display: flex;
+  flex-direction: column;
 `;
 
 const mainText = css`
@@ -127,6 +121,12 @@ const qrContainer = css`
   width: 250px;
   height: 250px;
   margin: 0 auto;
+`;
+
+const buttonContainer = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default MyPageQrCode;
