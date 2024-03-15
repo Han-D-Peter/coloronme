@@ -1,9 +1,9 @@
 import client from '../../api/client';
 
-class ColorFitRepository {
+class ProductRepository {
   async getProducts() {
     return client.get(`products`);
   }
 }
 
-export default new ColorFitRepository();
+export default new ProductRepository();

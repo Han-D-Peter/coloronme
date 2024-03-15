@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { Heart, HeartOutline, Text, color } from '@design';
 
-import { Product } from '@/src/query/personal-color-fit/colorFit.model';
+import { Product } from '@/src/query/product/product.model';
 
 const ProductItem = ({ imageUrl, name, platform, isLiked }: Product) => {
   return (
