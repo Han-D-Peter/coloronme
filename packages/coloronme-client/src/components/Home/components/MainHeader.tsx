@@ -7,9 +7,11 @@ import { Toggle } from '@design';
 import usePersonalColorMode from '@/src/hooks/usePersonalColorMode';
 import { PersonalColorMode } from '@/src/store/localeStore';
 
-// 로컬 스토리지에 저장된 퍼스널 컬러 모드를 가져와서 토글 버튼을 렌더링한다.
-// 토글 버튼을 클릭하면 로컬 스토리지에 퍼스널 컬러 모드를 저장하고, 퍼스널 컬러 모드를 변경한다.
-const MainHeader = () => {
+interface MainHeaderProps {
+  isToggleActive?: boolean;
+}
+
+const MainHeader = ({ isToggleActive = true }: MainHeaderProps) => {
   const [personalColorMode, setPersonalColorMode] = usePersonalColorMode();
   const isChecked = personalColorMode === 'worst';
 
@@ -27,40 +29,10 @@ const MainHeader = () => {
   return (
     <div css={headerContainer}>
       <Image src="/images/subLogo.png" alt="logo" width={160} height={37} />
-      <Toggle checked={isChecked} onChange={toggleColor} />
+      {isToggleActive && <Toggle checked={isChecked} onChange={toggleColor} />}
     </div>
   );
 };
-
-// const MainHeader = () => {
-//   const [personalColorMode, setPersonalColorMode] = usePersonalColorModeToggle();
-
-//   const [isChecked, setIsChecked] = useState(personalColorMode === 'worst');
-
-//   const toggleColor = (checked: boolean) => {
-//     setIsChecked(checked);
-
-//     if (personalColorMode === 'best') {
-//       localStorage.setItem('colorRange', 'worst');
-//       setPersonalColorMode('worst');
-//     } else {
-//       localStorage.setItem('colorRange', 'best');
-//       setPersonalColorMode('best');
-//     }
-//   };
-
-//   useEffect(() => {
-//     const color = localStorage.getItem('colorRange') || 'best';
-//     setPersonalColorMode(color as PersonalColorMode);
-//   }, []);
-
-//   return (
-//     <div css={headerContainer}>
-//       <Image src="/icons/subLogo.png" alt="logo" width={160} height={37} />
-//       <Toggle checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)} />
-//     </div>
-//   );
-// };
 
 const headerContainer = css`
   height: 63px;

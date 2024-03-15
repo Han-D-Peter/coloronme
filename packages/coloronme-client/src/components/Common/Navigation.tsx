@@ -31,17 +31,20 @@ const Navigation = () => {
             bottomText="홈"
           />
         </GhostButton>
-        <IconWithText
-          color={router.pathname === '/color-fit' ? '#000000' : '#B9BEC1'}
-          icon={
-            router.pathname === '/color-fit' ? (
-              <ShoppingCart width="24" height="24" color="#000000" />
-            ) : (
-              <ShoppingCartOutline width="24" height="24" color="#B9BEC1" />
-            )
-          }
-          bottomText="퍼스널컬러핏"
-        />
+        <GhostButton onClick={() => router.push('/personal-color-fit')}>
+          <IconWithText
+            color={router.pathname === '/personal-color-fit' ? '#000000' : '#B9BEC1'}
+            icon={
+              router.pathname === '/personal-color-fit' ? (
+                <ShoppingCart width="24" height="24" color="#000000" />
+              ) : (
+                <ShoppingCartOutline width="24" height="24" color="#B9BEC1" />
+              )
+            }
+            bottomText="퍼스널컬러핏"
+          />
+        </GhostButton>
+
         <GhostButton onClick={() => router.push('/mypage')}>
           <IconWithText
             color={router.pathname === '/mypage' ? '#000000' : '#B9BEC1'}
