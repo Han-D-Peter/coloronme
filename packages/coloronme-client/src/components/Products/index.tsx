@@ -7,7 +7,7 @@ import MainHeader from '../Home/components/MainHeader';
 import DefaultLayout from '../Common/Layout/DefaultLayout';
 import ProductList from './component/ProductList';
 
-const ProductPage = () => {
+const ProductsPage = () => {
   const { data } = useProducts();
 
   const registerProduct = () => {
@@ -34,4 +34,4 @@ const registerButtonStyle = css`
   z-index: 10;
 `;
 
-export default ProductPage;
+export default ProductsPage;

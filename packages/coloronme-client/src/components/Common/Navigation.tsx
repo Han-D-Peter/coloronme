@@ -31,11 +31,11 @@ const Navigation = () => {
             bottomText="홈"
           />
         </GhostButton>
-        <GhostButton onClick={() => router.push('/product')}>
+        <GhostButton onClick={() => router.push('/products')}>
           <IconWithText
-            color={router.pathname === '/product' ? '#000000' : '#B9BEC1'}
+            color={router.pathname === '/products' ? '#000000' : '#B9BEC1'}
             icon={
-              router.pathname === '/product' ? (
+              router.pathname === '/products' ? (
                 <ShoppingCart width="24" height="24" color="#000000" />
               ) : (
                 <ShoppingCartOutline width="24" height="24" color="#B9BEC1" />
