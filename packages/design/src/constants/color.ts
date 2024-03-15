@@ -39,6 +39,7 @@ export const color = {
   },
   red: {
     red100: '#da2e28',
+    red200: '#FF0000',
   },
   purple: {
     purple050: '#cd9de9',
