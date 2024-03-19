@@ -6,7 +6,7 @@ type Props = {
   id: string;
   isSelected: boolean;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const SelectableButton = ({ id, isSelected, label, onClick }: Props) => {

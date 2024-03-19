@@ -10,7 +10,7 @@ const ProductImage = ({ image }: Props) => {
   return (
     <div css={imageContainerStyle}>
       <Image src={image} alt="productImage" fill={true} />
-      {image && (
+      {!image && (
         <Text as="body" size="md" weight="bold" style={imageText}>
           링크를 입력하면 이미지가 나타나요
         </Text>

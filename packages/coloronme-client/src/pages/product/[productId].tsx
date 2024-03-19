@@ -1,5 +1,7 @@
+import ProductPage from '@/src/components/Product';
+
 const Product = () => {
-  return <div>Enter</div>;
+  return <ProductPage />;
 };
 
 export default Product;
