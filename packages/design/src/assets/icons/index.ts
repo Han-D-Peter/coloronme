@@ -42,3 +42,5 @@ export * from './ThumbsUp';
 export * from './ThumbsDown';
 export * from './BackwardOutline';
 export * from './Kakao';
+export * from './Question';
+export * from './PlusOutline';

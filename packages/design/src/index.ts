@@ -6,7 +6,7 @@ export * from './Dropdown';
 export * from './Tag';
 export * from './utils';
 
-import URLInput from './URLInput';
+import InputWithButton from './InputWithButton';
 import SearchInput from './SearchInput';
 import Toggle from './Toggle';
 import Modal from './Modal';
@@ -24,7 +24,7 @@ import TextWithDescription from './TextWithDescription';
 
 export {
   SearchInput,
-  URLInput,
+  InputWithButton,
   Toggle,
   Modal,
   BarGraph,

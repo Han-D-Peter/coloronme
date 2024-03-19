@@ -2,7 +2,7 @@ export type TypoType = 'title' | 'body' | 'caption';
 export type TypoScale = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
 export type TypoWeight = 'bold' | 'regular';
 
-export type buttonScale = 'md' | 'lg';
+export type buttonScale = 'sm' | 'md' | 'lg';
 export type ButtonSizeDimensions = {
   width: number;
   height: number;
@@ -36,6 +36,10 @@ export const fontSize: FontSize = {
 };
 
 export const buttonSize: ButtonSize = {
+  sm: {
+    width: 126,
+    height: 30,
+  },
   md: {
     width: 126,
     height: 45,
@@ -44,6 +48,11 @@ export const buttonSize: ButtonSize = {
     width: 281,
     height: 45,
   },
+};
+
+export const buttonRadiusSize = {
+  sm: 5,
+  md: 30,
 };
 
 export const tagGapSize = {

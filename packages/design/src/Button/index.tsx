@@ -1,9 +1,10 @@
 import { ButtonHTMLAttributes, forwardRef, useMemo, ReactNode, ForwardedRef } from 'react';
-import { css } from '@emotion/react';
-import { buttonSize, buttonStyles } from '../constants';
+import { SerializedStyles, css } from '@emotion/react';
+import { buttonRadiusSize, buttonSize, buttonStyles } from '../constants';
 
-export type Size = 'md' | 'lg';
-export type Variant = 'primary' | 'ghost';
+export type Size = 'sm' | 'md' | 'lg';
+export type Variant = 'primary' | 'ghost' | 'gray';
+type RadiusStyle = 'sm' | 'md';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string;
@@ -39,6 +40,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
    * Optional click handler
    */
   onClick?: () => void;
+
+  style?: SerializedStyles;
+
+  radius?: RadiusStyle;
 };
 
 const defaultButtonStyle = css`
@@ -52,6 +57,8 @@ export default function Button({
   fullWidth = false,
   disabled = false,
   children,
+  radius = 'md',
+  style,
   ...rest
 }: ButtonProps) {
   const activeButtonStyle = useMemo(() => {
@@ -82,11 +89,18 @@ export default function Button({
     [size, fullWidth],
   );
 
+  const buttonRadiusStyle = useMemo(
+    () => css`
+      border-radius: ${buttonRadiusSize[radius]}px;
+    `,
+    [radius],
+  );
+
   return (
     <button
       type="button"
       disabled={disabled}
-      css={[defaultButtonStyle, buttonSizeStyle, activeButtonStyle]}
+      css={[defaultButtonStyle, buttonSizeStyle, activeButtonStyle, buttonRadiusStyle, style]}
       // ref={ref}
       {...rest}
     >

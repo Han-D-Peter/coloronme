@@ -1,5 +1,11 @@
 import { color, gradation } from './color';
 
+const grayStyle = {
+  background: color.gray.gray000,
+  color: color.gray.gray040,
+  border: `1px solid ${color.gray.gray030}`,
+};
+
 export const buttonStyles = {
   primary: {
     default: {
@@ -22,7 +28,6 @@ export const buttonStyles = {
       backgroundSize: 'contain',
       color: color.gray.gray000,
       border: '3px solid transparent',
-      borderRadius: '40px',
       display: 'inline-block',
       backgroundOrigin: 'border-box',
       backgroundClip: 'padding-box, border-box',
@@ -34,7 +39,6 @@ export const buttonStyles = {
     default: {
       border: '2px solid transparent',
       backgroundImage: `linear-gradient(${color.gray.gray000}, ${color.gray.gray000}),${gradation.sm} , ${gradation.lg}`,
-      borderRadius: '30px',
       backgroundOrigin: 'border-box',
       backgroundClip: 'padding-box, border-box',
 
@@ -43,7 +47,6 @@ export const buttonStyles = {
     hover: {
       border: '2px solid transparent',
       backgroundImage: `linear-gradient(${color.gray.gray000}, ${color.gray.gray000}),${gradation.sm} , ${gradation.lg}`,
-      borderRadius: '30px',
       backgroundOrigin: 'border-box',
       backgroundClip: 'padding-box, border-box',
 
@@ -52,7 +55,6 @@ export const buttonStyles = {
     click: {
       border: '2px solid transparent',
       backgroundImage: `linear-gradient(${color.gray.gray000}, ${color.gray.gray000}),${gradation.sm} , ${gradation.lg}`,
-      borderRadius: '30px',
       backgroundOrigin: 'border-box',
       backgroundClip: 'padding-box, border-box',
 
@@ -61,7 +63,6 @@ export const buttonStyles = {
     focus: {
       border: '3px solid transparent',
       backgroundImage: `linear-gradient(${color.gray.gray000}, ${color.gray.gray000}),${gradation.sm} , ${gradation.lg}`,
-      borderRadius: '30px',
       backgroundOrigin: 'border-box',
       backgroundClip: 'padding-box, border-box',
       outline: 'none',
@@ -69,5 +70,12 @@ export const buttonStyles = {
       color: color.gray.gray030,
     },
     disabled: { background: color.gray.gray000, color: color.gray.gray030, border: `2px solid ${color.gray.gray030}` },
+  },
+  gray: {
+    default: grayStyle,
+    hover: grayStyle,
+    click: grayStyle,
+    focus: grayStyle,
+    disabled: grayStyle,
   },
 };
