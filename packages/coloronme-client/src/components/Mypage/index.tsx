@@ -63,7 +63,7 @@ const mainContainer = css`
   flex-direction: column;
   justify-content: space-between;
 
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const profileContainer = css`

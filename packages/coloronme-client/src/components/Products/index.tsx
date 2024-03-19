@@ -1,4 +1,6 @@
 import { css } from '@emotion/react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 import { Button } from '@design';
 
@@ -8,11 +10,16 @@ import DefaultLayout from '../Common/Layout/DefaultLayout';
 import ProductList from './component/ProductList';
 
 const ProductsPage = () => {
+  const router = useRouter();
   const { data } = useProducts();
 
   const registerProduct = () => {
-    console.log('상품 등록');
+    router.push('/product/register');
   };
+
+  // useEffect(() => {
+  //   console.log('data', data);
+  // }, [data]);
 
   return (
     <DefaultLayout header={<MainHeader isToggleActive={false} />}>
