@@ -35,3 +35,9 @@ export type ProductDetail = {
   sellUrl: string;
   userId: number;
 };
+
+export type OGInfo = {
+  image: string;
+  name: string;
+  platform: string;
+};

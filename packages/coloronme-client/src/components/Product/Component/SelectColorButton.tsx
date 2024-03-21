@@ -3,11 +3,12 @@ import { css } from '@emotion/react';
 type Props = {
   children?: React.ReactNode;
   color: string;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const SelectColorButton = ({ children, color }: Props) => {
+const SelectColorButton = ({ children, color, onClick }: Props) => {
   return (
     <button
+      onClick={onClick}
       css={css`
         ${colorAddButton}
         background-color: ${color};

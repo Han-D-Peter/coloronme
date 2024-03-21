@@ -137,12 +137,15 @@ export const PERSONAL_COLOR_MAPPING: {
   },
 };
 
-export const category: Record<Category, string> = {
-  Accessories: '악세서리',
+type ProductCategory = '아우터' | '상의' | '하의' | '원피스/세트' | '주얼리' | '패션소품';
+export const PRODUCT_CATEGORY: ProductCategory[] = ['아우터', '상의', '하의', '원피스/세트', '주얼리', '패션소품'];
+
+export const CATEGORY: Record<Category, ProductCategory> = {
+  Accessories: '패션소품',
   Outer: '아우터',
   Top: '상의',
   Dress: '원피스/세트',
   Bottom: '하의',
   Jewelry: '주얼리',
-  Acc: '악세서리',
+  Acc: '패션소품',
 };

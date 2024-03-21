@@ -1,6 +1,6 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { UseMutationResult, useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import ProductRepository from './product.repository';
-import { ProductDetail } from './product.model';
+import { OGInfo, ProductDetail } from './product.model';
 
 export const useInfiniteProducts = () => {
   return useInfiniteQuery({
@@ -22,5 +22,28 @@ export const useProduct = (id: number) => {
     queryKey: ['product', id],
     queryFn: () => ProductRepository.getProduct(id),
     enabled: !!id,
+  });
+};
+
+export const useProductOGInfo = () => {
+  return useMutation({
+    mutationFn: ({ url }: { url: string }) => ProductRepository.postProductOGInfo(url),
+  });
+};
+
+export type PostProduct = {
+  name: string;
+  color: string[];
+  platform: string[];
+  sellUrl: string;
+  imageUrl: string;
+  personalColor: number;
+  category: string;
+};
+
+export const usePostProduct = () => {
+  return useMutation({
+    mutationFn: ({ name, color, platform, sellUrl, imageUrl, personalColor, category }: PostProduct) =>
+      ProductRepository.postProduct({ name, color, platform, sellUrl, imageUrl, personalColor, category }),
   });
 };

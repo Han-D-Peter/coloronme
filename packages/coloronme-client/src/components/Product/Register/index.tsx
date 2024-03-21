@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { Text, color, Question, Button, PlusOutline } from '@design';
-import { PERSONAL_COLOR_MAPPING } from '@/src/constants/constants';
+import { CATEGORY, PERSONAL_COLOR_MAPPING } from '@/src/constants/constants';
 import ToolTip from '../../Common/ToolTip';
 import ProductImage from '../Component/ProductImage';
 import PlatformNotice from './Component/PlatformNotice';
@@ -9,45 +9,121 @@ import SelectableButton from './Component/SelectableButton';
 import SelectColorButton from '../Component/SelectColorButton';
 import CenteredLayout from '../../Common/Layout/CenteredLayout';
 import LabeledInputButton from '../Component/LabeledInputButton';
-
-// 상품 상세 페이지
-// 상품 등록 페이지
-// 상품 수정 페이지
-// 비슷함  같이 사용 할 수 있게 컴포넌트 분리
+import { useGetUser } from '@/src/query/user/user.queries';
+import { usePostProduct, useProductOGInfo } from '@/src/query/product/product.queries';
+import { useColor } from 'color-thief-react';
+import { useBooleanState } from '@/src/hooks/useBooleanState';
+import Colorful from '@uiw/react-color-colorful';
+//https://uiwjs.github.io/npm-unpkg/#/pkg/@uiw/react-color-colorful/file/README.md
 
 type ProductType = '아우터' | '상의' | '하의' | '원피스/세트' | '주얼리' | '패션소품';
 const productTypes: ProductType[] = ['아우터', '상의', '하의', '원피스/세트', '주얼리', '패션소품'];
 
-const myColorId = '1';
-const selectedItemType = '아우터';
-
+// 판매 링크 등록 후 클릭
 const ProductRegisterPage = () => {
-  const [saleLink, setSaleLink] = useState('http://www.abcdefg.com');
-  const [editProductName, setEditProductName] = useState('그린 맨투맨');
-  const [editPlatform, setEditPlatform] = useState('지그재그');
+  const { data } = useGetUser();
 
-  const clickColor = (code: string, name: string, id: number) => {
-    console.log(code, name, id);
+  const { mutate: productOGMutate, data: ogData } = useProductOGInfo();
+  const { mutate: postProductMutate } = usePostProduct();
+  const { data: colorData } = useColor(ogData?.image, 'hex', { crossOrigin: 'Anonymous' });
+
+  const [isShownColorPicker, onOpenColorPicker, onClose, onToggleColorPicker] = useBooleanState(false);
+  const [hsva, setHsva] = useState({ h: 0, s: 0, v: 68, a: 1 });
+
+  // const onColorPickerInfoChange = (color) => {
+  //   console.log('Main Color Change', color);
+  // };
+
+  useEffect(() => {
+    console.log('isShownColorPicker', isShownColorPicker);
+  }, [isShownColorPicker]);
+
+  useEffect(() => {
+    console.log('data', data);
+    console.log('urlData', ogData);
+  }, [data, ogData]);
+
+  const [sellLink, setSellLink] = useState('https://zigzag.kr/catalog/products/131358195');
+
+  useEffect(() => {
+    console.log('colorData', colorData);
+  }, [colorData, ogData]);
+
+  const [personalColorId, setPersonalColorId] = useState(0);
+  const [productType, setProductType] = useState<ProductType>();
+
+  const [productName, setProductName] = useState('');
+  const [platform, setPlatform] = useState('');
+
+  const submitSellLink = () => {
+    productOGMutate({ url: sellLink });
   };
 
-  const changeProductType = (type: ProductType) => {
-    console.log(type);
+  useEffect(() => {
+    console.log('productName', productName);
+  }, [productName]);
+
+  const findCategoryKeyByValue = (value: string) => {
+    const entries = Object.entries(CATEGORY);
+    for (let [key, val] of entries) {
+      if (val === value) {
+        return key;
+      }
+    }
+    return null;
   };
+
+  const submitProduct = () => {
+    if (!data) return;
+    if (!productType) return;
+    const keyForCategory = findCategoryKeyByValue(productType) || '';
+
+    console.log('submit');
+    postProductMutate({
+      name: productName,
+      color: [`${colorData}`],
+      platform: [platform],
+      sellUrl: sellLink,
+      imageUrl: ogData.image,
+      personalColor: personalColorId,
+      category: keyForCategory,
+    });
+  };
+
+  useEffect(() => {
+    if (!data) return;
+
+    setPersonalColorId(data?.personalColorId);
+  }, [data]);
+
+  useEffect(() => {
+    if (!ogData) return;
+
+    setProductName(ogData?.name);
+    setPlatform(ogData?.platform);
+  }, [ogData]);
+
+  if (!data) return null;
 
   return (
     <CenteredLayout>
-      <ProductImage image="/images/greenT.png" />
+      <ProductImage image={ogData?.image ?? '/images/greenT.png'} showBackButton />
 
       <div css={formStyle}>
-        <LabeledInputButton value={saleLink} onChange={(e) => setSaleLink(e.target.value)} buttonText="확인" fullWidth>
+        <LabeledInputButton
+          value={sellLink}
+          onChange={(e) => setSellLink(e.target.value)}
+          buttonText="확인"
+          fullWidth
+          onClick={submitSellLink}
+        >
           <Text as="title" size="sm" weight="bold">
             판매 링크
           </Text>
         </LabeledInputButton>
-
         <LabeledInputButton
-          value={editProductName}
-          onChange={(e) => setEditProductName(e.target.value)}
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
           buttonText="수정"
           fullWidth
         >
@@ -55,13 +131,7 @@ const ProductRegisterPage = () => {
             제품명 수정
           </Text>
         </LabeledInputButton>
-
-        <LabeledInputButton
-          value={editPlatform}
-          onChange={(e) => setEditPlatform(e.target.value)}
-          buttonText="추가"
-          fullWidth
-        >
+        <LabeledInputButton value={platform} onChange={(e) => setPlatform(e.target.value)} buttonText="추가" fullWidth>
           <div css={platformTextStyle}>
             <Text as="title" size="sm" weight="bold">
               판매처 추가
@@ -71,18 +141,59 @@ const ProductRegisterPage = () => {
             </ToolTip>
           </div>
         </LabeledInputButton>
-
         <div css={innerContentGapStyle}>
           <Text as="title" size="sm" weight="bold">
             상품 컬러
           </Text>
           <div css={colorBoxContainer}>
-            <SelectColorButton color={color.gray.gray010}>
+            {isShownColorPicker && (
+              <div
+                css={css`
+                  position: absolute;
+                  z-index: 100;
+                  /* bottom: 10%; */
+                  left: 20%;
+                  /* transform: translateX(-50%); X축 기준으로 자신의 크기의 반만큼 왼쪽으로 이동 */
+                `}
+              >
+                <Colorful
+                  color={hsva}
+                  disableAlpha={true}
+                  onChange={(color) => {
+                    setHsva(color.hsva);
+                  }}
+                />
+              </div>
+            )}
+            <SelectColorButton color={color.gray.gray010} onClick={onToggleColorPicker}>
               <PlusOutline width="20" height="20" color={color.gray.gray040} />
             </SelectColorButton>
-            <SelectColorButton color="#556B68" />
+            {colorData && <SelectColorButton color={colorData} />}
           </div>
         </div>
+        {/* <div css={innerContentGapStyle}>
+          <Text as="title" size="sm" weight="bold">
+            상품 컬러
+          </Text>
+          <div css={colorBoxContainer}>
+            <SelectColorButton color={color.gray.gray010} onClick={onOpenColorPicker}>
+              <PlusOutline width="20" height="20" color={color.gray.gray040} />
+            </SelectColorButton>
+            {colorData && <SelectColorButton color={colorData} />}
+          </div>
+        </div> */}
+        {/* {isShownColorPicker && (
+          <Colorful
+            css={css`
+              z-index: 100;
+            `}
+            color={hsva}
+            disableAlpha={true}
+            onChange={(color) => {
+              setHsva(color.hsva);
+            }}
+          />
+        )} */}
 
         <div css={innerContentGapStyle}>
           <div css={flexMdStyle}>
@@ -100,15 +211,14 @@ const ProductRegisterPage = () => {
               <SelectableButton
                 key={id}
                 id={id}
-                isSelected={myColorId === id}
-                onClick={() => clickColor(code, name, +id)}
+                isSelected={personalColorId === +id}
+                onClick={() => setPersonalColorId(+id)}
               >
                 {name}
               </SelectableButton>
             ))}
           </div>
         </div>
-
         <div css={innerContentGapStyle}>
           <Text as="title" size="sm" weight="bold">
             상품 유형
@@ -119,8 +229,8 @@ const ProductRegisterPage = () => {
               <SelectableButton
                 key={index}
                 id={index.toString()}
-                isSelected={item === selectedItemType}
-                onClick={() => changeProductType(item)}
+                isSelected={item === productType}
+                onClick={() => setProductType(item)}
               >
                 {item}
               </SelectableButton>
@@ -129,7 +239,7 @@ const ProductRegisterPage = () => {
         </div>
       </div>
       <div css={submitButtonStyle}>
-        <Button size="md" fullWidth>
+        <Button size="md" fullWidth onClick={submitProduct}>
           등록하기
         </Button>
       </div>
@@ -184,6 +294,7 @@ const innerContentGapStyle = css`
 `;
 
 const colorBoxContainer = css`
+  position: relative;
   display: flex;
   gap: 10px;
 `;
