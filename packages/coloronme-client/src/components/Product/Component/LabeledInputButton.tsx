@@ -6,7 +6,7 @@ const LabeledInputButton = ({ children, buttonText, onClick, fullWidth = false, 
   return (
     <div css={innerContentStyle}>
       {children}
-      <InputWithButton buttonText={buttonText} fullWidth={fullWidth} {...props} />
+      <InputWithButton buttonText={buttonText} onClick={onClick} fullWidth={fullWidth} {...props} />
     </div>
   );
 };

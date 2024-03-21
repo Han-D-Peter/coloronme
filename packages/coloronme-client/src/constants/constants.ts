@@ -1,4 +1,5 @@
 import { ColorCode, ColorName } from '@design';
+import { Category } from '../query/product/product.model';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -134,4 +135,14 @@ export const PERSONAL_COLOR_MAPPING: {
     code: 'Best_WC_DP',
     name: '겨울 쿨 딥',
   },
+};
+
+export const category: Record<Category, string> = {
+  Accessories: '악세서리',
+  Outer: '아우터',
+  Top: '상의',
+  Dress: '원피스/세트',
+  Bottom: '하의',
+  Jewelry: '주얼리',
+  Acc: '악세서리',
 };

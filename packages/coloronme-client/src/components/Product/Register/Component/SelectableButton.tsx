@@ -3,13 +3,13 @@ import { css } from '@emotion/react';
 import { Button, Text } from '@design'; // 가정한 디자인 시스템에서 가져온 컴포넌트
 
 type Props = {
-  id: string;
+  id?: string;
   isSelected: boolean;
-  label: string;
   onClick?: () => void;
+  children: string;
 };
 
-const SelectableButton = ({ id, isSelected, label, onClick }: Props) => {
+const SelectableButton = ({ id, isSelected, children, onClick }: Props) => {
   return (
     <Button
       key={id}
@@ -20,7 +20,7 @@ const SelectableButton = ({ id, isSelected, label, onClick }: Props) => {
       style={CustomButtonStyle}
     >
       <Text as="body" size="md" weight={isSelected ? 'bold' : 'regular'}>
-        {label}
+        {children}
       </Text>
     </Button>
   );

@@ -8,6 +8,10 @@ class ProductRepository {
 
     return client.get(`products?page=${page}&lastcursor=${productId}`);
   }
+
+  async getProduct(productId: number) {
+    return client.get(`products/${productId}`);
+  }
 }
 
 export default new ProductRepository();

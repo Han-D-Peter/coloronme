@@ -1,5 +1,6 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import ProductRepository from './product.repository';
+import { ProductDetail } from './product.model';
 
 export const useInfiniteProducts = () => {
   return useInfiniteQuery({
@@ -13,5 +14,13 @@ export const useInfiniteProducts = () => {
       const lastItemId = lastPage.products?.[lastPage.products.length - 1]?.id;
       return { page: lastPage.pagination.currentPage + 1, lastItemId };
     },
+  });
+};
+
+export const useProduct = (id: number) => {
+  return useQuery<ProductDetail>({
+    queryKey: ['product', id],
+    queryFn: () => ProductRepository.getProduct(id),
+    enabled: !!id,
   });
 };

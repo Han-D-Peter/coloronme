@@ -1,15 +1,26 @@
-import Image from 'next/image';
+/* eslint-disable @next/next/no-img-element */
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
-import { Text, color } from '@design';
+import { BackwardOutline, Text, color } from '@design';
 
 type Props = {
   image: string;
+  showBackButton?: boolean;
 };
 
-const ProductImage = ({ image }: Props) => {
+const ProductImage = ({ image, showBackButton = false }: Props) => {
+  const router = useRouter();
+
+  const changeFullImage = () => {};
+
   return (
     <div css={imageContainerStyle}>
-      <Image src={image} alt="productImage" fill={true} />
+      <img src={image} alt="productImage" css={imgStyle} onClick={changeFullImage} />
+      {showBackButton && (
+        <div css={backButtonStyle} onClick={router.back}>
+          <BackwardOutline width="20" height="20" color={color.gray.gray000} />
+        </div>
+      )}
       {!image && (
         <Text as="body" size="md" weight="bold" style={imageText}>
           링크를 입력하면 이미지가 나타나요
@@ -22,7 +33,24 @@ const ProductImage = ({ image }: Props) => {
 const imageContainerStyle = css`
   position: relative;
   width: 100%;
-  height: 45vh;
+  height: 60vh;
+`;
+
+const imgStyle = css`
+  width: 100%;
+  height: 100%;
+`;
+
+const backButtonStyle = css`
+  position: absolute;
+  left: 25px;
+  top: 30px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: ${color.gray.gray000};
+
+  white-space: nowrap;
+  cursor: pointer;
 `;
 
 const imageText = css`

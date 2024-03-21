@@ -101,9 +101,10 @@ const ProductRegisterPage = () => {
                 key={id}
                 id={id}
                 isSelected={myColorId === id}
-                label={name}
                 onClick={() => clickColor(code, name, +id)}
-              />
+              >
+                {name}
+              </SelectableButton>
             ))}
           </div>
         </div>
@@ -119,9 +120,10 @@ const ProductRegisterPage = () => {
                 key={index}
                 id={index.toString()}
                 isSelected={item === selectedItemType}
-                label={item}
                 onClick={() => changeProductType(item)}
-              />
+              >
+                {item}
+              </SelectableButton>
             ))}
           </div>
         </div>
