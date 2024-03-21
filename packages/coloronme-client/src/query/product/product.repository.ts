@@ -12,6 +12,40 @@ class ProductRepository {
   async getProduct(productId: number) {
     return client.get(`products/${productId}`);
   }
+
+  async postProductOGInfo(url: string) {
+    return client.post(`products/address`, {
+      sellUrl: url,
+    });
+  }
+
+  async postProduct({
+    name,
+    color,
+    platform,
+    sellUrl,
+    imageUrl,
+    personalColor,
+    category,
+  }: {
+    name: string;
+    color: string[];
+    platform: string[];
+    sellUrl: string;
+    imageUrl: string;
+    personalColor: number;
+    category: string;
+  }) {
+    return client.post(`products`, {
+      name,
+      color,
+      platform,
+      sellUrl,
+      imageUrl,
+      personalColor,
+      category,
+    });
+  }
 }
 
 export default new ProductRepository();
