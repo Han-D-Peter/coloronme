@@ -1,16 +1,25 @@
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
-import Image from 'next/image';
-
 import { Heart, HeartOutline, Text, color } from '@design';
-
 import { Product } from '@/src/query/product/product.model';
 
-const ProductItem = ({ imageUrl, name, platform, isLiked }: Product) => {
+const ProductItem = ({ id, imageUrl, name, platform, isLiked }: Product) => {
+  const router = useRouter();
+
+  const toggleLike = () => {
+    console.log('like');
+  };
+
+  const navigateToProductDetail = () => {
+    router.push(`/product/${id}`);
+  };
+
   return (
     <div css={productContainerStyle}>
       <div css={imageContainerStyle}>
-        <Image fill={true} src={imageUrl} alt={name} css={imageStyle} />
-        <div css={heartIconStyle}>
+        <img src={imageUrl} alt={name} css={imageStyle} onClick={navigateToProductDetail} />
+
+        <div css={heartIconStyle} onClick={toggleLike}>
           {isLiked ? (
             <Heart width="20" height="20" color={color.red.red200} />
           ) : (
@@ -18,7 +27,7 @@ const ProductItem = ({ imageUrl, name, platform, isLiked }: Product) => {
           )}
         </div>
       </div>
-      <div css={textContainerStyles}>
+      <div css={textContainerStyles} onClick={navigateToProductDetail}>
         <Text as="body" size="sm" weight="bold" style={nameStyle}>
           {name}
         </Text>
@@ -34,6 +43,7 @@ const productContainerStyle = css`
   position: relative;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 `;
 
 const imageContainerStyle = css`
@@ -51,6 +61,8 @@ const heartIconStyle = css`
 `;
 
 const imageStyle = css`
+  width: 100%;
+  height: 100%;
   border-radius: 5%;
 `;
 
@@ -83,5 +95,4 @@ const platformStyle = css`
 
   color: ${color.gray.gray040};
 `;
-
 export default ProductItem;

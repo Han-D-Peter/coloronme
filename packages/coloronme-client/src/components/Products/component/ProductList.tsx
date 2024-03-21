@@ -1,20 +1,30 @@
 import { css } from '@emotion/react';
 import ProductItem from './ProductItem';
+import { Products } from '@/src/query/product/product.model';
+import { RefObject } from 'react';
 
-const ProductList = () => {
+type Props = {
+  data: Products[];
+  targetRef: RefObject<HTMLDivElement>;
+};
+
+const ProductList = ({ data, targetRef }: Props) => {
   return (
     <div css={gridContainerStyle}>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item, index) => (
-        <div css={productItemStyle} key={index}>
-          <ProductItem
-            id={1}
-            imageUrl="/images/greenT.png"
-            name="그린 맨투맨 티셔츠 그린 맨투맨 티셔츠"
-            platform="지그재그"
-            isLiked={false}
-          />
-        </div>
-      ))}
+      {data?.map((page) => {
+        return page?.products?.map((item) => (
+          <div css={productItemStyle} key={item.id}>
+            <ProductItem
+              id={item.id}
+              imageUrl={item.imageUrl}
+              name={item.name}
+              platform={item.platform}
+              isLiked={item.isLiked}
+            />
+          </div>
+        ));
+      })}
+      <div css={targetStyle} ref={targetRef} />
     </div>
   );
 };
@@ -42,4 +52,9 @@ const productItemStyle = css`
     height: 60vw;
   }
 `;
+
+const targetStyle = css`
+  height: 1px;
+`;
+
 export default ProductList;
