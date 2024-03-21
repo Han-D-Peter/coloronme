@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { Text, color } from '@design';
 import { useProduct } from '@/src/query/product/product.queries';
-import { PERSONAL_COLOR_MAPPING, category } from '@/src/constants/constants';
+import { PERSONAL_COLOR_MAPPING, CATEGORY } from '@/src/constants/constants';
 import CenteredLayout from '../Common/Layout/CenteredLayout';
 import ProductImage from './Component/ProductImage';
 import LabeledInputButton from './Component/LabeledInputButton';
@@ -55,7 +55,7 @@ const ProductPage = () => {
             상품 컬러
           </Text>
           <div css={colorBoxContainer}>
-            <SelectColorButton color="#556B68" />
+            {data?.color?.map((color: string) => <SelectColorButton key={color} color={color} />)}
           </div>
         </div>
 
@@ -74,7 +74,7 @@ const ProductPage = () => {
             상품 유형
           </Text>
 
-          {data && <SelectableButton isSelected={true}>{category[data?.category]}</SelectableButton>}
+          {data && <SelectableButton isSelected={true}>{CATEGORY[data?.category]}</SelectableButton>}
         </div>
       </div>
     </CenteredLayout>
