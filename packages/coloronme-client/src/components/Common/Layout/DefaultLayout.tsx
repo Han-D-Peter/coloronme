@@ -31,9 +31,9 @@ const DefaultLayout = (
     `;
   }, [isLogined, centered]);
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  if (isLoading) {
+    return <Loading />;
+  }
 
   // if (!verified) {
   //   return <></>;
@@ -42,7 +42,7 @@ const DefaultLayout = (
   return (
     <div css={mainContainer} ref={ref} {...args}>
       {header && <header>{header}</header>}
-      {isLoading ? <Loading /> : <main css={[layoutMainStyle]}>{children}</main>}
+      <main css={[layoutMainStyle]}>{children}</main>
       <div css={navigationContainer}>
         <Navigation />
       </div>

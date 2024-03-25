@@ -40,8 +40,8 @@ const HomePage = () => {
     rgb: '',
     index: 1,
   });
-  const { data: colorData, isLoading: colorDataLoading } = usePersonalColor(currentPersonalColor.code);
-  const { data: worstColorData, isLoading: worstColorDataLoading } = useWorstColor(currentPersonalColor.code);
+  const { data: colorData, isLoading: colorDataLoading } = usePersonalColor(currentPersonalColor?.code);
+  const { data: worstColorData, isLoading: worstColorDataLoading } = useWorstColor(currentPersonalColor?.code);
   const currentColorRange = personalColorMode === 'best' ? colorData : worstColorData;
 
   const wheelColors = currentColorRange?.colors?.map((color: any) => `rgb(${color.r}, ${color.g}, ${color.b})`);
@@ -53,7 +53,7 @@ const HomePage = () => {
 
     if (colorInfo) {
       setCurrentWheelColor({
-        name: colorInfo.name,
+        name: colorInfo?.name,
         rgb: rgbColor,
         index,
       });
@@ -71,8 +71,8 @@ const HomePage = () => {
   useEffect(() => {
     if (!userData) return;
     setCurrentPersonalColor({
-      code: userData.personalColorId,
-      name: PERSONAL_COLOR_MAPPING[userData.personalColorId].name,
+      code: userData?.personalColorId,
+      name: PERSONAL_COLOR_MAPPING[userData.personalColorId]?.name,
     });
   }, [userData]);
 
@@ -82,7 +82,7 @@ const HomePage = () => {
     if (colors.length > 0) {
       setCurrentWheelColor({
         ...currentWheelColor,
-        name: currentColorRange.colors[currentWheelColor.index].name,
+        name: currentColorRange.colors[currentWheelColor.index]?.name,
         rgb: colors[currentWheelColor.index],
       });
     }
@@ -100,19 +100,19 @@ const HomePage = () => {
             css={css`
               width: 100%;
               height: 100%;
-              background: ${currentWheelColor.rgb};
+              background: ${currentWheelColor?.rgb};
             `}
             onClick={onColorModalOpen}
           />
 
           <div css={textContainer}>
-            <div css={colorText}>{currentWheelColor.name}</div>
-            <div css={rgbText}>{parseRGB(currentWheelColor.rgb)}</div>
+            <div css={colorText}>{currentWheelColor?.name}</div>
+            <div css={rgbText}>{parseRGB(currentWheelColor?.rgb)}</div>
           </div>
         </div>
 
         <div css={personalColorContainer} onClick={onBottomSheetOpen}>
-          <div css={titleText}>{currentPersonalColor.name}</div>
+          <div css={titleText}>{currentPersonalColor?.name}</div>
         </div>
         {personalColorMode === 'best' ? (
           <div css={moodTagContainer}>
@@ -124,7 +124,7 @@ const HomePage = () => {
           </div>
         ) : (
           <div css={worstModeText}>
-            {currentColorRange?.moods?.map((mood: any, index: number) => <div key={index}>{mood.name}</div>)}
+            {currentColorRange?.moods?.map((mood: any, index: number) => <div key={index}>{mood?.name}</div>)}
           </div>
         )}
         {isBottomSheetShown && (

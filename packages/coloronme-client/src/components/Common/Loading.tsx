@@ -1,16 +1,10 @@
-import { css } from "@emotion/react";
-import Image from "next/image";
+import { css } from '@emotion/react';
+import Image from 'next/image';
 
 const Loading = () => {
   return (
     <div css={container}>
-      <Image
-        src="/images/pontLogo.png"
-        alt="pontLogo"
-        width={200}
-        height={75}
-        priority
-      />
+      <Image src="/images/pontLogo.png" alt="pontLogo" width={200} height={75} priority />
       <div css={loadingText}>Loading</div>
     </div>
   );
@@ -24,11 +18,6 @@ const container = css`
   align-items: center;
   justify-content: center;
   gap: 10px;
-`;
-
-const imageContainer = css`
-  width: 200px;
-  height: 75px;
 `;
 
 const loadingText = css`
