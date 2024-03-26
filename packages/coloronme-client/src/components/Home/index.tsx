@@ -78,14 +78,13 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!currentColorRange) return;
-    const colors = currentColorRange?.colors?.map((color: any) => `rgb(${color.r}, ${color.g}, ${color.b})`);
-    if (colors.length > 0) {
-      setCurrentWheelColor({
-        ...currentWheelColor,
-        name: currentColorRange.colors[currentWheelColor.index]?.name,
-        rgb: colors[currentWheelColor.index],
-      });
-    }
+    const colors = currentColorRange?.colors?.map((color) => `rgb(${color.r}, ${color.g}, ${color.b})`);
+    if (!colors) return;
+    setCurrentWheelColor({
+      ...currentWheelColor,
+      name: currentColorRange.colors[currentWheelColor.index]?.name,
+      rgb: colors[currentWheelColor.index],
+    });
   }, [currentColorRange, currentWheelColor.index]);
 
   if (userDataLoading) {
