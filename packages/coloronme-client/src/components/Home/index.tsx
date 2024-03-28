@@ -44,7 +44,7 @@ const HomePage = () => {
   const { data: worstColorData, isLoading: worstColorDataLoading } = useWorstColor(currentPersonalColor?.code);
   const currentColorRange = personalColorMode === 'best' ? colorData : worstColorData;
 
-  const wheelColors = currentColorRange?.colors?.map((color: any) => `rgb(${color.r}, ${color.g}, ${color.b})`);
+  const wheelColors = currentColorRange?.colors?.map((color: Color) => `rgb(${color.r}, ${color.g}, ${color.b})`);
 
   const changeWheelColor = (rgbColor: string, index: number) => {
     const colorInfo = currentColorRange?.colors?.find(
@@ -78,7 +78,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!currentColorRange) return;
-    const colors = currentColorRange?.colors?.map((color) => `rgb(${color.r}, ${color.g}, ${color.b})`);
+    const colors = currentColorRange?.colors?.map((color: Color) => `rgb(${color.r}, ${color.g}, ${color.b})`);
     if (!colors) return;
     setCurrentWheelColor({
       ...currentWheelColor,
