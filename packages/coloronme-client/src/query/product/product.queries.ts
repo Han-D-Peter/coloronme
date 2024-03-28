@@ -1,6 +1,7 @@
 import { UseMutationResult, useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import ProductRepository from './product.repository';
 import { OGInfo, ProductDetail } from './product.model';
+import { AxiosError } from 'axios';
 
 export const useInfiniteProducts = () => {
   return useInfiniteQuery({
@@ -26,7 +27,7 @@ export const useProduct = (id: number) => {
 };
 
 export const useProductOGInfo = () => {
-  return useMutation({
+  return useMutation<OGInfo, AxiosError, { url: string }>({
     mutationFn: ({ url }: { url: string }) => ProductRepository.postProductOGInfo(url),
   });
 };

@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
+import { Sketch } from '@uiw/react-color';
+import { useColor } from 'color-thief-react';
+
 import { Text, color, Question, Button, PlusOutline } from '@design';
+
+import { useGetUser } from '@/src/query/user/user.queries';
+import { useBooleanState } from '@/src/hooks/useBooleanState';
 import { CATEGORY, PERSONAL_COLOR_MAPPING } from '@/src/constants/constants';
+import { usePostProduct, useProductOGInfo } from '@/src/query/product/product.queries';
 import ToolTip from '../../Common/ToolTip';
 import ProductImage from '../Component/ProductImage';
 import PlatformNotice from './Component/PlatformNotice';
@@ -9,59 +17,69 @@ import SelectableButton from './Component/SelectableButton';
 import SelectColorButton from '../Component/SelectColorButton';
 import CenteredLayout from '../../Common/Layout/CenteredLayout';
 import LabeledInputButton from '../Component/LabeledInputButton';
-import { useGetUser } from '@/src/query/user/user.queries';
-import { usePostProduct, useProductOGInfo } from '@/src/query/product/product.queries';
-import { useColor } from 'color-thief-react';
-import { useBooleanState } from '@/src/hooks/useBooleanState';
-import Colorful from '@uiw/react-color-colorful';
 //https://uiwjs.github.io/npm-unpkg/#/pkg/@uiw/react-color-colorful/file/README.md
 
 type ProductType = '아우터' | '상의' | '하의' | '원피스/세트' | '주얼리' | '패션소품';
 const productTypes: ProductType[] = ['아우터', '상의', '하의', '원피스/세트', '주얼리', '패션소품'];
 
-// 판매 링크 등록 후 클릭
 const ProductRegisterPage = () => {
-  const { data } = useGetUser();
+  const router = useRouter();
 
+  const { data } = useGetUser();
   const { mutate: productOGMutate, data: ogData } = useProductOGInfo();
   const { mutate: postProductMutate } = usePostProduct();
-  const { data: colorData } = useColor(ogData?.image, 'hex', { crossOrigin: 'Anonymous' });
+  const { data: colorData } = useColor(ogData?.image ?? '', 'hex', { crossOrigin: 'Anonymous' });
 
   const [isShownColorPicker, onOpenColorPicker, onClose, onToggleColorPicker] = useBooleanState(false);
-  const [hsva, setHsva] = useState({ h: 0, s: 0, v: 68, a: 1 });
-
-  // const onColorPickerInfoChange = (color) => {
-  //   console.log('Main Color Change', color);
-  // };
-
-  useEffect(() => {
-    console.log('isShownColorPicker', isShownColorPicker);
-  }, [isShownColorPicker]);
-
-  useEffect(() => {
-    console.log('data', data);
-    console.log('urlData', ogData);
-  }, [data, ogData]);
 
   const [sellLink, setSellLink] = useState('https://zigzag.kr/catalog/products/131358195');
-
-  useEffect(() => {
-    console.log('colorData', colorData);
-  }, [colorData, ogData]);
-
   const [personalColorId, setPersonalColorId] = useState(0);
   const [productType, setProductType] = useState<ProductType>();
-
   const [productName, setProductName] = useState('');
   const [platform, setPlatform] = useState('');
 
-  const submitSellLink = () => {
-    productOGMutate({ url: sellLink });
+  const [validateUrl, setValidateUrl] = useState(false);
+  const [urlWarnText, setUrlWarnText] = useState('');
+  const [productNameText, setProductNameText] = useState('');
+  const [platformWarnText, setPlatformWarnText] = useState('');
+  const [productTypeWarnText, setProductTypeWarnText] = useState('');
+
+  const changeSellLink = (url: string) => {
+    setSellLink(url);
+    setValidateUrl(false);
   };
 
-  useEffect(() => {
-    console.log('productName', productName);
-  }, [productName]);
+  const submitSellLink = () => {
+    setUrlWarnText('');
+
+    if (!sellLink) {
+      return setUrlWarnText('*판매 링크를 입력해주세요.');
+    }
+
+    productOGMutate(
+      { url: sellLink },
+      {
+        onSuccess: () => {
+          setValidateUrl(true);
+        },
+        onError(error) {
+          setValidateUrl(false);
+          if (error?.response?.status === 500) {
+            return setUrlWarnText('*유효하지 않은 링크입니다.');
+          }
+          if (error?.response?.status === 404) {
+            return setUrlWarnText('*유효하지 않은 링크입니다.');
+          }
+          if (error?.response?.status === 403) {
+            return setUrlWarnText('*안전하지 않은 링크입니다.');
+          }
+          if (error?.response?.status === 409) {
+            return setUrlWarnText('*이미 등록된 상품입니다.');
+          }
+        },
+      },
+    );
+  };
 
   const findCategoryKeyByValue = (value: string) => {
     const entries = Object.entries(CATEGORY);
@@ -73,21 +91,59 @@ const ProductRegisterPage = () => {
     return null;
   };
 
+  const validateProduct = () => {
+    if (!productName) {
+      setProductNameText('*상품명을 입력해주세요.');
+    } else {
+      setProductNameText('');
+    }
+
+    if (!platform) {
+      setPlatformWarnText('*판매처를 입력해주세요.');
+    } else {
+      setPlatformWarnText('');
+    }
+
+    if (!productType) {
+      setProductTypeWarnText('*상품 유형을 선택해주세요.');
+    } else {
+      setProductTypeWarnText('');
+    }
+
+    if (!sellLink) {
+      setUrlWarnText('*판매 링크를 입력해주세요.');
+    } else {
+      setUrlWarnText('');
+    }
+  };
+
   const submitProduct = () => {
-    if (!data) return;
-    if (!productType) return;
+    validateProduct();
+
+    if (!productName || !platform || !productType || !sellLink || urlWarnText || !ogData) return;
+
+    if (!validateUrl) {
+      return setUrlWarnText('*판매 링크가 수정되었습니다. 다시 확인해주세요.');
+    }
+
     const keyForCategory = findCategoryKeyByValue(productType) || '';
 
-    console.log('submit');
-    postProductMutate({
-      name: productName,
-      color: [`${colorData}`],
-      platform: [platform],
-      sellUrl: sellLink,
-      imageUrl: ogData.image,
-      personalColor: personalColorId,
-      category: keyForCategory,
-    });
+    postProductMutate(
+      {
+        name: productName,
+        color: [`${colorData}`],
+        platform: [platform],
+        sellUrl: sellLink,
+        imageUrl: ogData.image,
+        personalColor: personalColorId,
+        category: keyForCategory,
+      },
+      {
+        onSuccess: () => {
+          router.push('/products');
+        },
+      },
+    );
   };
 
   useEffect(() => {
@@ -107,62 +163,55 @@ const ProductRegisterPage = () => {
 
   return (
     <CenteredLayout>
-      <ProductImage image={ogData?.image ?? '/images/greenT.png'} showBackButton />
+      <ProductImage image={ogData?.image} showBackButton />
 
       <div css={formStyle}>
         <LabeledInputButton
           value={sellLink}
-          onChange={(e) => setSellLink(e.target.value)}
+          onChange={(e) => changeSellLink(e.target.value)}
           buttonText="확인"
           fullWidth
           onClick={submitSellLink}
+          errorMessage={urlWarnText}
         >
           <Text as="title" size="sm" weight="bold">
             판매 링크
           </Text>
         </LabeledInputButton>
-        <LabeledInputButton
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-          buttonText="수정"
-          fullWidth
-        >
+
+        <div css={inputContainerStyle}>
           <Text as="title" size="sm" weight="bold">
-            제품명 수정
+            상품명
           </Text>
-        </LabeledInputButton>
-        <LabeledInputButton value={platform} onChange={(e) => setPlatform(e.target.value)} buttonText="추가" fullWidth>
+          <input css={inputStyle} value={productName} onChange={(e) => setProductName(e.target.value)} />
+          <Text as="caption" size="md" style={warnTextStyle}>
+            {productNameText}
+          </Text>
+        </div>
+
+        <div css={inputContainerStyle}>
           <div css={platformTextStyle}>
             <Text as="title" size="sm" weight="bold">
-              판매처 추가
+              판매처
             </Text>
             <ToolTip content={<PlatformNotice />}>
               <Question width="15" height="15" color="#A4A4A4" />
             </ToolTip>
           </div>
-        </LabeledInputButton>
+
+          <input css={inputStyle} value={platform} onChange={(e) => setPlatform(e.target.value)} />
+          <Text as="caption" size="md" style={warnTextStyle}>
+            {platformWarnText}
+          </Text>
+        </div>
         <div css={innerContentGapStyle}>
           <Text as="title" size="sm" weight="bold">
             상품 컬러
           </Text>
           <div css={colorBoxContainer}>
             {isShownColorPicker && (
-              <div
-                css={css`
-                  position: absolute;
-                  z-index: 100;
-                  /* bottom: 10%; */
-                  left: 20%;
-                  /* transform: translateX(-50%); X축 기준으로 자신의 크기의 반만큼 왼쪽으로 이동 */
-                `}
-              >
-                <Colorful
-                  color={hsva}
-                  disableAlpha={true}
-                  onChange={(color) => {
-                    setHsva(color.hsva);
-                  }}
-                />
+              <div css={colorPickerStyle}>
+                <Sketch editableDisable={false} color="#83aee6" presetColors={['#b2a291', '#28292b']} />
               </div>
             )}
             <SelectColorButton color={color.gray.gray010} onClick={onToggleColorPicker}>
@@ -171,29 +220,6 @@ const ProductRegisterPage = () => {
             {colorData && <SelectColorButton color={colorData} />}
           </div>
         </div>
-        {/* <div css={innerContentGapStyle}>
-          <Text as="title" size="sm" weight="bold">
-            상품 컬러
-          </Text>
-          <div css={colorBoxContainer}>
-            <SelectColorButton color={color.gray.gray010} onClick={onOpenColorPicker}>
-              <PlusOutline width="20" height="20" color={color.gray.gray040} />
-            </SelectColorButton>
-            {colorData && <SelectColorButton color={colorData} />}
-          </div>
-        </div> */}
-        {/* {isShownColorPicker && (
-          <Colorful
-            css={css`
-              z-index: 100;
-            `}
-            color={hsva}
-            disableAlpha={true}
-            onChange={(color) => {
-              setHsva(color.hsva);
-            }}
-          />
-        )} */}
 
         <div css={innerContentGapStyle}>
           <div css={flexMdStyle}>
@@ -236,6 +262,9 @@ const ProductRegisterPage = () => {
               </SelectableButton>
             ))}
           </div>
+          <Text as="caption" size="md" style={warnTextStyle}>
+            {productTypeWarnText}
+          </Text>
         </div>
       </div>
       <div css={submitButtonStyle}>
@@ -275,7 +304,7 @@ const flexMdStyle = css`
 const formStyle = css`
   display: flex;
   flex-direction: column;
-  gap: 38px;
+  gap: 12px;
   padding: 0 5%;
   margin-top: 5%;
 `;
@@ -287,10 +316,35 @@ const platformTextStyle = css`
   width: fit-content;
 `;
 
+const inputContainerStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const inputStyle = css`
+  height: 100%;
+  padding: 0;
+  height: 28px;
+  padding-left: 11px;
+  outline: none;
+  border-radius: 5px;
+  color: ${color.gray.gray040};
+  box-sizing: border-box;
+  border: 1px solid ${color.gray.gray020};
+`;
+
+const colorPickerStyle = css`
+  position: absolute;
+  z-index: 100;
+  left: 70px;
+`;
+
 const innerContentGapStyle = css`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 10px;
 `;
 
 const colorBoxContainer = css`
@@ -303,6 +357,11 @@ const captionStyle = css`
   color: ${color.gray.gray040};
 `;
 
+const warnTextStyle = css`
+  color: ${color.red.red100};
+  height: 12px;
+`;
+
 const colorButtonContainerStyle = css`
   display: flex;
   flex-wrap: wrap;
@@ -310,7 +369,7 @@ const colorButtonContainerStyle = css`
 `;
 
 const submitButtonStyle = css`
-  padding: 10% 8%;
+  padding: 6% 8%;
   display: flex;
   justify-content: center;
   width: 100%;

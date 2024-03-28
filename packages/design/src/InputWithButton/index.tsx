@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useMemo, useState } from 'react';
+import React, { InputHTMLAttributes, useMemo } from 'react';
 import { css } from '@emotion/react';
 import { color } from '../constants';
 
@@ -9,8 +9,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputWithButton = ({ buttonText, onClick, fullWidth = false, ...props }: InputProps) => {
-  const [value, setValue] = useState(props.value);
-
   const inputSizeStyle = useMemo(() => {
     return css`
       width: ${fullWidth ? '100%' : '266px'};
@@ -21,22 +19,22 @@ const InputWithButton = ({ buttonText, onClick, fullWidth = false, ...props }: I
     <div css={containerStyle}>
       <input
         type="text"
-        value={value}
+        value={props.value}
         css={[inputStyle, inputSizeStyle]}
         onChange={(e) => {
           if (props.onChange) {
             props.onChange(e);
           }
-          setValue(e.target.value);
         }}
         {...props}
       />
       <button
+        disabled={props.value === ''}
         onClick={onClick}
         css={css`
           ${buttonStyle}
-          background:  ${value ? color.gray.gray090 : color.gray.gray020};
-          color: ${value ? color.gray.gray000 : color.gray.gray040};
+          background:  ${props.value === '' ? color.gray.gray020 : color.gray.gray090};
+          color: ${props.value === '' ? color.gray.gray040 : color.gray.gray000};
         `}
       >
         {buttonText}

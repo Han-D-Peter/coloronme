@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { BackwardOutline, Text, color } from '@design';
 
 type Props = {
-  image: string;
+  image?: string | null;
   showBackButton?: boolean;
 };
 
@@ -15,7 +15,7 @@ const ProductImage = ({ image, showBackButton = false }: Props) => {
 
   return (
     <div css={imageContainerStyle}>
-      <img src={image} alt="productImage" css={imgStyle} onClick={changeFullImage} />
+      <img src={image ?? '/images/defaultProduct.png'} alt="productImage" css={imgStyle} onClick={changeFullImage} />
       {showBackButton && (
         <div css={backButtonStyle} onClick={router.back}>
           <BackwardOutline width="20" height="20" color={color.gray.gray000} />
@@ -33,7 +33,7 @@ const ProductImage = ({ image, showBackButton = false }: Props) => {
 const imageContainerStyle = css`
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 56vh;
 `;
 
 const imgStyle = css`
