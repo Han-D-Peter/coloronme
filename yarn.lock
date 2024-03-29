@@ -6238,101 +6238,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiw/react-color-block@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-block@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-editable-input": 2.1.1
-    "@uiw/react-color-swatch": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: ce06599f177985e566ca2a6d0245890e80bedd9040dc8f7e1e7662111d85a99f27e1d73e8c68dd613e110187d3317fd5a2031ec75d8a497caee26a4e8ae00f22
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-chrome@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-chrome@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-alpha": 2.1.1
-    "@uiw/react-color-editable-input": 2.1.1
-    "@uiw/react-color-editable-input-hsla": 2.1.1
-    "@uiw/react-color-editable-input-rgba": 2.1.1
-    "@uiw/react-color-github": 2.1.1
-    "@uiw/react-color-hue": 2.1.1
-    "@uiw/react-color-saturation": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 894a2130324f2c36010192884e01f15199ef10cfcc5b26aaf3075b107112658c02b3f74b8b666fc7170c65241b0cb613de1d5c97b2d8099745ed2d171ef2b5a6
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-circle@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-circle@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-swatch": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 676ba9f608fff772257971d0c78d269b3c46edbff6ef5a4f7ea79c3a21667eb19cfa3afb4b38693253bb51d806831ebc2a9b587645a5e5216688347613c44aca
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-colorful@npm:2.1.1, @uiw/react-color-colorful@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-colorful@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-alpha": 2.1.1
-    "@uiw/react-color-hue": 2.1.1
-    "@uiw/react-color-saturation": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 7e2ba3eae5a262fe96cac95e870b966c27379f60f6502536c81b8d6ddb57023a3c9992917b6a547736787871c4dad7e050dd0d78937f2a693a2f13c10fa2551d
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-compact@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-compact@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-editable-input": 2.1.1
-    "@uiw/react-color-editable-input-rgba": 2.1.1
-    "@uiw/react-color-swatch": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: c24802c233539a977b78a2511d8378565fb43b8c1ecd62ff86c494b6d34190e79163dd65fb881976fa7df86bac33c242aefe36c665444b7b42db24b63dadacc3
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-editable-input-hsla@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-editable-input-hsla@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-editable-input-rgba": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: c3a721eb680d9d4795786bb5943b52dbee039136ab82b4bf18dab5565a154a7260dd11ce5d5439af6892812dde02dced94cf41a47021c00f8523c36f8ea45c55
-  languageName: node
-  linkType: hard
-
 "@uiw/react-color-editable-input-rgba@npm:2.1.1":
   version: 2.1.1
   resolution: "@uiw/react-color-editable-input-rgba@npm:2.1.1"
@@ -6358,20 +6263,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiw/react-color-github@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-github@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-swatch": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 8e29ddaf4e603ad4e2b84e63b328714699e45931d1e0fb5787f0a8ea16c973691ae2c5e66b68ab9b639da0d4e79453621fcd96cde228921f0434531a24063c92
-  languageName: node
-  linkType: hard
-
 "@uiw/react-color-hue@npm:2.1.1":
   version: 2.1.1
   resolution: "@uiw/react-color-hue@npm:2.1.1"
@@ -6383,33 +6274,6 @@ __metadata:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
   checksum: 7e76bbde85019bc1358b70094542089d492f2bb8d295f51294ed5175accc31f4ccd8f448930b3a0437750bb82f1318cb6ec5630acde11c39dd1e03e9e4f4a51f
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-material@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-material@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-editable-input": 2.1.1
-    "@uiw/react-color-editable-input-rgba": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 04bbaa24990ceb58ecdf9cf9d370bd90b09bb6c53c329c5d2d15ff5c550909a5f8d80e96098c11b45496fb09328c5b8fcbce62ee54bab8210981e1609c6b7082
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-name@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-name@npm:2.1.1"
-  dependencies:
-    colors-named: ^1.0.1
-    colors-named-hex: ^1.0.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-  checksum: 91994e6a1a61548bb25ddc0422c25056745d8aa309e311d8da9c555f9a1699b3aa7ddf1c17616091fd034c42fc9c2e4a1754d4015d5e1afe95d128da4862a7fc
   languageName: node
   linkType: hard
 
@@ -6427,21 +6291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiw/react-color-shade-slider@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-shade-slider@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-alpha": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 075c18d8249ec62aa9fa3488365ffa661393eb7c865557694be9782bdccb33cc7223dd26dc47c67a0765f586ccacebb6656791b761686020c411c2f802550beb
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-sketch@npm:2.1.1":
+"@uiw/react-color-sketch@npm:^2.1.1":
   version: 2.1.1
   resolution: "@uiw/react-color-sketch@npm:2.1.1"
   dependencies:
@@ -6460,20 +6310,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiw/react-color-slider@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-slider@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-alpha": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 29cf297969a59fe3cc532323ca8c25e620ba91fcfef6ff0e427460668cfef4741011325e404dcf3698881fec71a061e6fd257f505a9314448ce4166b59d52eac
-  languageName: node
-  linkType: hard
-
 "@uiw/react-color-swatch@npm:2.1.1":
   version: 2.1.1
   resolution: "@uiw/react-color-swatch@npm:2.1.1"
@@ -6484,52 +6320,6 @@ __metadata:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
   checksum: 44cb268a9670cad6a49493654a702fe9811d42d399b9b1f10737f60bf28273ca510ab9095f4162acdf9370e977dcb48f9bd15a1cbd165e8a8a9bfb08197e7d67
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color-wheel@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color-wheel@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-drag-event-interactive": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 80b39c641d828df4e0c87939bca356106b18f6104fd5c0f48a45e2bf6af72a8778186bdec7f3bb15b99d8cc3dd1e1fcce72eff94e2266dcc82299a2752b1747c
-  languageName: node
-  linkType: hard
-
-"@uiw/react-color@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@uiw/react-color@npm:2.1.1"
-  dependencies:
-    "@uiw/color-convert": 2.1.1
-    "@uiw/react-color-alpha": 2.1.1
-    "@uiw/react-color-block": 2.1.1
-    "@uiw/react-color-chrome": 2.1.1
-    "@uiw/react-color-circle": 2.1.1
-    "@uiw/react-color-colorful": 2.1.1
-    "@uiw/react-color-compact": 2.1.1
-    "@uiw/react-color-editable-input": 2.1.1
-    "@uiw/react-color-editable-input-hsla": 2.1.1
-    "@uiw/react-color-editable-input-rgba": 2.1.1
-    "@uiw/react-color-github": 2.1.1
-    "@uiw/react-color-hue": 2.1.1
-    "@uiw/react-color-material": 2.1.1
-    "@uiw/react-color-name": 2.1.1
-    "@uiw/react-color-saturation": 2.1.1
-    "@uiw/react-color-shade-slider": 2.1.1
-    "@uiw/react-color-sketch": 2.1.1
-    "@uiw/react-color-slider": 2.1.1
-    "@uiw/react-color-swatch": 2.1.1
-    "@uiw/react-color-wheel": 2.1.1
-  peerDependencies:
-    "@babel/runtime": ">=7.19.0"
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: 676771e218edb7844cfaecd3b0d0e5b21d775551664bb8367c9ac6aecc94899784a3b3fb4d662a34080cda931eaf9bf70ae4dcc644b4dcb4ae68145fb6228ef1
   languageName: node
   linkType: hard
 
@@ -8285,8 +8075,7 @@ __metadata:
     "@types/react-modal": ^3.16.3
     "@types/testing-library__jest-dom": ^6
     "@types/uuid": ^9
-    "@uiw/react-color": ^2.1.1
-    "@uiw/react-color-colorful": ^2.1.1
+    "@uiw/react-color-sketch": ^2.1.1
     axios: ^1.6.7
     color-thief-react: ^2.1.0
     eslint: 8.47.0
@@ -8316,20 +8105,6 @@ __metadata:
     typescript: ^5.1.6
   languageName: unknown
   linkType: soft
-
-"colors-named-hex@npm:^1.0.1":
-  version: 1.0.2
-  resolution: "colors-named-hex@npm:1.0.2"
-  checksum: 5080a07ae83f2448581c1baa4657d04c910255144a1e5b02835bfe21eb43a60dc3459e37d137781465c3e24c74e05ef49f8ce00a7fa22e657a2a389b28408b90
-  languageName: node
-  linkType: hard
-
-"colors-named@npm:^1.0.1":
-  version: 1.0.2
-  resolution: "colors-named@npm:1.0.2"
-  checksum: 11e71ed71ad233091945783fcd8bee137ad169e3129f7e402f32ae5d410c6cad152387d86e38c7fb1edf2f1c081716ccb333739b6e4a5d3b71628140a49dcc62
-  languageName: node
-  linkType: hard
 
 "colorthief@npm:2.3.2":
   version: 2.3.2

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
-import { Sketch } from '@uiw/react-color';
+import Sketch from '@uiw/react-color-sketch';
 import { useColor } from 'color-thief-react';
 
 import { Text, color, Question, Button, PlusOutline } from '@design';
@@ -211,7 +211,7 @@ const ProductRegisterPage = () => {
           <div css={colorBoxContainer}>
             {isShownColorPicker && (
               <div css={colorPickerStyle}>
-                <Sketch editableDisable={false} color="#83aee6" presetColors={['#b2a291', '#28292b']} />
+                <Sketch color="#83aee6" presetColors={['#b2a291', '#28292b']} />
               </div>
             )}
             <SelectColorButton color={color.gray.gray010} onClick={onToggleColorPicker}>
