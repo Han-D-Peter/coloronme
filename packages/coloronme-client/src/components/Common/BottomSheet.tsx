@@ -8,17 +8,18 @@ interface BottomSheetProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   close: () => void;
   children?: ReactNode;
 }
+const SheetContainer = Sheet as any;
 
 const BottomSheet = ({ isOpen, close, children }: BottomSheetProps) => {
   return (
-    <Sheet snapPoints={[500]} isOpen={isOpen} onClose={close} css={sheetStyle}>
+    <Sheet snapPoints={[500]} isOpen={isOpen} onClose={close} css={sheetStyle} disableScrollLocking={true}>
       <Sheet.Container>
         <Sheet.Header />
         <Sheet.Content css={contentStyle}>
           <Sheet.Scroller>{children}</Sheet.Scroller>
         </Sheet.Content>
       </Sheet.Container>
-      <Sheet.Backdrop onTap={close} />
+      <SheetContainer.Backdrop onClick={close} />
     </Sheet>
   );
 };
