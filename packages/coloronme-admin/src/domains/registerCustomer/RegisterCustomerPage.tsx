@@ -1,64 +1,62 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from '@emotion/react';
-import { Button, Modal, Text, color, Dropdown } from '@design';
+import { Button, Modal, Text, color, Dropdown, ColorName } from '@design';
 import { useBoolean } from '@libs';
 import Canvas from '../shared/component/Canvas';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useMutateUser, useUserByQR } from '../shared/hooks/queryhooks/common.query';
 import { PERSONAL_COLOR_MAPPING } from '../shared/constants/constants';
-
-function convertIdFromStringName(keyword: string) {
-  let index = 1;
-
-  Object.entries(PERSONAL_COLOR_MAPPING).forEach(([key, value]) => {
-    if (keyword === value.string) {
-      index = Number(key);
-    }
-  });
-  return index;
-}
+import { 퍼스널컬러이름으로부터_아이디추출하기 } from '../shared/utils/utils';
+import { Client } from '../shared/hooks/queryhooks/common.typs';
+import { NetworkResult } from '../shared/api/client';
 
 export default function RegisterCustomerPage() {
   const router = useRouter();
   const qrId = router.query.id! as string;
   const { mutate } = useMutateUser();
 
-  const { data, isLoading } = useUserByQR(qrId);
+  const { data } = useUserByQR(qrId);
   const [isOpen, open, close] = useBoolean(false);
   const [canvasObj, setCanvasObj] = useState<string>('');
 
   const [personalId, setPersonalId] = useState(1);
   const [diagnosisText, setDiagnosisText] = useState('');
 
-  useEffect(() => {
-    if (data?.data) {
-      setPersonalId(data?.data?.personalColorId);
-      setCanvasObj(data?.data?.consultedDrawing);
-      setDiagnosisText(data?.data?.consultedContent);
-    }
-  }, [data]);
-
-  const onSubmit = () => {
-    if (!data?.data) return;
-
-    mutate(
-      {
+  const 수정할_정보 = data?.data
+    ? {
         userId: data.data.memberId.toString(),
         personalColorId: personalId,
         consultedContent: diagnosisText,
         consultedDrawing: canvasObj,
         consultedDate: new Date().toISOString(),
+      }
+    : null;
+
+  function 데이터초기화(data: NetworkResult<Client> | undefined) {
+    return () => {
+      if (data?.data) {
+        setPersonalId(data.data.personalColorId);
+        setCanvasObj(data.data.consultedDrawing);
+        setDiagnosisText(data.data.consultedContent);
+      }
+    };
+  }
+
+  const onSubmit = () => {
+    if (!수정할_정보) return;
+
+    mutate(수정할_정보, {
+      onSuccess: () => {
+        console.log('success');
       },
-      {
-        onSuccess: () => {
-          console.log('success');
-        },
-      },
-    );
+    });
   };
 
-  if (isLoading || !data?.data) return <div>...Loading</div>;
+  useEffect(데이터초기화(data), [data]);
+
+  if (!data?.data) return <div>Error...</div>;
+
   return (
     <section
       css={css`
@@ -149,7 +147,7 @@ export default function RegisterCustomerPage() {
             value={PERSONAL_COLOR_MAPPING[data.data.personalColorId as keyof typeof PERSONAL_COLOR_MAPPING].string}
             placeholder="타입을 선택해 주세요"
             onChange={(value) => {
-              const changeTargetId = convertIdFromStringName(value);
+              const changeTargetId = 퍼스널컬러이름으로부터_아이디추출하기(value as ColorName);
               setPersonalId(changeTargetId);
             }}
           >

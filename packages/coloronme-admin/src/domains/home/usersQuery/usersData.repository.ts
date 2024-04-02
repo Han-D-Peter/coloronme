@@ -6,7 +6,7 @@ import { ColorData } from './usersData.type';
 interface UsersDataQueryArgs {
   from?: string;
   to?: string;
-  top: number;
+  top?: number;
   type: 'color' | 'channel' | 'gender' | 'age' | 'interval' | 'month';
   principal?: 'day' | 'time';
 }

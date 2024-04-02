@@ -1,35 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from '@emotion/react';
-import { Text, TablerPhotoSensorOutline, Button, ForwardOutline, colorLibrary, ColorLibrary } from '@design';
-import ProfileCard from '../shared/component/element/ProfileCard';
+import { Text, TablerPhotoSensorOutline, Button, colorLibrary } from '@design';
 import { OnResultFunction, QrReader } from 'react-qr-reader';
-import { ComponentType, useState } from 'react';
-import { useRouter } from 'next/router';
-import { relative } from 'path';
-import leftArrow from '../../../public/icons/vector/leftArrow.svg';
+import { useState } from 'react';
 import Image from 'next/image';
-import { useUserByQR, useUsers } from '../shared/hooks/queryhooks/common.query';
+import { useRouter } from 'next/router';
+import ProfileCard from '../shared/component/element/ProfileCard';
+import leftArrow from '../../../public/icons/vector/leftArrow.svg';
+import { useUsers } from '../shared/hooks/queryhooks/common.query';
 import convertDateToSimple from '../shared/utils/convertDateToSimple';
 import convertColorNumberToCode from '../shared/utils/convertColorNumberToCode';
+import CustomCountDescription from './CustomCountDescription';
 
 export default function RegisterPage() {
   const { data } = useUsers();
-
   const router = useRouter();
-  const [selected, setSelected] = useState('environment');
   const [startScan, setStartScan] = useState(false);
-  const [loadingScan, setLoadingScan] = useState(false);
-  const [qr, setQR] = useState('');
-  const colorKeys = Object.keys(colorLibrary) as (keyof ColorLibrary)[];
 
   const handleScan: OnResultFunction = async (result, error, codeReader) => {
-    setLoadingScan(true);
     const qrText = result?.getText();
     if (qrText && qrText !== '') {
       console.log(`loaded >>>`, qrText);
-      setQR(qrText);
       router.push(`/register/${qrText}`);
-      // setPrecScan(scanData);
     }
   };
   return (
@@ -39,64 +31,7 @@ export default function RegisterPage() {
           padding: 60px 13px 0 13px;
         `}
       >
-        <div>
-          <Text as="title" size="sm" weight="bold">
-            고객등록
-          </Text>
-        </div>
-        <div
-          css={css`
-            margin-top: 44px;
-          `}
-        >
-          <Text as="title" size="sm" weight="bold">
-            Today
-          </Text>
-        </div>
-        <div
-          css={css`
-            margin-top: 19px;
-          `}
-        >
-          <Text
-            as="body"
-            size="md"
-            style={css`
-              margin-bottom: 0;
-            `}
-          >
-            컬러온미를 통해
-          </Text>
-          <div
-            css={css`
-              display: flex;
-              align-items: center;
-              margin-bottom: 26px;
-            `}
-          >
-            <Text
-              as="body"
-              size="md"
-              weight="bold"
-              style={css`
-                margin: 0;
-                padding: 0;
-              `}
-            >
-              {data?.data ? `${data.data.length}명` : '0명'}
-            </Text>
-            <Text
-              as="body"
-              size="md"
-              style={css`
-                margin: 0;
-                padding: 0;
-              `}
-            >
-              의 고객에게 진단 결과를 공유했어요
-            </Text>
-          </div>
-        </div>
+        <CustomCountDescription customCount={data?.data ? data.data.length : 0} />
         <div>
           {data?.data?.map((user) => {
             return (

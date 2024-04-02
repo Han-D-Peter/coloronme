@@ -6,21 +6,21 @@ interface Period {
   onClick: (date: { start: string; end: string }) => void;
 }
 
+const periodBoxStyle = css`
+  display: flex;
+  margin-top: 46px;
+`;
+
+const periodStyle = css`
+  margin-right: 8px;
+  width: 50px;
+  margin-top: 6px;
+`;
+
 export default function Period({ onClick }: Period) {
   return (
-    <div
-      css={css`
-        display: flex;
-        margin-top: 46px;
-      `}
-    >
-      <div
-        css={css`
-          margin-right: 8px;
-          width: 50px;
-          margin-top: 6px;
-        `}
-      >
+    <div css={periodBoxStyle}>
+      <div css={periodStyle}>
         <Text as="body" size="sm" weight="bold">
           기간설정
         </Text>

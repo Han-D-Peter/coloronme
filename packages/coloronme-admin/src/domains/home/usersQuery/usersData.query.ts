@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import usersDataRepository from './usersData.repository';
-import { AgeData, ChannelData, ColorData, GenderData, IntervalDataByTime } from './usersData.type';
+import { AgeData, ChannelData, ColorData, GenderData, IntervalDataByTime, PeriodDataByTime } from './usersData.type';
 
 export const useColorData = ({ from, to }: { from: string; to: string }) => {
   return useQuery(
@@ -50,5 +50,13 @@ export const useIntervalData = ({ from, to }: { from: string; to: string }) => {
     {
       enabled: !from || !to ? false : true,
     },
+  );
+};
+
+export const usePeriodData = () => {
+  return useQuery(
+    ['periodData'],
+    () => usersDataRepository.getColorData<PeriodDataByTime>({ type: 'month', top: 6 }),
+    {},
   );
 };

@@ -33,6 +33,11 @@ export type ColorData = { name: ColorCode | 'ETC'; count: number; percentage: nu
 export type ChannelData = { [key: string]: number };
 export type AgeData = { [key: string]: number };
 export type IntervalDataByTime = { id: Time; data: { x: Day; y: number }[] }[];
+export type PeriodDataByTime = {
+  period: [number, number, number, number, number, number];
+  increase_than_right_before: number;
+  fullperiod: number;
+};
 export type GenderData = {
   [key in 'male' | 'female' | 'unknown']: number;
 };

@@ -5,6 +5,7 @@ import ChannelDataGraph from './ChannelDataGraph';
 import GenderPieGraph from './GenderPieGraph';
 import AgePieGraph from './AgePieGraph';
 import DayHeatMap from './DayHeatMap';
+import TrendPeriod from './TrendPeriod';
 
 interface Result {
   date: { start: string; end: string };
@@ -33,6 +34,7 @@ export default function Result({ date }: Result) {
           '진단 결과 공유 현황': (
             <>
               <DayHeatMap date={date} />
+              <TrendPeriod date={date} />
             </>
           ),
         }}

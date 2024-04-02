@@ -5,8 +5,35 @@ import { useLogin } from '../shared/hooks/queryhooks/common.query';
 import { Button } from '@design';
 import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/router';
+import { checkExistedValueOneOfThem } from '../shared/utils/utils';
 
 interface LoginPageProps {}
+
+const loginPageStyle = css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  background: linear-gradient(134deg, #c4a1d7 9.81%, #86b3cc 39.06%, #8cbbd4 45.31%, #fff3ea 85.94%, #fff387 100%);
+`;
+
+const inputStyle = css`
+  width: 224px;
+  height: 10px;
+  border-radius: 30px;
+  outline: transparent;
+  border: transparent;
+  padding: 20px 28px 20px 28px;
+  ::placeholder {
+    color: #8e9294;
+  }
+`;
 
 export default function LoginPage() {
   const [email, setEmail] = useState('peter@naver.com');
@@ -23,8 +50,7 @@ export default function LoginPage() {
   const { mutate } = useLogin();
 
   const submit = () => {
-    if (!email || !password) {
-      alert('정보 누락');
+    if (checkExistedValueOneOfThem([email, password], '정보 누락')) {
       return;
     }
     mutate(
@@ -45,28 +71,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main
-      css={css`
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-
-        background: linear-gradient(
-          134deg,
-          #c4a1d7 9.81%,
-          #86b3cc 39.06%,
-          #8cbbd4 45.31%,
-          #fff3ea 85.94%,
-          #fff387 100%
-        );
-      `}
-    >
+    <main css={loginPageStyle}>
       <div
         css={css`
           margin-bottom: 72px;
@@ -95,15 +100,3 @@ export default function LoginPage() {
     </main>
   );
 }
-
-const inputStyle = css`
-  width: 224px;
-  height: 10px;
-  border-radius: 30px;
-  outline: transparent;
-  border: transparent;
-  padding: 20px 28px 20px 28px;
-  ::placeholder {
-    color: #8e9294;
-  }
-`;
