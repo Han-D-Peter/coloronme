@@ -49,7 +49,7 @@ export default function TextWithDescription({ children, description }: TextWithD
       <div
         onMouseEnter={() => setState(true)}
         onMouseLeave={() => setState(false)}
-        onClick={() => setState(true)}
+        onClick={() => setState((prev) => !prev)}
         css={css`
           position: relative;
           display: flex;
