@@ -33,10 +33,8 @@ const gridContainerStyle = css`
   display: grid;
   gap: 10px;
   width: 100%;
-  height: 100%;
   grid-template-columns: repeat(3, 1fr);
   padding: 0 5%;
-  overflow-y: auto;
 
   @media (max-width: 451px) {
     grid-template-columns: repeat(2, 1fr);
