@@ -19,7 +19,7 @@ const ProductList = ({ data, targetRef }: Props) => {
               imageUrl={item.imageUrl}
               name={item.name}
               platform={item.platform}
-              isLiked={item.isLiked}
+              isMyLike={item.isMyLike}
             />
           </div>
         ));
@@ -53,6 +53,7 @@ const productItemStyle = css`
 
 const targetStyle = css`
   height: 1px;
+  z-index: 1000;
 `;
 
 export default ProductList;

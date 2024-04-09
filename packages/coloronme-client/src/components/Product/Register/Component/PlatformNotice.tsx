@@ -5,7 +5,7 @@ const PlatformNotice = () => {
   return (
     <div css={textContainer}>
       <Text as="caption" size="md">
-        아래에 해당하는 플랫폼이 판매처로 적용될 경우, 실제 쇼핑몰을 추가할 수 있어요
+        아래에 해당하는 플랫폼의 링크를 등록하면 판매처가 자동으로 추가돼요
       </Text>
 
       <Text as="caption" size="md" weight="bold">

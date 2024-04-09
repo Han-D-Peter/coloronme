@@ -2,12 +2,15 @@ import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { Heart, HeartOutline, Text, color } from '@design';
 import { Product } from '@/src/query/product/product.model';
+import { usePostProductLike } from '@/src/query/product/product.queries';
 
-const ProductItem = ({ id, imageUrl, name, platform, isLiked }: Product) => {
+const ProductItem = ({ id, imageUrl, name, platform, isMyLike }: Product) => {
   const router = useRouter();
 
+  const { mutate: postProductLikeMutate } = usePostProductLike();
+
   const toggleLike = () => {
-    console.log('like');
+    postProductLikeMutate(id);
   };
 
   const navigateToProductDetail = () => {
@@ -20,7 +23,7 @@ const ProductItem = ({ id, imageUrl, name, platform, isLiked }: Product) => {
         <img src={imageUrl} alt={name} css={imageStyle} onClick={navigateToProductDetail} />
 
         <div css={heartIconStyle} onClick={toggleLike}>
-          {isLiked ? (
+          {isMyLike ? (
             <Heart width="20" height="20" color={color.red.red200} />
           ) : (
             <HeartOutline width="20" height="20" color={color.gray.gray000} />
