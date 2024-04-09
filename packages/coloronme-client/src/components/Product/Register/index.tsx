@@ -17,7 +17,6 @@ import SelectableButton from './Component/SelectableButton';
 import SelectColorButton from '../Component/SelectColorButton';
 import CenteredLayout from '../../Common/Layout/CenteredLayout';
 import LabeledInputButton from '../Component/LabeledInputButton';
-//https://uiwjs.github.io/npm-unpkg/#/pkg/@uiw/react-color-colorful/file/README.md
 
 type ProductType = '아우터' | '상의' | '하의' | '원피스/세트' | '주얼리' | '패션소품';
 const productTypes: ProductType[] = ['아우터', '상의', '하의', '원피스/세트', '주얼리', '패션소품'];
@@ -64,12 +63,10 @@ const ProductRegisterPage = () => {
         },
         onError(error) {
           setValidateUrl(false);
-          if (error?.response?.status === 500) {
+          if (error?.response?.status === 500 || error?.response?.status === 500) {
             return setUrlWarnText('*유효하지 않은 링크입니다.');
           }
-          if (error?.response?.status === 404) {
-            return setUrlWarnText('*유효하지 않은 링크입니다.');
-          }
+
           if (error?.response?.status === 403) {
             return setUrlWarnText('*안전하지 않은 링크입니다.');
           }

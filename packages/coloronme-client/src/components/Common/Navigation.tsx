@@ -1,12 +1,7 @@
 import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 
-import { Home } from '@design';
-import { HomeOutline } from '@design';
-import { Person } from '@design';
-import { PersonOutline } from '@design';
-import { ShoppingCart } from '@design';
-import { ShoppingCartOutline } from '@design';
+import { Home, HomeOutline, Person, PersonOutline, ShoppingCart, ShoppingCartOutline } from '@design';
 
 import IconWithText from './IconWithText';
 import GhostButton from './Button/GhostButton';

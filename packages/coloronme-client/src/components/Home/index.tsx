@@ -10,6 +10,7 @@ import { PERSONAL_COLOR_MAPPING } from '@/src/constants/constants';
 import { useBooleanState } from '@/src/hooks/useBooleanState';
 import { useGetUser } from '@/src/query/user/user.queries';
 import { parseRGB } from '@/src/utils/parseRGB';
+import useSpinWheelSize from '@/src/hooks/useSpinWheelSize';
 
 import Loading from '../Common/Loading';
 import ColorModal from './components/ColorModal';
@@ -18,7 +19,6 @@ import BottomSheet from '../Common/BottomSheet';
 import ColorOptions from './components/ColorOptions';
 import DefaultLayout from '../Common/Layout/DefaultLayout';
 import MainLogo from '../Common/MainLogo';
-import useSpinWheelSize from '@/src/hooks/useSpinWheelSize';
 
 const HomePage = () => {
   const spinWheelSize = useSpinWheelSize();
