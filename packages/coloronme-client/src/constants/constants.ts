@@ -137,11 +137,12 @@ export const PERSONAL_COLOR_MAPPING: {
   },
 };
 
-type ProductCategory = '아우터' | '상의' | '하의' | '원피스/세트' | '주얼리' | '패션소품';
+export const PERSONAL_COLOR_ENTRIES = Object.entries(PERSONAL_COLOR_MAPPING);
+
+export type ProductCategory = '아우터' | '상의' | '하의' | '원피스/세트' | '주얼리' | '패션소품';
 export const PRODUCT_CATEGORY: ProductCategory[] = ['아우터', '상의', '하의', '원피스/세트', '주얼리', '패션소품'];
 
 export const CATEGORY: Record<Category, ProductCategory> = {
-  Accessories: '패션소품',
   Outer: '아우터',
   Top: '상의',
   Dress: '원피스/세트',
@@ -149,3 +150,16 @@ export const CATEGORY: Record<Category, ProductCategory> = {
   Jewelry: '주얼리',
   Acc: '패션소품',
 };
+
+export const CATEGORY_ENTRIES = Object.entries(CATEGORY) as [Category, ProductCategory][];
+
+type SortOptions = Record<string, string>;
+
+export const PRODUCT_SORT_ORDER: SortOptions = {
+  newest: '최신순',
+  popular: '인기순',
+  oldest: '오래된순',
+};
+
+export const PRODUCT_SORT_VALUE = Object.values(PRODUCT_SORT_ORDER);
+export const PRODUCT_SORT_ENTRIES = Object.entries(PRODUCT_SORT_ORDER);

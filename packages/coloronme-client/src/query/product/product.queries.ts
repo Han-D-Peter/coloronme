@@ -1,16 +1,31 @@
-import { UseMutationResult, useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import ProductRepository from './product.repository';
 import { OGInfo, ProductDetail } from './product.model';
-import { AxiosError } from 'axios';
 
-export const useInfiniteProducts = () => {
+type GetProduct = {
+  keyword?: string;
+  personalColor?: string;
+  category?: string;
+  sort?: string;
+};
+
+export const useInfiniteProducts = ({ keyword, personalColor, category, sort }: GetProduct) => {
   return useInfiniteQuery({
-    queryKey: ['projects'],
+    queryKey: ['projects', keyword, personalColor, category, sort],
     queryFn: ({ pageParam = { page: 1, lastItemId: 0 } }) =>
-      ProductRepository.getProducts(pageParam.page, pageParam.lastItemId),
+      ProductRepository.getProducts({
+        page: pageParam.page,
+        productId: pageParam.lastItemId,
+        keyword,
+        personalColor,
+        category,
+        sort,
+      }),
     initialPageParam: { page: 1, lastItemId: 0 },
     getNextPageParam: (lastPage) => {
-      if (lastPage.pagination.currentPage === lastPage.pagination.totalPages) return undefined;
+      if (lastPage.products.length === 0 || lastPage.pagination.currentPage === lastPage.pagination.totalPages)
+        return undefined;
 
       const lastItemId = lastPage.products?.[lastPage.products.length - 1]?.id;
       return { page: lastPage.pagination.currentPage + 1, lastItemId };
@@ -46,5 +61,11 @@ export const usePostProduct = () => {
   return useMutation({
     mutationFn: ({ name, color, platform, sellUrl, imageUrl, personalColor, category }: PostProduct) =>
       ProductRepository.postProduct({ name, color, platform, sellUrl, imageUrl, personalColor, category }),
+  });
+};
+
+export const usePostProductLike = () => {
+  return useMutation({
+    mutationFn: (id: number) => ProductRepository.postProductLike(id),
   });
 };

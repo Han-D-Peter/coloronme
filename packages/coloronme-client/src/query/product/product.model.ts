@@ -10,7 +10,7 @@ export type Product = {
   name: string;
   platform: string;
   imageUrl: string;
-  isLiked: boolean;
+  isMyLike: boolean;
 };
 
 export interface Products {
@@ -18,7 +18,7 @@ export interface Products {
   products: Product[];
 }
 
-export type Category = 'Accessories' | 'Outer' | 'Top' | 'Dress' | 'Bottom' | 'Jewelry' | 'Acc';
+export type Category = 'Outer' | 'Top' | 'Dress' | 'Bottom' | 'Jewelry' | 'Acc';
 
 export type ProductDetail = {
   id: number;
