@@ -29,6 +29,7 @@ const SelectableButton = ({ id, isSelected, children, onClick }: Props) => {
 const CustomButtonStyle = css`
   width: fit-content;
   padding: 0 12px;
+  cursor: pointer;
 `;
 
 export default SelectableButton;

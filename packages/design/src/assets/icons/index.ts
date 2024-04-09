@@ -44,3 +44,4 @@ export * from './BackwardOutline';
 export * from './Kakao';
 export * from './Question';
 export * from './PlusOutline';
+export * from './FilterIconFill';
