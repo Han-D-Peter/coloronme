@@ -4,14 +4,15 @@ import { color } from '../../../src/constants';
 
 interface RemovableTagProps {
   children: string;
-  onClose?: () => void;
+  id: string | number;
+  onClick?: (id: string | number) => void;
 }
 
-export function RemovableTag({ children, onClose }: RemovableTagProps) {
+export function RemovableTag({ children, id, onClick }: RemovableTagProps) {
   return (
     <div css={containerStyle}>
       <div css={tagFontStyle}>{children}</div>
-      <div css={closeButtonStyle} onClick={onClose}>
+      <div css={closeButtonStyle} onClick={() => onClick?.(id)}>
         <CloseOutline width="12" height="12" color="#C6C6C6" />
       </div>
     </div>
@@ -20,8 +21,8 @@ export function RemovableTag({ children, onClose }: RemovableTagProps) {
 
 const containerStyle = css`
   height: 26px;
-  width: fit-content;
-
+  width: auto;
+  padding: 0 12px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,18 +37,17 @@ const containerStyle = css`
 
 const tagFontStyle = css`
   color: ${color.gray.gray040};
-
   font-family: Pretendard;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: 15px;
-
-  padding-left: 18px;
+  white-space: nowrap;
 `;
 
 const closeButtonStyle = css`
-  padding-right: 17px;
+  display: flex;
+  align-items: center;
   :hover {
     cursor: pointer;
   }

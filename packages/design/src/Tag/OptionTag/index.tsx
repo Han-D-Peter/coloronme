@@ -5,11 +5,11 @@ import { Downward } from '../../../src/assets/icons';
 
 interface OptionTagProps {
   children: string;
-  selected: boolean;
+  selected?: boolean;
   onClick?: () => void;
 }
 
-export function OptionTag({ children, onClick, selected }: OptionTagProps) {
+export function OptionTag({ children, onClick, selected = false }: OptionTagProps) {
   const activeColor = selected ? color.gray.gray100 : color.gray.gray030;
 
   const selectedStyle = useMemo(() => {
