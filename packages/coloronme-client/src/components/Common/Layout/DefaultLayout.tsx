@@ -10,10 +10,11 @@ type DefaultLayoutProps = HTMLAttributes<HTMLDivElement> & {
   children: ReactNode | ReactNode[];
   centered?: boolean;
   requireAuth?: boolean;
+  floatingSection?: ReactNode;
 };
 
 const DefaultLayout = (
-  { isLogined, header, children, centered = false, requireAuth = true, ...args }: DefaultLayoutProps,
+  { isLogined, header, children, centered = false, requireAuth = true, floatingSection, ...args }: DefaultLayoutProps,
   ref: LegacyRef<HTMLDivElement>,
 ) => {
   const { isLoading, verified } = useAuth();
@@ -44,6 +45,7 @@ const DefaultLayout = (
       {header && <header>{header}</header>}
       <main css={[layoutMainStyle]}>{children}</main>
       <div css={navigationContainer}>
+        {floatingSection && <div css={floatingSectionStyle}>{floatingSection}</div>}
         <Navigation />
       </div>
     </div>
@@ -59,6 +61,12 @@ const mainContainer = css`
 const navigationContainer = css`
   position: relative;
   z-index: 1;
+`;
+
+const floatingSectionStyle = css`
+  position: absolute;
+  top: -63px;
+  right: 12px;
 `;
 
 export default forwardRef(DefaultLayout);
