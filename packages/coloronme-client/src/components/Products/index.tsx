@@ -1,22 +1,42 @@
-import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { css } from '@emotion/react';
 
-import { Button } from '@design';
-
+import { useUpdateQueryParameters } from '@/src/hooks/useUpdateQueryParameters';
+import { parseFilterQueryParams } from '@/src/utils/parseFilterQueryParams';
 import { useInfiniteProducts } from '@/src/query/product/product.queries';
+import { useBooleanState } from '@/src/hooks/useBooleanState';
+import { Category } from '@/src/query/product/product.model';
 import useIntersect from '@/src/hooks/useIntersect';
 import MainHeader from '../Home/components/MainHeader';
-import DefaultLayout from '../Common/Layout/DefaultLayout';
 import ProductList from './component/ProductList';
+import DefaultLayout from '../Common/Layout/DefaultLayout';
+import FilterOptions from './component/FilterOptions';
+import FilterForm from './component/FilterForm';
+import SearchForm from './component/SearchForm';
+import RegisterButton from './component/RegisterButton';
+
+export type FilterQueryParams = {
+  keyword?: string;
+  personalColor?: string | string[];
+  category?: Category | Category[];
+  sort?: string;
+};
+
+export type ParsedFilterQueryParams = {
+  keyword?: string;
+  personalColor?: string[];
+  category?: Category[];
+  sort?: string;
+};
 
 const ProductsPage = () => {
   const router = useRouter();
+  const { query } = router;
 
-  const registerProduct = () => {
-    router.push('/product/register');
-  };
+  const filterQueryParams: ParsedFilterQueryParams = parseFilterQueryParams(query);
+  const { keyword, personalColor, category, sort } = filterQueryParams;
 
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteProducts();
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteProducts(query);
 
   const targetRef = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);
@@ -25,24 +45,43 @@ const ProductsPage = () => {
     }
   });
 
+  const [isBottomSheetShown, onBottomSheetOpen, onBottomSheetClose] = useBooleanState(false);
+
+  const updateQueryParameters = useUpdateQueryParameters();
+
+  const filterSubmit = (filter: FilterQueryParams) => {
+    onBottomSheetClose();
+    updateQueryParameters(filter);
+  };
+
   return (
-    <DefaultLayout header={<MainHeader isToggleActive={false} />}>
-      {data && <ProductList data={data?.pages} targetRef={targetRef} />}
-      <div css={registerButtonStyle}>
-        <Button size="md" onClick={registerProduct}>
-          상품 등록
-        </Button>
+    <DefaultLayout header={<MainHeader isToggleActive={false} />} floatingSection={<RegisterButton />}>
+      <div css={mainContainer}>
+        <SearchForm initialValue={keyword} updateQuery={updateQueryParameters} />
+
+        <FilterOptions
+          onOpen={onBottomSheetOpen}
+          updateQuery={updateQueryParameters}
+          personalColor={personalColor}
+          category={category}
+          sort={sort}
+        />
+
+        {data && <ProductList data={data?.pages} targetRef={targetRef} />}
       </div>
+
+      {isBottomSheetShown && (
+        <FilterForm initialValues={filterQueryParams} isOpen={isBottomSheetShown} onSubmit={filterSubmit} />
+      )}
     </DefaultLayout>
   );
 };
 
-const registerButtonStyle = css`
-  position: fixed;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+const mainContainer = css`
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
 `;
 
 export default ProductsPage;
