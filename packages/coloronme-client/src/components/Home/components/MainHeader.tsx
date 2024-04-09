@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 
@@ -12,6 +13,8 @@ interface MainHeaderProps {
 }
 
 const MainHeader = ({ isToggleActive = true }: MainHeaderProps) => {
+  const router = useRouter();
+
   const [personalColorMode, setPersonalColorMode] = usePersonalColorMode();
   const isChecked = personalColorMode === 'worst';
 
@@ -28,11 +31,22 @@ const MainHeader = ({ isToggleActive = true }: MainHeaderProps) => {
 
   return (
     <div css={headerContainer}>
-      <Image src="/images/subLogo.png" alt="logo" width={160} height={37} />
+      <Image
+        src="/images/subLogo.png"
+        alt="logo"
+        width={160}
+        height={37}
+        css={logoStyle}
+        onClick={() => router.push('/')}
+      />
       {isToggleActive && <Toggle checked={isChecked} onChange={toggleColor} />}
     </div>
   );
 };
+
+const logoStyle = css`
+  cursor: pointer;
+`;
 
 const headerContainer = css`
   height: 63px;
