@@ -45,3 +45,5 @@ export * from './Kakao';
 export * from './Question';
 export * from './PlusOutline';
 export * from './FilterIconFill';
+export * from './SirenIconOutline';
+export * from './MoreVerticalOutline';
