@@ -3,7 +3,7 @@ import { CustomSVGProps } from '.';
 export function MoreVerticalOutline({ width, height, color }: CustomSVGProps) {
   return (
     <svg width={width} height={height} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_1863_3444)">
+      <g clipPath="url(#clip0_1863_3444)">
         <path
           d="M10 11.6666C10.9205 11.6666 11.6667 10.9205 11.6667 9.99998C11.6667 9.07951 10.9205 8.33331 10 8.33331C9.07953 8.33331 8.33333 9.07951 8.33333 9.99998C8.33333 10.9205 9.07953 11.6666 10 11.6666Z"
           fill={color}
