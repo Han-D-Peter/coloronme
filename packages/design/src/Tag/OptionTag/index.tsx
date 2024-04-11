@@ -1,15 +1,16 @@
 import { useMemo } from 'react';
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { color } from '../../../src/constants';
 import { Downward } from '../../../src/assets/icons';
 
 interface OptionTagProps {
-  children: string;
+  children: React.ReactNode;
   selected?: boolean;
   onClick?: () => void;
+  style?: SerializedStyles;
 }
 
-export function OptionTag({ children, onClick, selected = false }: OptionTagProps) {
+export function OptionTag({ children, onClick, selected = false, style }: OptionTagProps) {
   const activeColor = selected ? color.gray.gray100 : color.gray.gray030;
 
   const selectedStyle = useMemo(() => {
@@ -20,23 +21,23 @@ export function OptionTag({ children, onClick, selected = false }: OptionTagProp
   }, [selected]);
 
   return (
-    <div css={[containerStyle, selectedStyle]} onClick={onClick}>
+    <div css={[containerStyle, selectedStyle, style]} onClick={onClick}>
       <div css={tagFontStyle}>{children}</div>
-      <div css={iconButtonStyle}>
-        <Downward width="15" height="12" color={activeColor} />
-      </div>
+      <Downward width="15" height="12" color={activeColor} />
     </div>
   );
 }
 
 const containerStyle = css`
+  padding: 0 16px;
+
   height: 32px;
   width: fit-content;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 9px;
+  gap: 3px;
 
   background: ${color.gray.gray000};
   border-radius: 30px;
@@ -52,10 +53,4 @@ const tagFontStyle = css`
   font-style: normal;
   font-weight: 700;
   line-height: 18px;
-
-  padding-left: 16px;
-`;
-
-const iconButtonStyle = css`
-  padding-right: 15px;
 `;

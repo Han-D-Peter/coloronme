@@ -45,10 +45,14 @@ const FilterOptions = ({ onOpen, updateQuery, personalColor, category, sort }: P
     <div css={innerContainer}>
       <div css={filterContainer}>
         <div css={optionTagContainer}>
-          <OptionTag selected={true} onClick={onOpen}>
+          <OptionTag selected={personalColor && personalColor.length > 0} onClick={onOpen}>
             퍼스널 컬러
+            <span css={optionTagSelectedStyle}>{personalColor?.length ? `${personalColor?.length}` : ''}</span>
           </OptionTag>
-          <OptionTag onClick={onOpen}>상품 유형</OptionTag>
+          <OptionTag selected={category && category.length > 0} onClick={onOpen}>
+            상품 유형
+            <span css={optionTagSelectedStyle}>{category?.length ? `${category?.length}` : ''}</span>
+          </OptionTag>
         </div>
 
         <div ref={tabContainerRef} onClick={onToggleTab} css={sortTabContainer}>
@@ -102,6 +106,12 @@ const filterContainer = css`
 const optionTagContainer = css`
   display: flex;
   gap: 10px;
+`;
+
+const optionTagSelectedStyle = css`
+  min-width: 10px;
+  display: inline-block;
+  text-align: right;
 `;
 
 const removableTagContainer = css`

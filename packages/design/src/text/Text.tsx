@@ -1,12 +1,12 @@
 import { SerializedStyles, css } from '@emotion/react';
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { TypoScale, TypoType, TypoWeight, fontSize } from '../constants/size';
 
 // type TypoTitleScale = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 interface TextBaseType {
   weight?: TypoWeight;
-  children: string;
+  children?: ReactNode;
   style?: SerializedStyles;
 }
 interface TextTitle extends TextBaseType {
