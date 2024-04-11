@@ -59,7 +59,7 @@ class ProductRepository {
   }
 
   async postProductLike(id: number) {
-    return client.post(`product/${id}`);
+    return client.post(`likes/product/${id}`);
   }
 }
 

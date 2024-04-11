@@ -5,10 +5,11 @@ import { Heart, HeartOutline, Text, color } from '@design';
 type Props = {
   isLike: boolean;
   count: number;
+  onClick?: () => void;
 };
 
-const LikeIndicator = ({ isLike, count }: Props) => (
-  <div css={likeIconContainer}>
+const LikeIndicator = ({ isLike, count, onClick }: Props) => (
+  <div css={likeIconContainer} onClick={onClick}>
     {isLike ? (
       <Heart width="13" height="13" color="red" />
     ) : (

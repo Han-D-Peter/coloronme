@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 
 import { Text, color } from '@design';
 
-import { useProduct } from '@/src/query/product/product.queries';
+import { queryClient } from '@/src/pages/_app';
+import { usePostProductLike, useProduct } from '@/src/query/product/product.queries';
 import { useBooleanState } from '@/src/hooks/useBooleanState';
 import { PERSONAL_COLOR_MAPPING, CATEGORY } from '@/src/constants/constants';
 import CenteredLayout from '../Common/Layout/CenteredLayout';
@@ -25,8 +26,22 @@ const ProductPage = () => {
 
   const { data } = useProduct(Number(productId));
 
+  const { mutate: postLikeMutate } = usePostProductLike();
+
   const redirectToSaleLink = (url: string) => {
     router.push(url);
+  };
+
+  const toggleProductLike = () => {
+    if (!productId) return;
+
+    postLikeMutate(+productId, {
+      onSettled: () => {
+        queryClient.refetchQueries({
+          queryKey: ['product', +productId],
+        });
+      },
+    });
   };
 
   if (!data) return <Loading />;
@@ -46,7 +61,7 @@ const ProductPage = () => {
 
           <div css={SubContentIconContainer}>
             <div css={likeIconContainer}>
-              <LikeIndicator isLike={data?.isMyLike} count={data?.likeCount} />
+              <LikeIndicator isLike={data?.isMyLike} count={data?.likeCount} onClick={toggleProductLike} />
             </div>
 
             <PostOptionsIndicator isMyPost={data?.isMyPost} onMyPostClick={onBottomSheetOpen} />
