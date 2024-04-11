@@ -5,14 +5,15 @@ import { mobileStyle } from '@/src/style/SharedStyles';
 
 interface BottomSheetProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isOpen: boolean;
+  snapPoints?: number;
   close: () => void;
   children?: ReactNode;
 }
 const SheetContainer = Sheet as any;
 
-const BottomSheet = ({ isOpen, close, children }: BottomSheetProps) => {
+const BottomSheet = ({ isOpen, close, snapPoints = 500, children }: BottomSheetProps) => {
   return (
-    <Sheet snapPoints={[500]} isOpen={isOpen} onClose={close} css={sheetStyle} disableScrollLocking={true}>
+    <Sheet snapPoints={[snapPoints]} isOpen={isOpen} onClose={close} css={sheetStyle} disableScrollLocking={true}>
       <Sheet.Container>
         <Sheet.Header />
         <Sheet.Content css={contentStyle}>
