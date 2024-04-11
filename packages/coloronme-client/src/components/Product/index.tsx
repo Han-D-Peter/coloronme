@@ -1,18 +1,27 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+
 import { Text, color } from '@design';
+
 import { useProduct } from '@/src/query/product/product.queries';
+import { useBooleanState } from '@/src/hooks/useBooleanState';
 import { PERSONAL_COLOR_MAPPING, CATEGORY } from '@/src/constants/constants';
 import CenteredLayout from '../Common/Layout/CenteredLayout';
-import ProductImage from './Component/ProductImage';
-import LabeledInputButton from './Component/LabeledInputButton';
-import SelectColorButton from './Component/SelectColorButton';
-import SelectableButton from './Register/Component/SelectableButton';
 import Loading from '../Common/Loading';
+import BottomSheet from '../Common/BottomSheet';
+import ProductImage from './Component/ProductImage';
+import LikeIndicator from './Component/LikeIndicator';
+import SelectableButton from './Register/Component/SelectableButton';
+import ProductManagement from './Component/ProductManagement';
+import SelectColorButton from './Component/SelectColorButton';
+import LabeledInputButton from './Component/LabeledInputButton';
+import PostOptionsIndicator from './Component/PostOptionsIndicator';
 
 const ProductPage = () => {
   const router = useRouter();
   const productId = router.query.productId;
+
+  const [isBottomSheetShown, onBottomSheetOpen, onBottomSheetClose] = useBooleanState(false);
 
   const { data } = useProduct(Number(productId));
 
@@ -28,12 +37,20 @@ const ProductPage = () => {
 
       <div css={productTitleContainer}>
         <Text as="title" size="md" weight="bold">
-          {data?.name ?? ''}
+          {data?.name}
         </Text>
-        <div>
+        <div css={subContentContainer}>
           <Text as="body" size="sm" style={platFormTextStyle}>
-            {data?.platform ?? ''}
+            {data?.platform}
           </Text>
+
+          <div css={SubContentIconContainer}>
+            <div css={likeIconContainer}>
+              <LikeIndicator isLike={data?.isMyLike} count={data?.likeCount} />
+            </div>
+
+            <PostOptionsIndicator isMyPost={data?.isMyPost} onMyPostClick={onBottomSheetOpen} />
+          </div>
         </div>
       </div>
       <div css={dividerStyle} />
@@ -77,9 +94,35 @@ const ProductPage = () => {
           {data && <SelectableButton isSelected={true}>{CATEGORY[data?.category]}</SelectableButton>}
         </div>
       </div>
+
+      {isBottomSheetShown && (
+        <BottomSheet snapPoints={150} isOpen={isBottomSheetShown} close={onBottomSheetClose}>
+          <ProductManagement />
+        </BottomSheet>
+      )}
     </CenteredLayout>
   );
 };
+
+const subContentContainer = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SubContentIconContainer = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+`;
+
+const likeIconContainer = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const productTitleContainer = css`
   display: flex;

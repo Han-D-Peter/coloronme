@@ -25,7 +25,9 @@ export type ProductDetail = {
   name: string;
   platform: string;
   imageUrl: string;
-  isLiked: boolean;
+  isMyLike: boolean;
+  likeCount: number;
+  isMyPost: boolean;
 
   category: Category;
   color: string[];

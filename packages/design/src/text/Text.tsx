@@ -8,6 +8,7 @@ interface TextBaseType {
   weight?: TypoWeight;
   children?: ReactNode;
   style?: SerializedStyles;
+  onClick?: () => void;
 }
 interface TextTitle extends TextBaseType {
   as: 'title';
@@ -31,7 +32,7 @@ const defaultStyle = css`
   padding: 0;
 `;
 
-export function Text({ as, size, weight = 'regular', children, style }: TextProps) {
+export function Text({ as, size, weight = 'regular', children, onClick, style }: TextProps) {
   const textSize = useMemo(() => {
     return css`
       font-family: 'pretendard';
@@ -46,11 +47,19 @@ export function Text({ as, size, weight = 'regular', children, style }: TextProp
   }, [weight]);
 
   if (as === 'title') {
-    return <span css={[defaultStyle, textSize, textWeight, style ?? null]}>{children}</span>;
+    return (
+      <span onClick={onClick} css={[defaultStyle, textSize, textWeight, style ?? null]}>
+        {children}
+      </span>
+    );
   }
 
   if (as === 'body' || as === 'caption') {
-    return <p css={[defaultStyle, textSize, textWeight, style ?? null]}>{children}</p>;
+    return (
+      <p onClick={onClick} css={[defaultStyle, textSize, textWeight, style ?? null]}>
+        {children}
+      </p>
+    );
   }
   return <></>;
 }
