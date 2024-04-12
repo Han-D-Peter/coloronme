@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import { css } from '@emotion/react';
 import { Heart, HeartOutline, Text, color } from '@design';
 
@@ -6,10 +6,10 @@ type Props = {
   isLike: boolean;
   count: number;
   onClick?: () => void;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const LikeIndicator = ({ isLike, count, onClick }: Props) => (
-  <div css={likeIconContainer} onClick={onClick}>
+const LikeIndicator = ({ isLike, count, disabled, onClick }: Props) => (
+  <button css={likeIconContainer} onClick={onClick} disabled={disabled}>
     {isLike ? (
       <Heart width="13" height="13" color="red" />
     ) : (
@@ -20,12 +20,12 @@ const LikeIndicator = ({ isLike, count, onClick }: Props) => (
       size="sm"
       style={css`
         margin-top: -3px;
-        color: ${count ? color.red.red100 : color.gray.gray030};
+        color: ${isLike ? color.red.red100 : color.gray.gray030};
       `}
     >
       {count}
     </Text>
-  </div>
+  </button>
 );
 
 const likeIconContainer = css`

@@ -26,7 +26,7 @@ const ProductPage = () => {
 
   const { data } = useProduct(Number(productId));
 
-  const { mutate: postLikeMutate } = usePostProductLike();
+  const { mutate: postLikeMutate, isPending } = usePostProductLike();
 
   const redirectToSaleLink = (url: string) => {
     router.push(url);
@@ -61,7 +61,12 @@ const ProductPage = () => {
 
           <div css={SubContentIconContainer}>
             <div css={likeIconContainer}>
-              <LikeIndicator isLike={data?.isMyLike} count={data?.likeCount} onClick={toggleProductLike} />
+              <LikeIndicator
+                isLike={data?.isMyLike}
+                count={data?.likeCount}
+                disabled={isPending}
+                onClick={toggleProductLike}
+              />
             </div>
 
             <PostOptionsIndicator isMyPost={data?.isMyPost} onMyPostClick={onBottomSheetOpen} />
