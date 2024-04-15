@@ -22,6 +22,21 @@ export default function App({ Component, pageProps }: AppProps) {
               font-weight: 400;
               src: url('/fonts/Pretendard-Medium.otf');
             }
+            @font-face {
+              font-family: pretendard;
+              font-weight: 300;
+              src: url('/fonts/Pretendard-Regular.otf');
+            }
+            @font-face {
+              font-family: pretendard;
+              font-weight: 200;
+              src: url('/fonts/Pretendard-Light.otf');
+            }
+            @font-face {
+              font-family: pretendard;
+              font-weight: 100;
+              src: url('/fonts/Pretendard-Thin.otf');
+            }
             body {
               margin: 0;
               width: 100%;
