@@ -24,6 +24,7 @@ const PostOptionsIndicator = ({ isMyPost, onMyPostClick, onOtherPostClick }: Pro
 
 const iconStyle = css`
   display: flex;
+  cursor: pointer;
 `;
 
 export default PostOptionsIndicator;

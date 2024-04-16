@@ -61,6 +61,10 @@ class ProductRepository {
   async postProductLike(id: number) {
     return client.post(`likes/product/${id}`);
   }
+
+  async deleteProduct(id: number) {
+    return client.delete(`products/${id}`);
+  }
 }
 
 export default new ProductRepository();

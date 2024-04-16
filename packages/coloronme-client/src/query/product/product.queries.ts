@@ -69,3 +69,9 @@ export const usePostProductLike = () => {
     mutationFn: (id: number) => ProductRepository.postProductLike(id),
   });
 };
+
+export const useDeleteProduct = () => {
+  return useMutation({
+    mutationFn: (id: number) => ProductRepository.deleteProduct(id),
+  });
+};
