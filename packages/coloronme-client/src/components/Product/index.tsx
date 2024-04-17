@@ -9,7 +9,6 @@ import { useBooleanState } from '@/src/hooks/useBooleanState';
 import { PERSONAL_COLOR_MAPPING, CATEGORY } from '@/src/constants/constants';
 import CenteredLayout from '../Common/Layout/CenteredLayout';
 import Loading from '../Common/Loading';
-import BottomSheet from '../Common/BottomSheet';
 import ProductImage from './Component/ProductImage';
 import LikeIndicator from './Component/LikeIndicator';
 import SelectableButton from './Register/Component/SelectableButton';
@@ -44,6 +43,8 @@ const ProductPage = () => {
     });
   };
 
+  const productReportSubmit = () => {};
+
   if (!data) return <Loading />;
 
   return (
@@ -69,7 +70,11 @@ const ProductPage = () => {
               />
             </div>
 
-            <PostOptionsIndicator isMyPost={data?.isMyPost} onMyPostClick={onBottomSheetOpen} />
+            <PostOptionsIndicator
+              isMyPost={data?.isMyPost}
+              onMyPostClick={onBottomSheetOpen}
+              onOtherPostClick={productReportSubmit}
+            />
           </div>
         </div>
       </div>
@@ -115,11 +120,7 @@ const ProductPage = () => {
         </div>
       </div>
 
-      {isBottomSheetShown && (
-        <BottomSheet snapPoints={150} isOpen={isBottomSheetShown} close={onBottomSheetClose}>
-          <ProductManagement />
-        </BottomSheet>
-      )}
+      <ProductManagement isOpen={isBottomSheetShown} onClose={onBottomSheetClose} />
     </CenteredLayout>
   );
 };

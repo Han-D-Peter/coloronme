@@ -1,10 +1,8 @@
-import { ComponentType, useState } from 'react';
+import { useState } from 'react';
 import { css } from '@emotion/react';
-import Modal from 'react-modal';
 
 import { Text, CheckmarkOutline, Button, color } from '@design';
-
-const ModalSafeForReact18 = Modal as ComponentType<ReactModal['props']>;
+import DefaultModal from '../../Common/Modal';
 
 type Props = {
   image: string;
@@ -64,7 +62,7 @@ const ColorSelectModal = ({ image, isOpen, setSelectColors, colorData, closeModa
   };
 
   return (
-    <ModalSafeForReact18 style={modalStyles} isOpen={isOpen} ariaHideApp={false}>
+    <DefaultModal style={modalStyles} isOpen={isOpen} ariaHideApp={false}>
       <div css={titleTextContainer}>
         <Text as="body" size="md">
           컬러피커가 컬러를 추출했어요.
@@ -114,7 +112,7 @@ const ColorSelectModal = ({ image, isOpen, setSelectColors, colorData, closeModa
           <Button onClick={submitColor}>저장</Button>
         </div>
       </div>
-    </ModalSafeForReact18>
+    </DefaultModal>
   );
 };
 
