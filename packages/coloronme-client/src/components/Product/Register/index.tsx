@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import Sketch from '@uiw/react-color-sketch';
-import { useColor } from 'color-thief-react';
+import { usePalette } from 'color-thief-react';
 
 import { Text, color, Question, Button, PlusOutline } from '@design';
 
 import { useGetUser } from '@/src/query/user/user.queries';
 import { useBooleanState } from '@/src/hooks/useBooleanState';
-import { CATEGORY, PERSONAL_COLOR_MAPPING } from '@/src/constants/constants';
+import { CATEGORY_ENTRIES, PERSONAL_COLOR_MAPPING } from '@/src/constants/constants';
 import { usePostProduct, useProductOGInfo } from '@/src/query/product/product.queries';
+import { Category } from '@/src/query/product/product.model';
 import ToolTip from '../../Common/ToolTip';
 import ProductImage from '../Component/ProductImage';
 import PlatformNotice from './Component/PlatformNotice';
@@ -17,9 +18,10 @@ import SelectableButton from './Component/SelectableButton';
 import SelectColorButton from '../Component/SelectColorButton';
 import CenteredLayout from '../../Common/Layout/CenteredLayout';
 import LabeledInputButton from '../Component/LabeledInputButton';
+import ColorSelectModal from '../Component/ColorSelectModal';
 
-type ProductType = '아우터' | '상의' | '하의' | '원피스/세트' | '주얼리' | '패션소품';
-const productTypes: ProductType[] = ['아우터', '상의', '하의', '원피스/세트', '주얼리', '패션소품'];
+const COLOR_COUNT = 8;
+const COLOR_FORMAT = 'hex';
 
 const ProductRegisterPage = () => {
   const router = useRouter();
@@ -27,19 +29,28 @@ const ProductRegisterPage = () => {
   const { data } = useGetUser();
   const { mutate: productOGMutate, data: ogData } = useProductOGInfo();
   const { mutate: postProductMutate } = usePostProduct();
-  const { data: colorData } = useColor(ogData?.image ?? '', 'hex', { crossOrigin: 'Anonymous' });
+
+  const [colorSelectModalShown, onColorSelectModalOpen, onColorSelectModalClose] = useBooleanState();
+
+  const [selectColors, setSelectColors] = useState<string[]>([]);
+
+  const {
+    data: colorData,
+    loading,
+    error,
+  } = usePalette(ogData?.image ?? '', COLOR_COUNT, COLOR_FORMAT, { crossOrigin: 'Anonymous' });
 
   const [isShownColorPicker, onOpenColorPicker, onClose, onToggleColorPicker] = useBooleanState(false);
 
-  const [sellLink, setSellLink] = useState('https://zigzag.kr/catalog/products/131358195');
+  const [sellLink, setSellLink] = useState('');
   const [personalColorId, setPersonalColorId] = useState(0);
-  const [productType, setProductType] = useState<ProductType>();
+  const [productType, setProductType] = useState<Category>();
   const [productName, setProductName] = useState('');
   const [platform, setPlatform] = useState('');
 
   const [validateUrl, setValidateUrl] = useState(false);
   const [urlWarnText, setUrlWarnText] = useState('');
-  const [productNameText, setProductNameText] = useState('');
+  const [productNameWarnText, setProductNameWarnText] = useState('');
   const [platformWarnText, setPlatformWarnText] = useState('');
   const [productTypeWarnText, setProductTypeWarnText] = useState('');
 
@@ -60,6 +71,7 @@ const ProductRegisterPage = () => {
       {
         onSuccess: () => {
           setValidateUrl(true);
+          onColorSelectModalOpen();
         },
         onError(error) {
           setValidateUrl(false);
@@ -73,26 +85,17 @@ const ProductRegisterPage = () => {
           if (error?.response?.status === 409) {
             return setUrlWarnText('*이미 등록된 상품입니다.');
           }
+          return setUrlWarnText('*다시 시도해주세요.');
         },
       },
     );
   };
 
-  const findCategoryKeyByValue = (value: string) => {
-    const entries = Object.entries(CATEGORY);
-    for (let [key, val] of entries) {
-      if (val === value) {
-        return key;
-      }
-    }
-    return null;
-  };
-
   const validateProduct = () => {
     if (!productName) {
-      setProductNameText('*상품명을 입력해주세요.');
+      setProductNameWarnText('*상품명을 입력해주세요.');
     } else {
-      setProductNameText('');
+      setProductNameWarnText('');
     }
 
     if (!platform) {
@@ -123,17 +126,15 @@ const ProductRegisterPage = () => {
       return setUrlWarnText('*판매 링크가 수정되었습니다. 다시 확인해주세요.');
     }
 
-    const keyForCategory = findCategoryKeyByValue(productType) || '';
-
     postProductMutate(
       {
         name: productName,
-        color: [`${colorData}`],
+        color: selectColors,
         platform: [platform],
         sellUrl: sellLink,
         imageUrl: ogData.image,
         personalColor: personalColorId,
-        category: keyForCategory,
+        category: productType,
       },
       {
         onSuccess: () => {
@@ -182,7 +183,7 @@ const ProductRegisterPage = () => {
           </Text>
           <input css={inputStyle} value={productName} onChange={(e) => setProductName(e.target.value)} />
           <Text as="caption" size="md" style={warnTextStyle}>
-            {productNameText}
+            {productNameWarnText}
           </Text>
         </div>
 
@@ -214,7 +215,9 @@ const ProductRegisterPage = () => {
             <SelectColorButton color={color.gray.gray010} onClick={onToggleColorPicker}>
               <PlusOutline width="20" height="20" color={color.gray.gray040} />
             </SelectColorButton>
-            {colorData && <SelectColorButton color={colorData} />}
+            {selectColors.map((color) => (
+              <SelectColorButton color={color} key={color} />
+            ))}
           </div>
         </div>
 
@@ -248,14 +251,14 @@ const ProductRegisterPage = () => {
           </Text>
 
           <div css={colorButtonContainerStyle}>
-            {productTypes.map((item, index) => (
+            {CATEGORY_ENTRIES.map(([key, value], index) => (
               <SelectableButton
                 key={index}
                 id={index.toString()}
-                isSelected={item === productType}
-                onClick={() => setProductType(item)}
+                isSelected={key === productType}
+                onClick={() => setProductType(key)}
               >
-                {item}
+                {value}
               </SelectableButton>
             ))}
           </div>
@@ -269,6 +272,16 @@ const ProductRegisterPage = () => {
           등록하기
         </Button>
       </div>
+
+      {colorSelectModalShown && ogData?.image && colorData && (
+        <ColorSelectModal
+          isOpen={colorSelectModalShown}
+          image={ogData?.image}
+          colorData={colorData}
+          setSelectColors={setSelectColors}
+          closeModal={onColorSelectModalClose}
+        />
+      )}
     </CenteredLayout>
   );
 };
@@ -282,15 +295,6 @@ const flexStyle = css`
 
 const gapSmStyle = css`
   gap: 5px;
-`;
-
-const gapMdStyle = css`
-  gap: 10px;
-`;
-
-const flexSmStyle = css`
-  ${flexStyle}
-  ${gapMdStyle}
 `;
 
 const flexMdStyle = css`
