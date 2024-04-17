@@ -14,6 +14,7 @@ import FilterOptions from './component/FilterOptions';
 import FilterForm from './component/FilterForm';
 import SearchForm from './component/SearchForm';
 import RegisterButton from './component/RegisterButton';
+import EmptyProduct from './component/EmptyProduct';
 
 export type FilterQueryParams = {
   keyword?: string;
@@ -67,7 +68,11 @@ const ProductsPage = () => {
           sort={sort}
         />
 
-        {data && <ProductList data={data?.pages} targetRef={targetRef} />}
+        {data?.pages && data?.pages?.[0]?.pagination.totalProducts !== 0 ? (
+          <ProductList data={data?.pages} targetRef={targetRef} />
+        ) : (
+          <EmptyProduct />
+        )}
       </div>
 
       {isBottomSheetShown && (
