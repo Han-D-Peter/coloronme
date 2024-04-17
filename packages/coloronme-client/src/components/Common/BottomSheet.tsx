@@ -11,17 +11,19 @@ interface BottomSheetProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 const SheetContainer = Sheet as any;
 
-const BottomSheet = ({ isOpen, close, snapPoints = 500, children }: BottomSheetProps) => {
+const BottomSheet = ({ isOpen = false, close, snapPoints = 500, children }: BottomSheetProps) => {
   return (
-    <Sheet snapPoints={[snapPoints]} isOpen={isOpen} onClose={close} css={sheetStyle} disableScrollLocking={true}>
-      <Sheet.Container>
-        <Sheet.Header />
-        <Sheet.Content css={contentStyle}>
-          <Sheet.Scroller>{children}</Sheet.Scroller>
-        </Sheet.Content>
-      </Sheet.Container>
-      <SheetContainer.Backdrop onClick={close} />
-    </Sheet>
+    isOpen && (
+      <Sheet snapPoints={[snapPoints]} isOpen={isOpen} onClose={close} css={sheetStyle} disableScrollLocking={true}>
+        <Sheet.Container>
+          <Sheet.Header />
+          <Sheet.Content css={contentStyle}>
+            <Sheet.Scroller>{children}</Sheet.Scroller>
+          </Sheet.Content>
+        </Sheet.Container>
+        <SheetContainer.Backdrop onClick={close} />
+      </Sheet>
+    )
   );
 };
 
