@@ -14,7 +14,7 @@ export default function DropdownHeader() {
     width: 100%;
     background-color: #fff;
     border: 1px solid ${color.gray.gray020};
-    border-radius: 5px 5px 0 0;
+    border-radius: 3px;
     display: flex;
     justify-content: space-between;
     align-items: center;

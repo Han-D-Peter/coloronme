@@ -16,7 +16,6 @@ export default function DropdownElement({ children }: DropdownElementProps) {
     background-color: ${selectedValue === children ? `${color.gray.gray020}` : '#fff'};
     border: none;
     display: flex;
-    border-radius: 5px;
     align-items: center;
     &:hover {
       background-color: ${color.gray.gray020};
