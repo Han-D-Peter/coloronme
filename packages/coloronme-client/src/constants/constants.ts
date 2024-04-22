@@ -163,3 +163,14 @@ export const PRODUCT_SORT_ORDER: SortOptions = {
 
 export const PRODUCT_SORT_VALUE = Object.values(PRODUCT_SORT_ORDER);
 export const PRODUCT_SORT_ENTRIES = Object.entries(PRODUCT_SORT_ORDER);
+
+export const PRODUCT_REPORT = {
+  soldOut: '품절 또는 판매 중지',
+  invalidLink: '유효하지 않은 링크',
+  colorMismatch: '퍼스널컬러 불일치',
+  infoError: '상품 정보 오류',
+  etc: '기타',
+};
+
+export type ProductReport = 'soldOut' | 'invalidLink' | 'colorMismatch' | 'infoError' | ' etc';
+export const PRODUCT_REPORT_ENTRIES = Object.entries(PRODUCT_REPORT) as [ProductReport, string][];

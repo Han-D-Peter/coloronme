@@ -1,4 +1,5 @@
 import client from '../../api/client';
+import { ReportPost } from './product.queries';
 
 type GetProducts = {
   page: number;
@@ -64,6 +65,13 @@ class ProductRepository {
 
   async deleteProduct(id: number) {
     return client.delete(`products/${id}`);
+  }
+
+  async reportProduct({ id, reason, comment }: ReportPost) {
+    return client.post(`product-report/${id}`, {
+      reason,
+      comment,
+    });
   }
 }
 

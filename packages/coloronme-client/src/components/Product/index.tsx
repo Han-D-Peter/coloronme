@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
 import { Text, color } from '@design';
 
 import { queryClient } from '@/src/pages/_app';
-import { usePostProductLike, useProduct } from '@/src/query/product/product.queries';
+import { usePostProductLike, useProduct, useReportProduct } from '@/src/query/product/product.queries';
 import { useBooleanState } from '@/src/hooks/useBooleanState';
-import { PERSONAL_COLOR_MAPPING, CATEGORY } from '@/src/constants/constants';
+import { PERSONAL_COLOR_MAPPING, CATEGORY, PRODUCT_REPORT_ENTRIES } from '@/src/constants/constants';
 import CenteredLayout from '../Common/Layout/CenteredLayout';
 import Loading from '../Common/Loading';
 import ProductImage from './Component/ProductImage';
@@ -16,16 +17,23 @@ import ProductManagement from './Component/ProductManagement';
 import SelectColorButton from './Component/SelectColorButton';
 import LabeledInputButton from './Component/LabeledInputButton';
 import PostOptionsIndicator from './Component/PostOptionsIndicator';
+import ReportModal from './Component/ReportModal';
 
 const ProductPage = () => {
   const router = useRouter();
   const productId = router.query.productId;
 
   const [isBottomSheetShown, onBottomSheetOpen, onBottomSheetClose] = useBooleanState(false);
+  const [isReportModalShown, onReportModalOpen, onReportModalClose] = useBooleanState(false);
+
+  const [reportType, setReportType] = useState('');
+  const [reportMemo, setReportMemo] = useState('');
+  const [reportErrorMessage, setReportErrorMessage] = useState('');
 
   const { data } = useProduct(Number(productId));
 
   const { mutate: postLikeMutate, isPending } = usePostProductLike();
+  const { mutate: reportMutate } = useReportProduct();
 
   const redirectToSaleLink = (url: string) => {
     router.push(url);
@@ -43,7 +51,33 @@ const ProductPage = () => {
     });
   };
 
-  const productReportSubmit = () => {};
+  const changeReportType = (value: string) => {
+    setReportType(value);
+    setReportErrorMessage('');
+  };
+
+  const productReportSubmit = () => {
+    if (!productId) return;
+
+    const reportTypeKey = PRODUCT_REPORT_ENTRIES.find((entry) => entry[1] === reportType);
+    if (!reportTypeKey) {
+      return setReportErrorMessage('신고 사유를 선택해주세요.');
+    }
+    setReportErrorMessage('');
+
+    reportMutate(
+      {
+        id: +productId,
+        reason: reportTypeKey[0],
+        comment: reportMemo,
+      },
+      {
+        onSuccess: () => {
+          onReportModalClose();
+        },
+      },
+    );
+  };
 
   if (!data) return <Loading />;
 
@@ -73,7 +107,7 @@ const ProductPage = () => {
             <PostOptionsIndicator
               isMyPost={data?.isMyPost}
               onMyPostClick={onBottomSheetOpen}
-              onOtherPostClick={productReportSubmit}
+              onOtherPostClick={onReportModalOpen}
             />
           </div>
         </div>
@@ -121,6 +155,16 @@ const ProductPage = () => {
       </div>
 
       <ProductManagement isOpen={isBottomSheetShown} onClose={onBottomSheetClose} />
+      <ReportModal
+        isOpen={isReportModalShown}
+        onClose={onReportModalClose}
+        onSubmit={productReportSubmit}
+        reportType={reportType}
+        setReportType={changeReportType}
+        reportMemo={reportMemo}
+        setReportMemo={setReportMemo}
+        errorMessage={reportErrorMessage}
+      />
     </CenteredLayout>
   );
 };

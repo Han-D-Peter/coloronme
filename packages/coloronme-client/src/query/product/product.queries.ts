@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
+import { ProductReport } from '@/src/constants/constants';
 import ProductRepository from './product.repository';
 import { OGInfo, ProductDetail } from './product.model';
 
@@ -73,5 +74,16 @@ export const usePostProductLike = () => {
 export const useDeleteProduct = () => {
   return useMutation({
     mutationFn: (id: number) => ProductRepository.deleteProduct(id),
+  });
+};
+
+export type ReportPost = {
+  id: number;
+  reason: ProductReport;
+  comment: string;
+};
+export const useReportProduct = () => {
+  return useMutation({
+    mutationFn: ({ id, reason, comment }: ReportPost) => ProductRepository.reportProduct({ id, reason, comment }),
   });
 };
