@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { useComments, useDeleteComment, usePostComment, useReportComment } from '@/src/query/comment/comment.queries';
@@ -27,10 +27,6 @@ const Comment = () => {
   const { mutate: postCommentMutate } = usePostComment();
   const { mutate: commentDeleteMutate } = useDeleteComment();
   const { mutate: reportMutate } = useReportComment();
-
-  useEffect(() => {
-    console.log('commentList', commentList);
-  }, [commentList]);
 
   const [comment, setComment] = useState('');
   const [selectedComment, setSelectedComment] = useState<SelectComment>({
