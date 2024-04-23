@@ -172,5 +172,18 @@ export const PRODUCT_REPORT = {
   etc: '기타',
 };
 
-export type ProductReport = 'soldOut' | 'invalidLink' | 'colorMismatch' | 'infoError' | ' etc';
+export type ProductReport = 'soldOut' | 'invalidLink' | 'colorMismatch' | 'infoError' | 'etc';
 export const PRODUCT_REPORT_ENTRIES = Object.entries(PRODUCT_REPORT) as [ProductReport, string][];
+
+export type CommentReport = 'spam' | 'adult' | 'illegal' | 'harmful' | 'curse' | 'infoLeak' | 'etc';
+export const COMMENT_REPORT = {
+  spam: '스팸홍보/도배글',
+  adult: '음란물',
+  illegal: '불법정보',
+  harmful: '유해한 내용',
+  curse: '욕설/생명경시/혐오/차별적발언',
+  infoLeak: '개인정보 노출',
+  etc: '기타',
+};
+
+export const COMMENT_REPORT_ENTRIES = Object.entries(COMMENT_REPORT) as [CommentReport, string][];
