@@ -115,6 +115,7 @@ const Comment = () => {
       {
         onSuccess: () => {
           onCommentReportModalClose();
+          queryClient.invalidateQueries({ queryKey: ['comments'] });
         },
       },
     );
@@ -126,10 +127,9 @@ const Comment = () => {
     <>
       <CommentInput comment={comment} onChangeComment={setComment} onsubmit={submitComment} />
 
-      {commentList &&
-        commentList.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} changeSelectComment={changeSelectComment} />
-        ))}
+      {commentList?.map((comment) => (
+        <CommentItem key={comment.id} comment={comment} changeSelectComment={changeSelectComment} />
+      ))}
 
       <CommentManagement
         isMyComment={selectedComment.isMyComment}

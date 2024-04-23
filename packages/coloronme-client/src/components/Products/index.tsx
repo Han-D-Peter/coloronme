@@ -37,7 +37,7 @@ const ProductsPage = () => {
   const filterQueryParams: ParsedFilterQueryParams = parseFilterQueryParams(query);
   const { keyword, personalColor, category, sort } = filterQueryParams;
 
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteProducts(query);
+  const { data, fetchNextPage, hasNextPage, isFetching, isLoading } = useInfiniteProducts(query);
 
   const targetRef = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);
@@ -68,11 +68,15 @@ const ProductsPage = () => {
           sort={sort}
         />
 
-        {data?.pages && data?.pages?.[0]?.pagination.totalProducts !== 0 ? (
-          <ProductList data={data?.pages} targetRef={targetRef} />
-        ) : (
-          <EmptyProduct />
-        )}
+        <div css={mainContainer}>
+          {isLoading ? (
+            <></>
+          ) : data?.pages && data?.pages[0]?.pagination.totalProducts !== 0 ? (
+            <ProductList data={data?.pages} targetRef={targetRef} />
+          ) : (
+            <EmptyProduct />
+          )}
+        </div>
       </div>
 
       {isBottomSheetShown && (

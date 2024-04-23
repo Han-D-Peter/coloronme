@@ -5,6 +5,7 @@ export type Comment = {
   user: User;
   isReported: boolean;
   createdAt: string;
+  isPosted: boolean;
 };
 
 export type User = {

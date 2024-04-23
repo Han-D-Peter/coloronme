@@ -42,7 +42,7 @@ const CommentItem = ({ comment, changeSelectComment }: Props) => {
               <Text as="body" size="md" weight="bold">
                 {comment.user.nickname}
               </Text>
-              {comment.isMyComment && (
+              {comment.isPosted && (
                 <div css={authorBadgeStyle}>
                   <Text as="caption" size="sm">
                     등록자

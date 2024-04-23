@@ -27,7 +27,7 @@ class CommentRepository {
   }
 
   async reportComment({ id, reason, comment }: ReportComment) {
-    return client.post(`comments-report/${id}`, {
+    return client.post(`comment-report/${id}`, {
       reason,
       comment,
     });
