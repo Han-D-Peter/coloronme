@@ -81,7 +81,7 @@ const ReportModal = ({
           <Button variant="ghost" onClick={onClose}>
             취소
           </Button>
-          <Button onClick={onSubmit}>삭제</Button>
+          <Button onClick={onSubmit}>신고</Button>
         </div>
       </div>
     </DefaultModal>
