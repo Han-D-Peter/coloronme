@@ -28,6 +28,7 @@ export type ProductDetail = {
   isMyLike: boolean;
   likeCount: number;
   isMyPost: boolean;
+  isReported: boolean;
 
   category: Category;
   color: string[];

@@ -18,6 +18,8 @@ import SelectColorButton from './Component/SelectColorButton';
 import LabeledInputButton from './Component/LabeledInputButton';
 import PostOptionsIndicator from './Component/PostOptionsIndicator';
 import ReportModal from './Component/ReportModal';
+import Comment from './Component/Comment/Comment';
+import AlreadyReportedModal from './Component/AlreadyReportedModal';
 
 const ProductPage = () => {
   const router = useRouter();
@@ -25,6 +27,7 @@ const ProductPage = () => {
 
   const [isBottomSheetShown, onBottomSheetOpen, onBottomSheetClose] = useBooleanState(false);
   const [isReportModalShown, onReportModalOpen, onReportModalClose] = useBooleanState(false);
+  const [isAlreadyReportModalShown, onAlreadyReportModalOpen, onAlreadyReportModalClose] = useBooleanState(false);
 
   const [reportType, setReportType] = useState('');
   const [reportMemo, setReportMemo] = useState('');
@@ -54,6 +57,14 @@ const ProductPage = () => {
   const changeReportType = (value: string) => {
     setReportType(value);
     setReportErrorMessage('');
+  };
+
+  const openReportModal = (reportState: boolean) => {
+    if (reportState) {
+      return onAlreadyReportModalOpen();
+    }
+
+    onReportModalOpen();
   };
 
   const productReportSubmit = () => {
@@ -107,11 +118,12 @@ const ProductPage = () => {
             <PostOptionsIndicator
               isMyPost={data?.isMyPost}
               onMyPostClick={onBottomSheetOpen}
-              onOtherPostClick={onReportModalOpen}
+              onOtherPostClick={() => openReportModal(data?.isReported)}
             />
           </div>
         </div>
       </div>
+
       <div css={dividerStyle} />
 
       <div css={formStyle}>
@@ -154,6 +166,12 @@ const ProductPage = () => {
         </div>
       </div>
 
+      <div css={dividerStyle} />
+
+      <div css={commentContainer}>
+        <Comment />
+      </div>
+
       <ProductManagement isOpen={isBottomSheetShown} onClose={onBottomSheetClose} />
       <ReportModal
         isOpen={isReportModalShown}
@@ -165,6 +183,7 @@ const ProductPage = () => {
         setReportMemo={setReportMemo}
         errorMessage={reportErrorMessage}
       />
+      <AlreadyReportedModal isOpen={isAlreadyReportModalShown} onClose={onAlreadyReportModalClose} />
     </CenteredLayout>
   );
 };
@@ -225,6 +244,13 @@ const innerContentGapStyle = css`
 const colorBoxContainer = css`
   display: flex;
   gap: 10px;
+`;
+
+const commentContainer = css`
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 export default ProductPage;
