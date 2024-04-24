@@ -96,10 +96,11 @@ const CommentReportModal = ({
         </div>
 
         <textarea
-          placeholder="10자 이상"
+          placeholder="500자 이내"
           value={reportMemo}
           onChange={(e) => setReportMemo(e.target.value)}
           css={textAreaStyle}
+          maxLength={500}
         />
       </div>
 
