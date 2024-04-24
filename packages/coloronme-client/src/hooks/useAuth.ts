@@ -1,42 +1,29 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import client from "../api/client";
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import client from '../api/client';
 
 const useAuth = (requireAuth = true) => {
-  const [verified, setVerified] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
+  const { data, isLoading, isSuccess, isError } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => client.get('users'),
+    enabled: requireAuth,
+    retry: false,
+  });
+
   useEffect(() => {
-    if (!requireAuth) {
-      setIsLoading(false);
-      setVerified(true);
-      return;
-    }
-
-    const fetchUser = async () => {
-      try {
-        const responseAttributes = await client.get("users");
-
-        const { personalColorId } = responseAttributes;
-
-        if (!personalColorId) {
-          router.replace("/qrcode");
-          return;
-        }
-
-        setVerified(true);
-      } catch (error) {
-        router.replace("/login");
-      } finally {
-        setIsLoading(false);
+    if (isSuccess) {
+      if (!data.personalColorId) {
+        router.replace('/qrcode');
       }
-    };
+    } else if (isError) {
+      router.replace('/login');
+    }
+  }, [data, isSuccess, isError, router]);
 
-    fetchUser();
-  }, [router, requireAuth]);
-
-  return { isLoading, verified };
+  return { isLoading, verified: isSuccess };
 };
 
 export default useAuth;
