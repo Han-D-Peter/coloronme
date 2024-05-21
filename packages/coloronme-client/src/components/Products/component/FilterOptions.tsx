@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { css } from '@emotion/react';
 
 import { FilterIconFill, OptionTag, RemovableTag, Text } from '@design';
@@ -19,9 +18,8 @@ type Props = {
 };
 
 const FilterOptions = ({ onOpen, updateQuery, personalColor, category, sort }: Props) => {
-  const tabContainerRef = useRef<HTMLDivElement | null>(null);
   const [isTabVisible, _, onCloseTab, onToggleTab] = useBooleanState(false);
-  useOnClickOutside(tabContainerRef, onCloseTab);
+  const tabContainerRef = useOnClickOutside(onCloseTab);
 
   const removePersonalColorId = (id: string | number) => {
     if (!personalColor) return;
