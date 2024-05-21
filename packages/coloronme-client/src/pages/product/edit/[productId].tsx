@@ -1,4 +1,4 @@
-import ProductPage from '@/src/components/Product';
+import ProductPage from '@/src/components/Product/ProductPage';
 
 const Product = () => {
   return <ProductPage />;
