@@ -1,16 +1,18 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 
 type Props = {
   children?: React.ReactNode;
   color: string;
+  style?: SerializedStyles;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const SelectColorButton = ({ children, color, onClick }: Props) => {
+const SelectColorButton = ({ children, color, style, onClick }: Props) => {
   return (
     <button
       onClick={onClick}
       css={css`
         ${colorAddButton}
+        ${style}
         background-color: ${color};
       `}
     >

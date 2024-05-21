@@ -8,7 +8,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   fullWidth?: boolean;
 }
 
-const InputWithButton = ({ buttonText, onClick, fullWidth = false, ...props }: InputProps) => {
+const InputWithButton = ({ buttonText, onClick, fullWidth = false, disabled, ...props }: InputProps) => {
   const inputSizeStyle = useMemo(() => {
     return css`
       width: ${fullWidth ? '100%' : '266px'};
@@ -29,12 +29,12 @@ const InputWithButton = ({ buttonText, onClick, fullWidth = false, ...props }: I
         {...props}
       />
       <button
-        disabled={props.value === ''}
+        disabled={props.value === '' || disabled}
         onClick={onClick}
         css={css`
           ${buttonStyle}
-          background:  ${props.value === '' ? color.gray.gray020 : color.gray.gray090};
-          color: ${props.value === '' ? color.gray.gray040 : color.gray.gray000};
+          background:  ${props.value === '' || disabled ? color.gray.gray020 : color.gray.gray090};
+          color: ${props.value === '' || disabled ? color.gray.gray040 : color.gray.gray000};
         `}
       >
         {buttonText}

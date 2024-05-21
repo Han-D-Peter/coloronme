@@ -12,12 +12,13 @@ const LabeledInputButton = ({
   onClick,
   fullWidth = false,
   errorMessage,
+  disabled,
   ...props
 }: LabeledInputButtonProps) => {
   return (
     <div css={innerContentStyle}>
       {children}
-      <InputWithButton buttonText={buttonText} onClick={onClick} fullWidth={fullWidth} {...props} />
+      <InputWithButton buttonText={buttonText} disabled={disabled} onClick={onClick} fullWidth={fullWidth} {...props} />
       <Text as="caption" size="md" style={warnTextStyle}>
         {errorMessage ?? ''}
       </Text>
