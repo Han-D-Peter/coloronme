@@ -12,6 +12,7 @@ export const useGetUser = () => {
   return useQuery({
     queryKey: ['getUser'],
     queryFn: () => UserRepository.getUser(),
+    retry: 0,
   });
 };
 
