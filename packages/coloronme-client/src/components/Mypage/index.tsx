@@ -10,7 +10,6 @@ import { useLogout } from '@/src/query/auth/auth.queries';
 import DefaultLayout from '../Common/Layout/DefaultLayout';
 import Header from './components/Header';
 import Profile from './components/Profile';
-import Loading from '../Common/Loading';
 import Diagnose from './components/Diagnose';
 import MyColor from './components/MyColor';
 
@@ -25,16 +24,13 @@ const MypageView = () => {
   const logout = () => {
     logoutMutate(undefined, {
       onSuccess: () => {
-        router.push('/login');
+        router.push('/');
       },
     });
   };
 
-  if (userDataLoading) {
-    return <Loading />;
-  }
   return (
-    <DefaultLayout header={<Header>{isEdit ? '마이페이지 변경' : '마이페이지'}</Header>}>
+    <DefaultLayout header={<Header>{isEdit ? '마이페이지 변경' : '마이페이지'}</Header>} isLoading={userDataLoading}>
       <div css={mainContainer}>
         <div css={profileContainer}>{userData && <Profile data={userData} />}</div>
 

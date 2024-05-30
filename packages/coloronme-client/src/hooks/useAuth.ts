@@ -18,8 +18,7 @@ const useAuth = (requireAuth = true) => {
       if (!data.personalColorId) {
         router.replace('/qrcode');
       }
-    } else if (isError) {
-      router.replace('/login');
+      router.replace('/home');
     }
   }, [data, isSuccess, isError, router]);
 
