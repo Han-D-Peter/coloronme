@@ -8,7 +8,7 @@ const LoginWithKakao = () => {
     <Link href={`${BASE_URL}/auth/login/kakao`} css={linkStyle}>
       <button css={kakaoLoginButton}>
         <Kakao height="20" width="20" color="#000000" />
-        카카오로 시작하기
+        카카오톡으로 시작하기
       </button>
     </Link>
   );
@@ -31,6 +31,7 @@ const kakaoLoginButton = css`
   align-items: center;
   justify-content: center;
   gap: 8px;
+  font-weight: bold;
 `;
 
 const linkStyle = css`
