@@ -13,11 +13,11 @@ const Navigation = () => {
   return (
     <footer css={footerContainer}>
       <nav css={[centeredStyle, navContainer]}>
-        <GhostButton onClick={() => router.push('/')}>
+        <GhostButton onClick={() => router.push('/home')}>
           <IconWithText
-            color={router.pathname === '/' ? '#000000' : '#B9BEC1'}
+            color={router.pathname === '/home' ? '#000000' : '#B9BEC1'}
             icon={
-              router.pathname === '/' ? (
+              router.pathname === '/home' ? (
                 <Home width="24" height="24" color="#000000" />
               ) : (
                 <HomeOutline width="24" height="24" color="#B9BEC1" />
