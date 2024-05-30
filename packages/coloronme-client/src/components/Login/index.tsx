@@ -16,9 +16,7 @@ const LoginPage = () => {
             확인해 보세요!
           </Text>
         </div>
-        <div css={buttonContainer}>
-          <LoginWithKakao />
-        </div>
+        <LoginWithKakao />
       </div>
     </main>
   );
@@ -72,13 +70,6 @@ const logoPosition = css`
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white);
     opacity: 1;
   }
-`;
-
-const buttonContainer = css`
-  /* background-color: red; */
-  /* width: 70%; */
-  /* position: absolute; */
-  /* bottom: 20%; */
 `;
 
 export default LoginPage;
