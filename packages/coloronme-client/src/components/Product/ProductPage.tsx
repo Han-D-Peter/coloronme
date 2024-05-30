@@ -9,7 +9,6 @@ import { usePostProductLike, useProduct, useReportProduct } from '@/src/query/pr
 import { useBooleanState } from '@/src/hooks/useBooleanState';
 import { PERSONAL_COLOR_MAPPING, CATEGORY, PRODUCT_REPORT_ENTRIES } from '@/src/constants/constants';
 import CenteredLayout from '../Common/Layout/CenteredLayout';
-import Loading from '../Common/Loading';
 import ProductImage from './Component/ProductImage';
 import LikeIndicator from './Component/LikeIndicator';
 import SelectableButton from './Register/Component/SelectableButton';
@@ -20,6 +19,7 @@ import PostOptionsIndicator from './Component/PostOptionsIndicator';
 import ReportModal from './Component/ReportModal';
 import Comment from './Component/Comment/Comment';
 import AlreadyReportedModal from './Component/AlreadyReportedModal';
+import LoadingSpinner from '../Common/Loading/LoadingSpinner';
 
 const ProductPage = () => {
   const router = useRouter();
@@ -90,7 +90,7 @@ const ProductPage = () => {
     );
   };
 
-  if (!data) return <Loading />;
+  if (!data) return <LoadingSpinner />;
 
   return (
     <CenteredLayout>

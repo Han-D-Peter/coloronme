@@ -12,7 +12,6 @@ import { useGetUser } from '@/src/query/user/user.queries';
 import { parseRGB } from '@/src/utils/parseRGB';
 import useSpinWheelSize from '@/src/hooks/useSpinWheelSize';
 
-import Loading from '../Common/Loading';
 import ColorModal from './components/ColorModal';
 import MainHeader from './components/MainHeader';
 import BottomSheet from '../Common/BottomSheet';
@@ -87,12 +86,8 @@ const HomePage = () => {
     });
   }, [currentColorRange, currentWheelColor.index]);
 
-  if (userDataLoading) {
-    return <Loading />;
-  }
-
   return (
-    <DefaultLayout header={<MainHeader />}>
+    <DefaultLayout header={<MainHeader />} isLoading={userDataLoading}>
       <div css={mainContainer}>
         <div css={containerStyle}>
           <div

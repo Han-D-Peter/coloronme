@@ -56,7 +56,11 @@ const ProductsPage = () => {
   };
 
   return (
-    <DefaultLayout header={<MainHeader isToggleActive={false} />} floatingSection={<RegisterButton />}>
+    <DefaultLayout
+      header={<MainHeader isToggleActive={false} />}
+      floatingSection={<RegisterButton />}
+      isLoading={isLoading}
+    >
       <div css={mainContainer}>
         <SearchForm initialValue={keyword} updateQuery={updateQueryParameters} />
 

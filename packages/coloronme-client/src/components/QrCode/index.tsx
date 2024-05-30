@@ -3,7 +3,7 @@ import { useQRCode } from 'next-qrcode';
 import { css } from '@emotion/react';
 import { usePostId } from '@/src/query/user/user.queries';
 import CenteredLayout from '../Common/Layout/CenteredLayout';
-import Loading from '../Common/Loading';
+import Loading from '../Common/Loading/WhiteLoadingPage';
 
 const QrCodePage = () => {
   const router = useRouter();

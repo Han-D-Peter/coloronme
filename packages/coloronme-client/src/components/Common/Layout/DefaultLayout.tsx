@@ -1,8 +1,7 @@
 import { forwardRef, ReactNode, useMemo, LegacyRef, HTMLAttributes } from 'react';
 import { css } from '@emotion/react';
-import useAuth from '@/src/hooks/useAuth';
 import Navigation from '../Navigation';
-import Loading from '../Loading';
+import LoadingSpinner from '../Loading/LoadingSpinner';
 
 type DefaultLayoutProps = HTMLAttributes<HTMLDivElement> & {
   isLogined?: boolean;
@@ -11,14 +10,22 @@ type DefaultLayoutProps = HTMLAttributes<HTMLDivElement> & {
   centered?: boolean;
   requireAuth?: boolean;
   floatingSection?: ReactNode;
+  isLoading?: boolean;
 };
 
 const DefaultLayout = (
-  { isLogined, header, children, centered = false, requireAuth = true, floatingSection, ...args }: DefaultLayoutProps,
+  {
+    isLogined,
+    header,
+    children,
+    centered = false,
+    requireAuth = true,
+    floatingSection,
+    isLoading = false,
+    ...args
+  }: DefaultLayoutProps,
   ref: LegacyRef<HTMLDivElement>,
 ) => {
-  const { isLoading, verified } = useAuth();
-
   const layoutMainStyle = useMemo(() => {
     return css`
       height: calc(100vh - 81px - 63px);
@@ -32,18 +39,10 @@ const DefaultLayout = (
     `;
   }, [isLogined, centered]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  // if (!verified) {
-  //   return <></>;
-  // }
-
   return (
     <div css={mainContainer} ref={ref} {...args}>
       {header && <header>{header}</header>}
-      <main css={[layoutMainStyle]}>{children}</main>
+      {isLoading ? <LoadingSpinner /> : <main css={[layoutMainStyle]}>{children}</main>}
       <div css={navigationContainer}>
         {floatingSection && <div css={floatingSectionStyle}>{floatingSection}</div>}
         <Navigation />
@@ -56,6 +55,9 @@ const mainContainer = css`
   height: 100%;
   max-width: 520px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const navigationContainer = css`
