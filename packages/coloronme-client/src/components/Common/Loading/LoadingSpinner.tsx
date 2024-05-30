@@ -1,8 +1,24 @@
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import Lottie from 'react-lottie-player';
+import dynamic from 'next/dynamic';
+
+const Lottie = dynamic(() => import('react-lottie-player'), {
+  ssr: false,
+});
+
 import LottieLoadingSpinner from 'public/lottie/loadingSpinner.json';
 
 const LoadingSpinner = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <div css={overlay}>
       <Lottie loop animationData={LottieLoadingSpinner} play css={lottieStyle} />
