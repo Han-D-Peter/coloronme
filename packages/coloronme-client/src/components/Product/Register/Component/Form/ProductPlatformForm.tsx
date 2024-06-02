@@ -7,19 +7,19 @@ import SellLinkTitle from '../Title/SellLinkTitle';
 import { ProductDispatch } from '../Reducer/productReducer';
 
 type Props = {
-  productName: string;
+  platform: string;
   dispatch: ProductDispatch;
   errorMessage: string;
 };
 
-const ProductPlatformForm = ({ productName, dispatch, errorMessage }: Props) => {
+const ProductPlatformForm = ({ platform, dispatch, errorMessage }: Props) => {
   const changeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: 'SET_PLATFORM', payload: event.target.value });
   };
 
   return (
     <FormSection title={<SellLinkTitle />} errorMessage={errorMessage}>
-      <input css={inputStyle} value={productName} onChange={changeName} />
+      <input css={inputStyle} value={platform} onChange={changeName} />
     </FormSection>
   );
 };
