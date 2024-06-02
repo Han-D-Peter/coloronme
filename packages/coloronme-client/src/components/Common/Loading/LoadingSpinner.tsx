@@ -2,24 +2,28 @@ import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import dynamic from 'next/dynamic';
 
-// const Lottie = dynamic(() => import('react-lottie-player'), {
-//   ssr: false,
-// });
+const Lottie = dynamic(() => import('react-lottie-player'), {
+  ssr: false,
+});
 
-// import LottieLoadingSpinner from 'public/lottie/loadingSpinner.json';
+import LottieLoadingSpinner from 'public/lottie/loadingSpinner.json';
 
 const LoadingSpinner = () => {
-  // const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
-  // if (!isClient) {
-  //   return null;
-  // }
+  if (!isClient) {
+    return null;
+  }
 
-  return <div css={overlay}>{/* <Lottie loop animationData={LottieLoadingSpinner} play css={lottieStyle} /> */}</div>;
+  return (
+    <div css={overlay}>
+      <Lottie loop animationData={LottieLoadingSpinner} play css={lottieStyle} />
+    </div>
+  );
 };
 
 const overlay = css`
