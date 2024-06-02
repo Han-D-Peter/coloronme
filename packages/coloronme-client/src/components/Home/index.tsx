@@ -87,7 +87,7 @@ const HomePage = () => {
   }, [currentColorRange, currentWheelColor.index]);
 
   return (
-    <DefaultLayout header={<MainHeader />} isLoading={userDataLoading}>
+    <DefaultLayout header={<MainHeader />} isLoading={userDataLoading || colorDataLoading}>
       <div css={mainContainer}>
         <div css={containerStyle}>
           <div
