@@ -4,7 +4,7 @@ const LoadingPage = () => {
   return (
     <main css={homeContainer}>
       <div css={logoPosition}>
-        <img src="/images/bigLogo.png" alt="logo" width={200} height={200} />
+        <img src="/images/bigLogo.png" alt="logo" width={150} height={150} />
       </div>
     </main>
   );
