@@ -13,7 +13,8 @@
     "packages/libs",
     "packages/design",
     "packages/coloronme-client",
-    "packages/coloronme-admin"
+    "packages/coloronme-admin",
+    "packages/mobileClient"
   ],
   "devDependencies": {
     "@types/prettier": "^3",
