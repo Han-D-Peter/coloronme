@@ -36,7 +36,6 @@
 
 ## 🛠 어떤 기능이 있나요?
 
----
 
 ### 1. 퍼스널 컬러 선택
 
@@ -70,7 +69,37 @@
 
 ### 4. 퍼스널 컬러에 맞는 상품 쇼핑하기
 
-- 퍼스널 컬러에 맞는 상품을 등록할 수 있어요
+- 퍼스널 컬러에 맞는 상품을 등록할 수 있어요.
+- 상품 링크만 등록하면 상품명, 판매처가 자동으로 입력돼요.
+- 상품의 색상을 추천해주고 만약 같은 색상이 없다면 수동으로 등록 할 수 있어요! 
+<div style="display: flex; justify-content: center; text-align: center;">
+  <figure style="width: 32%; margin: 0 1%;">
+    <img src="https://github.com/Han-D-Peter/coloronme/assets/86206374/b46ee54f-eb14-4120-841b-70772044f095" width="30%" height="10%">
+  </figure>
+    <figure style="width: 32%; margin: 0 1%;">
+<!--     <img src="https://github.com/Han-D-Peter/coloronme/assets/86206374/dbfde9e2-5c31-46d0-80f5-c9c18f268f55" width="30%" height="10%"> -->
+  </figure>
+    <figure style="width: 32%; margin: 0 1%;">
+<!--     <img src="https://github.com/Han-D-Peter/coloronme/assets/86206374/a79de5b6-f76f-4b2a-97b3-b4d35aebe04f" width="30%" height="10%"> -->
+  </figure>
+    <figure style="width: 32%; margin: 0 1%;">
+    <img src="https://github.com/Han-D-Peter/coloronme/assets/86206374/d18d1674-29e5-4739-aab4-8a6f72d1b6cf" width="30%" height="10%">
+  </figure>
+</div>
+
+<div style="display: flex; justify-content: center; text-align: center;">
+  <figure style="width: 32%; margin: 0 1%;">
+  </figure>
+    <figure style="width: 32%; margin: 0 1%;">
+    <img src="https://github.com/Han-D-Peter/coloronme/assets/86206374/dbfde9e2-5c31-46d0-80f5-c9c18f268f55" width="30%" height="10%">
+  </figure>
+    <figure style="width: 32%; margin: 0 1%;">
+    <img src="https://github.com/Han-D-Peter/coloronme/assets/86206374/a79de5b6-f76f-4b2a-97b3-b4d35aebe04f" width="30%" height="10%">
+  </figure>
+    <figure style="width: 32%; margin: 0 1%;">
+  </figure>
+</div>
+
 - 퍼스널 컬러에 맞는 상품을 검색, 필터링해서 편하게 볼 수 있어요!
 
 <div style="display: flex; justify-content: center; text-align: center;">
