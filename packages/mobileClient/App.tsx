@@ -30,7 +30,7 @@ function App(): React.JSX.Element {
     <SafeAreaView style={[backgroundStyle, styles.sectionContainer]}>
       <WebView
         style={styles.webview}
-        source={{uri: 'https://www.coloronme.site/'}}
+        source={{uri: 'https://www.coloronme.store/'}}
       />
     </SafeAreaView>
   );
