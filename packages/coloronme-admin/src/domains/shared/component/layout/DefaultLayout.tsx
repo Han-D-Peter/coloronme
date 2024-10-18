@@ -15,6 +15,11 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
           position: relative;
         `}
       >
+        <div
+          css={css`
+            height: 50px;
+          `}
+        ></div>
         <Navigation />
       </footer>
     </>

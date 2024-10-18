@@ -33,7 +33,7 @@ export default function Navigation() {
         justify-content: space-around;
         background: ${color.gray.gray000};
         align-items: center;
-        height: 81px;
+        height: 50px;
         width: 100%;
         border-radius: 15px 15px 0 0;
         box-shadow: 0px -4px 4px 0px rgba(0, 0, 0, 0.25);

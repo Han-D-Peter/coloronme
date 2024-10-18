@@ -12,7 +12,6 @@ export default function ProfileCard({ name, email, date, colorType }: ProfileCar
   return (
     <div
       css={css`
-        height: 66px;
         padding: 16px 20px;
         border-radius: 15px;
         box-shadow: 0px 2px 5px 2px #ededed;
@@ -51,7 +50,7 @@ export default function ProfileCard({ name, email, date, colorType }: ProfileCar
             <Text
               as="body"
               size="md"
-              weight="bold"
+              weight="regular"
               style={css`
                 margin: 0;
                 padding: 0;
