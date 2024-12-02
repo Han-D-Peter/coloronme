@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Preview } from '@storybook/react';
 import { Global, css } from '@emotion/react';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
