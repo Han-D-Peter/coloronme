@@ -6,7 +6,6 @@ import { SxProps, Theme } from '@mui/material';
 const style = {
   top: '50%',
   left: '50%',
-  width: '100%',
   border: 'none',
   backgroundColor: '#fff',
   borderRadius: '15px',
