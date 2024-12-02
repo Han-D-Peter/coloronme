@@ -76,3 +76,22 @@ export const PERSONAL_COLOR_MAPPING = {
     string: '겨울 쿨 딥',
   },
 };
+
+export const colorGroupNameMap = {
+  p: '페일',
+  lt: '라이트',
+  b: '브라이트',
+  v: '비비드',
+  s: '스트롱',
+  sf: '소프트',
+  d: '덜',
+  dp: '딥',
+  dk: '다크',
+  ltg: '라이트 그레이시',
+  g: '그레이시',
+  dkg: '다크 그레이시',
+  wh: '화이티쉬',
+  bs: '베이직',
+  bk: '블랙키시',
+  pl: '페일',
+};
