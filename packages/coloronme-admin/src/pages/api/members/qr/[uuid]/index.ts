@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       nickname: 'peter',
       email: 'asdf@asdf.com',
       consultedDate: '2022-2-22',
-      personalColorId: 1,
+
       age: 15,
       genderEnum: '1',
       consultedContent: 'simple is best',
