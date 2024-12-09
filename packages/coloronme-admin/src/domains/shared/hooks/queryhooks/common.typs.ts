@@ -1,3 +1,6 @@
+import { ColorRGB } from '../../../../../../design/src/ColorSelect/types';
+import { CustomColorType, Seasons } from './color/color.type';
+
 export interface ColorResponse<T> {
   status: 'success' | 'error';
   data?: T;
@@ -10,11 +13,12 @@ export type Client = {
   email: string;
   profileImageUrl?: string;
   consultedDate: string | null;
-  personalColorId: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+  personalColorType?: CustomColorType;
   age: number;
   genderEnum: string;
   consultedContent: string;
   consultedDrawing: string;
+  personalColorGroupName?: Seasons;
 };
 
 export type Me = {

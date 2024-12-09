@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from '@emotion/react';
-import { Text, TablerPhotoSensorOutline, Button, colorLibrary } from '@design';
+import { Text, TablerPhotoSensorOutline, Button, colorLibrary, Modal } from '@design';
 import { OnResultFunction, QrReader } from 'react-qr-reader';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -11,11 +11,13 @@ import { useUsers } from '../shared/hooks/queryhooks/common.query';
 import convertDateToSimple from '../shared/utils/convertDateToSimple';
 import convertColorNumberToCode from '../shared/utils/convertColorNumberToCode';
 import CustomCountDescription from './CustomCountDescription';
+import Member from './Member';
 
 export default function RegisterPage() {
   const { data } = useUsers();
   const router = useRouter();
   const [startScan, setStartScan] = useState(false);
+  const [selectedMemberId, setSelectedMemberId] = useState<string | null>(null);
 
   const handleScan: OnResultFunction = async (result, error, codeReader) => {
     const qrText = result?.getText();
@@ -36,6 +38,7 @@ export default function RegisterPage() {
           {data?.data?.map((user) => {
             return (
               <div
+                onClick={() => setSelectedMemberId(String(user.memberId))}
                 key={user.memberId}
                 css={css`
                   margin-bottom: 16px;
@@ -45,7 +48,7 @@ export default function RegisterPage() {
                   name={user.nickname}
                   email={user.email}
                   date={convertDateToSimple(user.consultedDate as string)}
-                  colorType={colorLibrary[convertColorNumberToCode(user.personalColorId)].name}
+                  colorType={user.personalColorType!.personalColorTypeName}
                 />
               </div>
             );
@@ -193,6 +196,14 @@ export default function RegisterPage() {
           </div>
         </Button>
       </div>
+      <Modal
+        sx={{ padding: '59px 17px', overflow: 'scroll' }}
+        isOpen={!!selectedMemberId}
+        close={() => setSelectedMemberId(null)}
+        open={() => {}}
+      >
+        {selectedMemberId && <Member memberId={selectedMemberId} onClose={() => setSelectedMemberId(null)} />}
+      </Modal>
     </>
   );
 }

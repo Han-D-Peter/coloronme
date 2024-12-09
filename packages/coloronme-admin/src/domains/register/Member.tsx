@@ -1,36 +1,51 @@
-/* eslint-disable @next/next/no-img-element */
 import { css } from '@emotion/react';
-import { Button, Modal, Text, color, Dropdown, ColorName } from '@design';
-import { useBoolean } from '@libs';
-import Canvas from '../shared/component/Canvas';
+import Image from 'next/image';
+import { Text } from '../../../../design/src/text';
+import SeasonPicker, { Seasons } from '../../../../design/src/SeasonPicker';
+import Dropdown from '../../../../design/src/Dropdown';
+import ColorSelect from '../../../../design/src/ColorSelect';
+import { useBoolean } from '../../../../libs/src/hooks';
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useMutateUser, useUserByQR } from '../shared/hooks/queryhooks/common.query';
-import { GENDER, KO_SEASON, PERSONAL_COLOR_MAPPING } from '../shared/constants/constants';
-import { 퍼스널컬러이름으로부터_아이디추출하기 } from '../shared/utils/utils';
-import { Client } from '../shared/hooks/queryhooks/common.typs';
-import { NetworkResult } from '../shared/api/client';
+import { useModifyUser, useUser } from '../shared/hooks/queryhooks/common.query';
+import { color } from '../../../../design/src/constants';
 import { useMyColor } from '../shared/hooks/queryhooks/color/color.query';
-import SeasonPicker, { Seasons as KoSeasons } from '../../../../design/src/SeasonPicker/index';
-import { CustomColorType, Seasons } from '../shared/hooks/queryhooks/color/color.type';
-import ColorSelect from '../../../../design/src/ColorSelect';
+import { CustomColorType } from '../shared/hooks/queryhooks/color/color.type';
+import { GENDER, KO_SEASON } from '../shared/constants/constants';
 import { ColorRGB } from '../../../../design/src/ColorSelect/types';
-import Image from 'next/image';
+import Button from '../../../../design/src/Button';
+import { Modal } from '@design';
+import Canvas from '../shared/component/Canvas/Canvas';
+import { SEASONS } from '../shared/constants/color';
 
-export default function RegisterCustomerPage() {
-  const router = useRouter();
-  const qrId = router.query.id! as string;
-  const { mutate } = useMutateUser();
+interface Member {
+  memberId: string;
+  onClose: () => void;
+}
+
+export default function Member({ memberId, onClose }: Member) {
+  const { data } = useUser(memberId as string);
   const { data: myColor } = useMyColor();
 
-  const { data } = useUserByQR(qrId);
+  const { mutate } = useModifyUser();
+
   const [isOpen, open, close] = useBoolean(false);
   const [canvasObj, setCanvasObj] = useState<string>('');
-  const [season, setSeason] = useState<KoSeasons | undefined>(undefined);
+  const [season, setSeason] = useState<Seasons | undefined>(undefined);
   const [selectedColorTypeName, setSelectedColorTypeName] = useState('');
   const [diagnosisText, setDiagnosisText] = useState('');
 
-  const [targetColors, setTargetColors] = useState<(ColorRGB | null)[]>([null, null, null, null, null, null, null]);
+  useEffect(() => {
+    if (!data?.data) return;
+    const {
+      data: { personalColorType, consultedContent, consultedDrawing, personalColorGroupName },
+    } = data;
+
+    if (consultedDrawing) setCanvasObj(consultedDrawing);
+    if (personalColorGroupName) setSeason(SEASONS[personalColorGroupName]);
+    if (personalColorType?.personalColorTypeName) setSelectedColorTypeName(personalColorType.personalColorTypeName);
+    if (consultedContent) setDiagnosisText(consultedContent);
+  }, [data]);
 
   const dropdownValues = useMemo(() => {
     if (!myColor?.data || !season) return [];
@@ -40,23 +55,30 @@ export default function RegisterCustomerPage() {
 
   const selectedColorType = useMemo(() => {
     if (!dropdownValues || !selectedColorTypeName) return;
-    return dropdownValues.find((value) => {
+    const isExistedValue = dropdownValues.find((value) => {
       return value.personalColorTypeName === selectedColorTypeName;
     });
-  }, [dropdownValues, selectedColorTypeName]);
+    return isExistedValue || data?.data?.personalColorType;
+  }, [dropdownValues, selectedColorTypeName, data]);
+  const [selectedColors, setSelectedColors] = useState<(ColorRGB | null)[]>([null, null, null, null, null, null, null]);
 
-  const selectedColors: (ColorRGB | null)[] = useMemo(() => {
-    if (!dropdownValues || !selectedColorTypeName) return [null, null, null, null, null, null, null];
+  console.log('data', data);
+  useEffect(() => {
+    if (!dropdownValues || !selectedColorTypeName) return;
     const selectedColorType = dropdownValues.find((value) => {
       return value.personalColorTypeName === selectedColorTypeName;
     });
-    if (!selectedColorType) return [null, null, null, null, null, null, null];
-    return [...selectedColorType.colors, ...new Array(7 - selectedColorType.colors.length).fill(null)];
-  }, [dropdownValues, selectedColorTypeName]);
-
-  useEffect(() => {
-    setTargetColors(selectedColors);
-  }, [selectedColors]);
+    if (selectedColorType)
+      return setSelectedColors([
+        ...selectedColorType.colors,
+        ...new Array(7 - selectedColorType.colors.length).fill(null),
+      ]);
+    if (!selectedColorType && data!.data!.personalColorType!.colors)
+      return setSelectedColors([
+        ...data!.data!.personalColorType!.colors,
+        ...new Array(7 - data!.data!.personalColorType!.colors.length).fill(null),
+      ]);
+  }, [data, dropdownValues, selectedColorTypeName]);
 
   const 수정할_정보 = data?.data
     ? {
@@ -65,38 +87,28 @@ export default function RegisterCustomerPage() {
         consultedContent: diagnosisText,
         consultedDrawing: canvasObj,
         consultedDate: new Date().toISOString(),
-        colors: targetColors.filter((color) => !!color).map((color) => color?.colorId) as number[],
+        colors: selectedColors.filter((color) => !!color).map((color) => color?.colorId) as number[],
       }
     : null;
-
-  function 데이터초기화(data: NetworkResult<Client> | undefined) {
-    return () => {
-      if (data?.data) {
-        // setPersonalId(data.data.personalColorId);
-        setCanvasObj(data.data.consultedDrawing);
-        setDiagnosisText(data.data.consultedContent);
-      }
-    };
-  }
 
   const onSubmit = () => {
     if (!수정할_정보) return;
 
     mutate(수정할_정보, {
       onSuccess: () => {
-        router.push(`/members/${data?.data?.memberId}`);
+        onClose();
       },
     });
   };
-
-  useEffect(데이터초기화(data), [data]);
 
   if (!data?.data) return <div>Error...</div>;
 
   return (
     <section
       css={css`
-        padding-top: 24px;
+        height: 75vh;
+        padding: 33px 31px;
+        overflow: scroll;
       `}
     >
       <div
@@ -115,7 +127,15 @@ export default function RegisterCustomerPage() {
               border-radius: 200px;
             `}
           >
-            <Image src={data.data.profileImageUrl} alt="profile image" />
+            <img
+              css={css`
+                border-radius: 200px;
+              `}
+              src={data.data.profileImageUrl}
+              alt="profile image"
+              width={57}
+              height={57}
+            />
           </div>
         ) : (
           <div
@@ -202,7 +222,7 @@ export default function RegisterCustomerPage() {
         >
           <Dropdown
             value={selectedColorTypeName}
-            placeholder="타입을 선택해 주세요"
+            placeholder={selectedColorTypeName || '타입을 선택해 주세요'}
             onChange={(value) => setSelectedColorTypeName(value)}
           >
             {dropdownValues.map((value) => {
@@ -231,8 +251,28 @@ export default function RegisterCustomerPage() {
             `}
           >
             {selectedColors.map((color, index) => {
-              if (!color) return <ColorSelect key={index} />;
-              return <ColorSelect key={color.colorId} value={color} />;
+              if (!color)
+                return (
+                  <ColorSelect
+                    key={index}
+                    onChange={(value) => {
+                      const copied: (ColorRGB | null)[] = [...selectedColors];
+                      copied[index] = value;
+                      setSelectedColors(copied);
+                    }}
+                  />
+                );
+              return (
+                <ColorSelect
+                  key={color.colorId}
+                  value={color}
+                  onChange={(value) => {
+                    const copied: (ColorRGB | null)[] = [...selectedColors];
+                    copied[index] = value;
+                    setSelectedColors(copied);
+                  }}
+                />
+              );
             })}
           </div>
         </div>
@@ -329,10 +369,14 @@ export default function RegisterCustomerPage() {
           margin-top: 40px;
           display: flex;
           justify-content: center;
+          gap: 17px;
         `}
       >
+        <Button variant="ghost" size="lg" onClick={onClose}>
+          취소
+        </Button>
         <Button variant="primary" size="lg" onClick={onSubmit}>
-          결과 공유하기
+          저장
         </Button>
       </div>
       <Modal sx={{ display: 'flex', padding: '59px 16px' }} isOpen={isOpen} close={close} open={open}>

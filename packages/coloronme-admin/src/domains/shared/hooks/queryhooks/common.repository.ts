@@ -16,6 +16,10 @@ class CommonRepository {
     return await requestInstance.get<Client[]>('members');
   }
 
+  async getUser(userId: string) {
+    return await requestInstance.get<Client>(`members/${userId}`);
+  }
+
   async login({ email, password }: { email: string; password: string }) {
     return await requestInstance.post<AuthResult, { email: string; password: string }>('login', {
       email,
@@ -27,24 +31,51 @@ class CommonRepository {
     return await requestInstance.patch<ColorResponse<MutatedUser>, MutatedUser>('myPages', { ...body });
   }
 
-  async registerCustomer({
+  async modifyCustomer({
     userId,
-    personalColorId,
+    personalColorTypeId,
     consultedContent,
     consultedDrawing,
     consultedDate,
+    colors,
   }: {
     userId: string;
-    personalColorId: number;
+    personalColorTypeId: number;
     consultedContent: string;
     consultedDrawing: string;
     consultedDate: string;
+    colors: number[];
   }) {
-    return await requestInstance.post<Client>(`members/${userId}`, {
-      personalColorId,
+    return await requestInstance.patch<Client>(`members/${userId}`, {
+      personalColorTypeId,
       consultedContent,
       consultedDrawing,
       consultedDate,
+      colors,
+    });
+  }
+
+  async registerCustomer({
+    userId,
+    personalColorTypeId,
+    consultedContent,
+    consultedDrawing,
+    consultedDate,
+    colors,
+  }: {
+    userId: string;
+    personalColorTypeId: number;
+    consultedContent: string;
+    consultedDrawing: string;
+    consultedDate: string;
+    colors: number[];
+  }) {
+    return await requestInstance.post<Client>(`members/${userId}`, {
+      personalColorTypeId,
+      consultedContent,
+      consultedDrawing,
+      consultedDate,
+      colors,
     });
   }
 

@@ -1,4 +1,6 @@
 import { ColorCode, ColorName } from '@design';
+import { Seasons } from '../hooks/queryhooks/color/color.type';
+import { Seasons as KoSeasons } from '../../../../../design/src/SeasonPicker/index';
 
 // export const BASE_URL = 'https://api.admin.coloronme.site';
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!;
@@ -57,4 +59,16 @@ export const PERSONAL_COLOR_MAPPING: {
     code: 'Best_WC_DP',
     string: '겨울 쿨 딥',
   },
+};
+
+export const GENDER: Record<string, string> = {
+  FEMALE: '여성',
+  MALE: '남성',
+};
+
+export const KO_SEASON: Record<KoSeasons, Seasons> = {
+  '봄 웜': 'spring',
+  '여름 쿨': 'summer',
+  '가을 웜': 'autumn',
+  '겨울 쿨': 'winter',
 };
