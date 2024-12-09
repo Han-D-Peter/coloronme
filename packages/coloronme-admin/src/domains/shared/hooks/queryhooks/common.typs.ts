@@ -35,3 +35,9 @@ export type AuthResult = {
 };
 
 export type MutatedUser = { name?: string; company?: string; email?: string };
+
+export type IncreasingData = {
+  period: number[];
+  increase_than_right_before: number;
+  full_period: number;
+};

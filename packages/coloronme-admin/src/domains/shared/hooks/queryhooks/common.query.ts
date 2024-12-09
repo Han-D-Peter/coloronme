@@ -60,3 +60,7 @@ export const useMutationMe = () => {
 export const useMutationPassword = () => {
   return useMutation(['modifyPassword'], commonRepository.modifyPassword, {});
 };
+
+export const useMonthPeriod = () => {
+  return useQuery(['month period'], commonRepository.monthPeriodValues);
+};

@@ -3,6 +3,7 @@ import { TextWithDescription } from '@design';
 import { useIntervalData, usePeriodData } from '../usersQuery/usersData.query';
 import dynamic from 'next/dynamic';
 import { Day } from '../usersQuery/usersData.type';
+import PeriodTracking from '../../../../../design/src/PeriodTracking/index';
 
 interface TrendPeriod {
   date: { start: string; end: string };
@@ -10,8 +11,16 @@ interface TrendPeriod {
 
 export default function TrendPeriod({}: TrendPeriod) {
   const { data } = usePeriodData();
-
   if (!data?.data) return <></>;
+
+  const currentMonth = new Date().getMonth() + 1;
+
+  const period = data.data.period.map((per, index) => {
+    return {
+      title: 5 - index === 0 ? '이번달' : `${currentMonth - 5 + index}월`,
+      value: per,
+    };
+  });
 
   return (
     <>
@@ -22,42 +31,28 @@ export default function TrendPeriod({}: TrendPeriod) {
         `}
       >
         <TextWithDescription description="해당 기간 동안 결과를 공유한 전체 고객 기준  ">
-          요일 및 시간대
+          6개월 간 진단추이
         </TextWithDescription>
       </div>
-      {/* <div
+      <div
         css={css`
           margin-bottom: 11px;
         `}
       >
         <div
           css={css`
-            font-family: pretendard;
-            font-size: 14px;
-            margin-bottom: 3px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            background-color: white;
+            border-radius: 5px;
+            padding: 76px 33px 56px 33px;
           `}
         >
-          해당 기간동안{' '}
-          <span
-            css={css`
-              font-family: inherit;
-              font-size: 14px;
-              font-weight: bold;
-            `}
-          >
-            {`${mostValue.요일} ${mostValue.시간}대`}
-          </span>{' '}
-          에
+          <PeriodTracking values={period} width="256px" height={200} />
         </div>
-        <div
-          css={css`
-            font-family: pretendard;
-            font-size: 14px;
-          `}
-        >
-          가장 많은 결과를 공유했어요.
-        </div>
-      </div> */}
+      </div>
       <div
         css={css`
           position: relative;

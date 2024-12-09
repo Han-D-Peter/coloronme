@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import ky from 'ky';
-import { Me, AuthResult, Client, ColorResponse, MutatedUser } from './common.typs';
+import { Me, AuthResult, Client, ColorResponse, MutatedUser, IncreasingData } from './common.typs';
 import { BASE_URL } from '../../constants/constants';
 import { requestInstance } from '../../api/client';
 
@@ -81,6 +81,10 @@ class CommonRepository {
 
   async modifyPassword(body: { oldPassword: string; newPassword: string; newPasswordConfirm: string }) {
     return await requestInstance.patch('password', body);
+  }
+
+  async monthPeriodValues() {
+    return await requestInstance.get<ColorResponse<IncreasingData>>('/data/users?type=month');
   }
 }
 
