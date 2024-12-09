@@ -3,7 +3,7 @@ import { Text } from '../text';
 import { useEffect, useState } from 'react';
 import SeasonButton from './SeasonButton';
 
-export type Seasons = Spring | Summer | Autumn | Winter | null;
+export type Seasons = Spring | Summer | Autumn | Winter;
 type Spring = '봄 웜';
 type Summer = '여름 쿨';
 type Autumn = '가을 웜';
@@ -17,7 +17,7 @@ const seasons: Record<string, Seasons> = {
 };
 
 interface SeasonPicker {
-  value?: Seasons;
+  value?: Seasons | null;
   onClick?: (value: Seasons) => void;
 }
 

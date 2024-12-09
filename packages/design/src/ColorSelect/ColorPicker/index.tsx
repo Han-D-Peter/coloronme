@@ -27,10 +27,12 @@ export default function ColorPicker({
       </Text>
       <div
         css={css`
+          max-height: 60vh;
           margin-top: 24px;
           display: flex;
           flex-direction: column;
           gap: 14px;
+          overflow: scroll;
         `}
       >
         {color[code][group].map((col) => (

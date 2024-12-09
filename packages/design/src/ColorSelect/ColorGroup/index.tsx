@@ -114,7 +114,6 @@ function ColorGroupItem({
       >
         {color[code][colorGroup]?.map((col, index) => {
           const rgb = `rgb(${col.r}, ${col.g}, ${col.b})`;
-          console.log('rgb', rgb);
           const rotageDegree = `rotate(${rotateDegreeByLength * index}deg)`;
 
           return (

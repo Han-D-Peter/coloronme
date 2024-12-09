@@ -12,21 +12,23 @@ import ColorGroup from './ColorGroup';
 import ColorPicker from './ColorPicker';
 
 interface ColorSelect {
-  value?: string;
-  onChange?: (value: string | null) => void;
+  value?: ColorRGB | null;
+  onChange?: (value: ColorRGB | null) => void;
 }
 
-export default function ColorSelect({}: ColorSelect) {
-  const [selectedColor, setSelectedColor] = useState<ColorRGB | null>(null);
+export default function ColorSelect({ value = null, onChange }: ColorSelect) {
+  const [selectedColor, setSelectedColor] = useState<ColorRGB | null>(value);
   const [isShown, open, close] = useBoolean(false);
   const color = useColorLibrary();
 
   function clear() {
+    onChange && onChange(null);
     setSelectedColor(null);
   }
 
   function selectColor(color: ColorRGB) {
     setSelectedColor(color);
+    onChange && onChange(color);
     close();
   }
 
@@ -43,6 +45,7 @@ export default function ColorSelect({}: ColorSelect) {
           <button
             onClick={clear}
             css={css`
+              z-index: 100;
               cursor: pointer;
               position: absolute;
               width: 16px;
