@@ -47,7 +47,7 @@ export default function DateRange({ onClick }: DateRange) {
 
   useEffect(() => {
     const currentDate = new Date();
-    const oneWeekAgo = new Date().setDate(currentDate.getMonth() - 1);
+    const oneWeekAgo = new Date(new Date().setDate(currentDate.getDate() - 7));
     setEndDate(kstFormat(currentDate, 'yyyy-MM-dd'));
     setStartDate(kstFormat(oneWeekAgo, 'yyyy-MM-dd'));
     onClick({ start: kstFormat(oneWeekAgo, 'yyyy-MM-dd'), end: kstFormat(currentDate, 'yyyy-MM-dd') });
@@ -103,6 +103,7 @@ export default function DateRange({ onClick }: DateRange) {
             border-radius: 5px;
             border: none;
             background-color: ${color.gray.gray040};
+            white-space: nowrap;
           `}
           onClick={callback}
         >
@@ -129,6 +130,7 @@ export default function DateRange({ onClick }: DateRange) {
               display: flex;
               justify-content: center;
               align-items: center;
+              white-space: nowrap;
             `}
             onClick={beforeOneWeek}
           >
@@ -148,6 +150,7 @@ export default function DateRange({ onClick }: DateRange) {
               display: flex;
               justify-content: center;
               align-items: center;
+              white-space: nowrap;
             `}
             onClick={beforeOneMonth}
           >
