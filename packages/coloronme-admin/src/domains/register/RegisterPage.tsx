@@ -11,7 +11,9 @@ import { useUsers } from '../shared/hooks/queryhooks/common.query';
 import convertDateToSimple from '../shared/utils/convertDateToSimple';
 import convertColorNumberToCode from '../shared/utils/convertColorNumberToCode';
 import CustomCountDescription from './CustomCountDescription';
-import Member from './Member';
+import dynamic from 'next/dynamic';
+
+const Member = dynamic(() => import('./Member'), { ssr: false });
 
 export default function RegisterPage() {
   const { data } = useUsers();
