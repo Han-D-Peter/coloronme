@@ -26,8 +26,6 @@ export default function SeasonColorCatBox({ season, colors }: SeasonColorCatBox)
   const [modifyingTargetGroup, setModifyingTargetGroup] = useState<CustomColorType | null>(null);
   const { mutate } = useRemoveColorType();
 
-  console.log('modifyingTargetGroup', modifyingTargetGroup);
-
   return (
     <>
       <div>

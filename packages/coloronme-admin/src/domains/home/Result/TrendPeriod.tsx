@@ -10,7 +10,6 @@ interface TrendPeriod {
 
 export default function TrendPeriod({}: TrendPeriod) {
   const { data } = usePeriodData();
-  console.log('🚀 ~ TrendPeriod ~ data:', data);
 
   if (!data?.data) return <></>;
 

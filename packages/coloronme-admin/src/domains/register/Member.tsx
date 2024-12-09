@@ -62,7 +62,6 @@ export default function Member({ memberId, onClose }: Member) {
   }, [dropdownValues, selectedColorTypeName, data]);
   const [selectedColors, setSelectedColors] = useState<(ColorRGB | null)[]>([null, null, null, null, null, null, null]);
 
-  console.log('data', data);
   useEffect(() => {
     if (!dropdownValues || !selectedColorTypeName) return;
     const selectedColorType = dropdownValues.find((value) => {
@@ -101,7 +100,7 @@ export default function Member({ memberId, onClose }: Member) {
     });
   };
 
-  if (!data?.data) return <div>Error...</div>;
+  if (!data?.data) return <div>Loading...</div>;
 
   return (
     <section
