@@ -21,13 +21,14 @@ export default function PeriodTracking({ values, height, width }: PeriodTracking
     },
     [0, 0],
   );
-  const nomalizedValues = values.map((value) => ({ ...value, height: (height * value.value) / total[1] }));
+
+  const nomalizedValues = values.map((value) => ({ ...value, height: height * (value.value / total[1]) }));
 
   return (
     <div
       css={css`
         width: ${width};
-        height: ${total[0] + 100}px;
+        height: ${height}px;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
