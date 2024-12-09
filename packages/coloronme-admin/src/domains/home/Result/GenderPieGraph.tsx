@@ -22,7 +22,9 @@ export default function GenderPieGraph({ date }: GenderPieGraph) {
         value: name,
         count: item[1],
       };
-    });
+    })
+    .sort((a, b) => b.count - a.count);
+
   return (
     <div>
       <div>

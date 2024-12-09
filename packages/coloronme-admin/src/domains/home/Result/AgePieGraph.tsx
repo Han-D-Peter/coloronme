@@ -40,6 +40,21 @@ export default function AgePieGraph({ date }: AgePieGraph) {
       count: item[1],
     };
   });
+
+  const bestAge = convertedData.reduce(
+    (accum, curr) => {
+      if (accum.count < curr.count) {
+        return curr;
+      } else {
+        return accum;
+      }
+    },
+    {
+      label: '',
+      value: '',
+      count: 0,
+    },
+  );
   return (
     <div>
       <div>
@@ -72,7 +87,7 @@ export default function AgePieGraph({ date }: AgePieGraph) {
                 font-weight: bold;
               `}
             >
-              {convertedData[0].label}
+              {bestAge.label}
             </span>
             예요.
           </div>
