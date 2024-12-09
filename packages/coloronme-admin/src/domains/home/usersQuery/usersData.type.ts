@@ -36,7 +36,7 @@ export type IntervalDataByTime = { id: Time; data: { x: Day; y: number }[] }[];
 export type PeriodDataByTime = {
   period: [number, number, number, number, number, number];
   increase_than_right_before: number;
-  fullperiod: number;
+  full_period: number;
 };
 export type GenderData = {
   [key in 'male' | 'female' | 'unknown']: number;

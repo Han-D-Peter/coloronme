@@ -41,6 +41,49 @@ export default function TrendPeriod({}: TrendPeriod) {
       >
         <div
           css={css`
+            font-family: pretendard;
+            font-size: 14px;
+            margin-bottom: 3px;
+          `}
+        >
+          지난달에 비해{' '}
+          <span
+            css={css`
+              font-family: inherit;
+              font-size: 14px;
+              font-weight: bold;
+            `}
+          >
+            {data.data.increase_than_right_before}
+          </span>{' '}
+          % 증가했어요.
+        </div>
+        <div
+          css={css`
+            font-family: pretendard;
+            font-size: 14px;
+          `}
+        >
+          6개월 간 평균{' '}
+          <span
+            css={css`
+              font-family: inherit;
+              font-size: 14px;
+              font-weight: bold;
+            `}
+          >
+            {data.data.full_period}
+          </span>
+          %씩 증가하고 있어요.
+        </div>
+      </div>
+      <div
+        css={css`
+          margin-bottom: 11px;
+        `}
+      >
+        <div
+          css={css`
             position: relative;
             display: flex;
             justify-content: center;
