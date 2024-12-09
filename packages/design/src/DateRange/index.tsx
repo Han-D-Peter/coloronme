@@ -66,6 +66,7 @@ export default function DateRange({ onClick }: DateRange) {
             border: 1px solid ${color.gray.gray040};
             border-radius: 5px;
             outline: none;
+            white-space: nowrap;
           `}
           onChange={onStartDateChange}
           value={startDate}
@@ -90,6 +91,7 @@ export default function DateRange({ onClick }: DateRange) {
             border: 1px solid ${color.gray.gray040};
             border-radius: 5px;
             outline: none;
+            white-space: nowrap;
           `}
           type="date"
           onChange={onEndDateChange}
@@ -98,8 +100,7 @@ export default function DateRange({ onClick }: DateRange) {
         <button
           css={css`
             margin-left: 8px;
-            width: 34px;
-            height: 24px;
+            padding: 6px 7px;
             border-radius: 5px;
             border: none;
             background-color: ${color.gray.gray040};
